@@ -44,3 +44,72 @@ php.ini
 .stylelintcache
 .jestcache
 /.phpunit.cache
+
+/public/*
+!/public/index.php
+!/public/.htaccess.dist
+/public/css/*
+!/public/css/
+!/public/css/.gitkeep
+/public/js/*
+!/public/js/
+!/public/js/.gitkeep
+/public/media/*
+!/public/media/
+!/public/media/.gitkeep
+src/Administration/Resources/public/static/
+
+!**/.gitkeep
+
+# Log files
+/var/logs/*
+!/var/logs/.htaccess
+/var/log/*
+!/var/log/.htaccess
+npm-debug.log
+
+.php-cs-fixer.cache
+
+/.env
+.env.local
+.env.local.php
+.env.test
+.env.e2e
+.env.dev
+
+# tests / ci
+/build/
+!build/artifacts/.gitkeep
+tests/integration/Core/Framework/Plugin/_fixtures/SwagFashionTheme.zip
+tests/integration/Core/Framework/Plugin/_fixtures/TestShippingApp.zip
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/framework-bundle ###
+.env
+/public/bundles/
+/var/
+/vendor/
+phpstan.neon
+###< symfony/framework-bundle ###
+
+config/jwt/
+config/packages/*
+!config/packages/test/
+config/routes*
+!config/routes/
+config/routes/*
+!config/routes/test/
+config/services*
+!/config/services_test.xml
+
+plugins
+files/*
+install.lock
+
+vendor-bin/**/vendor
+vendor-bin/**/composer.lock
+.uniqueid.txt
