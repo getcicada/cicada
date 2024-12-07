@@ -1,0 +1,22 @@
+{
+  "name": "cicada/platform",
+  "description": "The Cicada admin core",
+  "type": "library",
+  "keywords": [
+    "framework",
+    "admin"
+  ],
+  "license": "Apache-2.0",
+  "require": {
+    "php": "~8.2.0 || ~8.3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cicada\\": "src/"
+    },
+    "exclude-from-classmap": [
+      "src/**/Test/",
+      "tests/"
+    ]
+  }
+}
