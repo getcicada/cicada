@@ -1,0 +1,28 @@
+{
+  "name": "cicada-ag/core",
+  "type": "library",
+  "description": "Cicada platform is the core for all Cicada admin products.",
+  "keywords": [
+    "cicada",
+    "admin",
+    "cms"
+  ],
+  "license": "Apache-2.0",
+  "autoload": {
+    "exclude-from-classmap": [
+      "*/Test/"
+    ],
+    "psr-4": {
+      "Cicada\\Core\\": ""
+    }
+  },
+  "config": {
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true,
+    "allow-plugins": {
+      "symfony/runtime": true
+    }
+  }
+}

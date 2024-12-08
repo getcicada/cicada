@@ -1,0 +1,29 @@
+{
+  "name": "cicada/administration",
+  "type": "library",
+  "description": "Administration frontend for the Cicada Core",
+  "keywords": [
+    "cicada",
+    "admin",
+    "cms"
+  ],
+  "license": "Apache-2.0",
+  "autoload": {
+    "exclude-from-classmap": [
+      "*/Test/"
+    ],
+    "psr-4": {
+      "Cicada\\Administration\\": ""
+    }
+  },
+  "require": {
+    "php": "~8.2.0 || ~8.3.0",
+    "doctrine/dbal": "^3.9",
+    "pentatrion/vite-bundle": "^7.0",
+    "haokeyingxiao/core": "*",
+    "symfony/framework-bundle": "~7.2.0",
+    "symfony/http-foundation": "~7.2.0",
+    "symfony/mime": "~7.2.0",
+    "symfony/routing": "~7.2.0"
+  }
+}

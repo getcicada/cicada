@@ -1,0 +1,9 @@
+includes:
+    - phpstan-baseline.neon
+    - src/Core/DevOps/StaticAnalyze/PHPStan/common.neon
+    - src/Core/DevOps/StaticAnalyze/PHPStan/core-rules.neon
+parameters:
+    tmpDir: var/cache/phpstan
+    paths:
+        - src
+        - tests
