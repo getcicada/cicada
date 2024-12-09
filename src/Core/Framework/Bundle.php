@@ -3,6 +3,7 @@
 
 namespace Cicada\Core\Framework;
 
+use Cicada\Core\Framework\Adapter\Filesystem\PrefixFilesystem;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\Framework\Migration\MigrationSource;
 use Cicada\Core\Framework\Parameter\AdditionalBundleParameters;
