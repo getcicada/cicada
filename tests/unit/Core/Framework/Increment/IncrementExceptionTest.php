@@ -44,7 +44,7 @@ class IncrementExceptionTest extends TestCase
         $pool = 'test_pool';
         $exception = IncrementException::wrongGatewayType($pool);
         static::assertSame(Response::HTTP_INTERNAL_SERVER_ERROR, $exception->getStatusCode());
-        static::assertSame('shopware.increment.gateway type of test_pool pool must be a string', $exception->getMessage());
+        static::assertSame('cicada.increment.gateway type of test_pool pool must be a string', $exception->getMessage());
     }
 
     public function testGatewayServiceNotFound(): void

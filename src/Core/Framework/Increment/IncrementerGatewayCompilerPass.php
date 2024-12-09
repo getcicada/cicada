@@ -20,8 +20,8 @@ class IncrementerGatewayCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container): void
     {
         /** @var array{type?: string, config?: array<string, mixed>}[] $services */
-        $services = $container->getParameter('shopware.increment');
-        $tag = 'shopware.increment.gateway';
+        $services = $container->getParameter('cicada.increment');
+        $tag = 'cicada.increment.gateway';
 
         foreach ($services as $pool => $service) {
             $type = $service['type'] ?? null;
@@ -30,7 +30,7 @@ class IncrementerGatewayCompilerPass implements CompilerPassInterface
                 throw IncrementException::wrongGatewayType($pool);
             }
 
-            $active = \sprintf('shopware.increment.%s.gateway.%s', $pool, $type);
+            $active = \sprintf('cicada.increment.%s.gateway.%s', $pool, $type);
             $config = [];
 
             // If service is not registered directly in the container, try to resolve them using fallback gateway
@@ -68,10 +68,10 @@ class IncrementerGatewayCompilerPass implements CompilerPassInterface
      */
     private function resolveTypeDefinition(ContainerBuilder $container, string $pool, string $type, array $config = []): string
     {
-        // shopware.increment.gateway.mysql is fallback gateway if custom gateway is not set
-        $fallback = \sprintf('shopware.increment.gateway.%s', $type);
+        // cicada.increment.gateway.mysql is fallback gateway if custom gateway is not set
+        $fallback = \sprintf('cicada.increment.gateway.%s', $type);
 
-        $gatewayServiceName = \sprintf('shopware.increment.%s.gateway.%s', $pool, $type);
+        $gatewayServiceName = \sprintf('cicada.increment.%s.gateway.%s', $pool, $type);
 
         switch ($type) {
             case 'array':
@@ -94,13 +94,13 @@ class IncrementerGatewayCompilerPass implements CompilerPassInterface
                     $connectionDefinition->setFactory([new Reference(RedisConnectionFactory::class), 'create'])->addArgument($config['url']);
                     Feature::triggerDeprecationOrThrow(
                         'v6.7.0.0',
-                        'Parameter "shopware.increment.pool_name.config.url" for redis is deprecated and will be removed. Please use "shopware.increment.pool_name.config.connection" instead.'
+                        'Parameter "cicada.increment.pool_name.config.url" for redis is deprecated and will be removed. Please use "cicada.increment.pool_name.config.connection" instead.'
                     );
                 } else {
                     return $gatewayServiceName;
                 }
 
-                $adapterServiceName = \sprintf('shopware.increment.%s.redis_adapter', $pool);
+                $adapterServiceName = \sprintf('cicada.increment.%s.redis_adapter', $pool);
 
                 $container->setDefinition($adapterServiceName, $connectionDefinition);
 

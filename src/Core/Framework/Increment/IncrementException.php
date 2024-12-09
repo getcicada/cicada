@@ -45,7 +45,7 @@ class IncrementException extends HttpException
         return new self(
             Response::HTTP_INTERNAL_SERVER_ERROR,
             self::WRONG_GATEWAY_TYPE,
-            'shopware.increment.gateway type of {{ pool }} pool must be a string',
+            'cicada.increment.gateway type of {{ pool }} pool must be a string',
             [
                 'pool' => $pool,
             ]
