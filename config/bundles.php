@@ -9,8 +9,12 @@ $bundles = [
     Cicada\Core\Profiling\Profiling::class => ['all' => true],
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Cicada\Core\Framework\Framework::class => ['all' => true],
+    Cicada\Core\System\System::class => ['all' => true],
+    Cicada\Core\Content\Content::class => ['all' => true],
     Cicada\Core\DevOps\DevOps::class => ['all' => true],
+    Cicada\Core\Maintenance\Maintenance::class => ['all' => true],
     Cicada\Administration\Administration::class => ['all' => true],
+    Cicada\Core\Service\Service::class => ['all' => true],
 ];
 
 if (InstalledVersions::isInstalled('symfony/web-profiler-bundle')) {

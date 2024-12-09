@@ -30,10 +30,10 @@ class FrameworkExtension extends Extension
 
             /*
              * The route cache in dev mode checks on each request if its fresh. If you use the following expression
-             * `defaults={"auth_required"="%shopware.api.api_browser.auth_required%"}` it also checks if the parameter
+             * `defaults={"auth_required"="%cicada.api.api_browser.auth_required%"}` it also checks if the parameter
              * matches the value in the container. The expression always results in a string, but the value in the
              * container is a boolean. So they never match. To workaround this, we add this as an additional string
-             * parameter. So in the dynamic use case you have to use `defaults={"auth_required"="%shopware.api.api_browser.auth_required_str%"}`
+             * parameter. So in the dynamic use case you have to use `defaults={"auth_required"="%cicada.api.api_browser.auth_required_str%"}`
              */
             if ($key === 'cicada.api.api_browser.auth_required') {
                 $container->setParameter('cicada.api.api_browser.auth_required_str', (string) (int) $option);

@@ -26,7 +26,7 @@ class MySQLFactory
 
         $url = (string) EnvironmentHelper::getVariable('DATABASE_URL', getenv('DATABASE_URL'));
         if ($url === '') {
-            $url = 'mysql://root:shopware@127.0.0.1:3306/shopware';
+            $url = 'mysql://root:cicada@127.0.0.1:3306/cicada';
         }
 
         $replicaUrl = (string) EnvironmentHelper::getVariable('DATABASE_REPLICA_0_URL');

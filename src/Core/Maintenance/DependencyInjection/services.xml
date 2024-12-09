@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Cicada\Core\Maintenance\System\Service\DatabaseConnectionFactory"/>
+        <service id="Cicada\Core\Maintenance\System\Service\SetupDatabaseAdapter"/>
+        <service id="Cicada\Core\Maintenance\System\Command\SystemInstallCommand">
+            <argument>%kernel.project_dir%</argument>
+            <argument type="service" id="Cicada\Core\Maintenance\System\Service\SetupDatabaseAdapter"/>
+            <argument type="service" id="Cicada\Core\Maintenance\System\Service\DatabaseConnectionFactory"/>
+            <tag name="console.command"/>
+        </service>
+    </services>
+</container>

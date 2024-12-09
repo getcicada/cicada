@@ -15,7 +15,6 @@
                       The phpunit file traversal is really inefficient for our test structure. A naive definition results in
                       more than 70000 files being traversed, which has to be done for each thread/process.
                   -->
-            <directory suffix=".php">src/Core/Checkout</directory>
             <directory suffix=".php">src/Core/Content</directory>
             <directory suffix=".php">src/Core/Framework</directory>
             <directory suffix=".php">src/Core/DevOps</directory>
@@ -29,7 +28,6 @@
             <file>src/Core/HttpKernelResult.php</file>
             <file>src/Core/Kernel.php</file>
             <file>src/Core/PlatformRequest.php</file>
-            <file>src/Core/SalesChannelRequest.php</file>
             <directory suffix=".php">src/Elasticsearch</directory>
             <directory suffix=".php">src/Administration/Controller</directory>
             <directory suffix=".php">src/Administration/DependencyInjection</directory>
@@ -131,7 +129,7 @@
     <php>
         <ini name="error_reporting" value="-1"/>
         <ini name="memory_limit" value="-1"/>
-        <server name="KERNEL_CLASS" value="Shopware\Core\Kernel"/>
+        <server name="KERNEL_CLASS" value="Cicada\Core\Kernel"/>
         <env name="APP_ENV" value="test"/>
         <env name="APP_DEBUG" value="1"/>
         <env name="APP_SECRET" value="def00000bb5acb32b54ff8ee130270586eec0e878f7337dc7a837acc31d3ff00f93a56b595448b4b29664847dd51991b3314ff65aeeeb761a133b0ec0e070433bff08e48"/>
@@ -166,9 +164,9 @@
     </testsuites>
     <extensions>
         <bootstrap class="Ergebnis\PHPUnit\SlowTestDetector\Extension"/>
-        <bootstrap class="Shopware\Core\Test\PHPUnit\Extension\FeatureFlag\FeatureFlagExtension"/>
-        <bootstrap class="Shopware\Core\Test\PHPUnit\Extension\Datadog\DatadogExtension"/>
+        <bootstrap class="Cicada\Core\Test\PHPUnit\Extension\FeatureFlag\FeatureFlagExtension"/>
+        <bootstrap class="Cicada\Core\Test\PHPUnit\Extension\Datadog\DatadogExtension"/>
         <!-- Enable to see the db side effects of the tests. -->
-        <!--        <bootstrap class="Shopware\Core\Test\PHPUnit\Extension\DatabaseDiff\DatabaseDiffExtension"/>-->
+        <!--        <bootstrap class="Cicada\Core\Test\PHPUnit\Extension\DatabaseDiff\DatabaseDiffExtension"/>-->
     </extensions>
 </phpunit>
