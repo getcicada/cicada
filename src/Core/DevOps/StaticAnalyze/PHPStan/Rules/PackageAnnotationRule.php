@@ -76,7 +76,7 @@ class PackageAnnotationRule implements Rule
 
         return [
             RuleErrorBuilder::message(\sprintf('This class is missing the "#[Package(...)]" attribute (recommendation: %s)', $area ?? 'unknown'))
-                ->identifier('shopware.missingPackageAttribute')
+                ->identifier('cicada.missingPackageAttribute')
                 ->build(),
         ];
     }

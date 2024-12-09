@@ -12,7 +12,7 @@ use Cicada\Core\Profiling\Integration\ProfilerInterface;
 class Profiler
 {
     /**
-     * Profilers will be activated over the shopware.yaml file
+     * Profilers will be activated over the cicada.yaml file
      *
      * All enabled profilers will be added here
      *
@@ -55,7 +55,7 @@ class Profiler
      *
      * @return TReturn
      */
-    public static function trace(string $name, \Closure $closure, string $category = 'shopware', array $tags = [])
+    public static function trace(string $name, \Closure $closure, string $category = 'cicada', array $tags = [])
     {
         $tags = array_merge(self::$tags, $tags);
 
