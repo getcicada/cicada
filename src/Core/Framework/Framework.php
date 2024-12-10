@@ -75,6 +75,9 @@ class Framework extends Bundle
         $loader->load('flag.xml');
         $loader->load('seo.xml');
         $loader->load('filesystem.xml');
+        if ($container->getParameter('kernel.environment') === 'test') {
+            $loader->load('services_test.xml');
+        }
         $container->addCompilerPass(new AttributeEntityCompilerPass(new AttributeEntityCompiler()), PassConfig::TYPE_BEFORE_REMOVING, 1000);
         $container->addCompilerPass(new FeatureFlagCompilerPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1000);
         $container->addCompilerPass(new EntityCompilerPass());

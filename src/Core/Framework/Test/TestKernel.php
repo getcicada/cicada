@@ -3,7 +3,7 @@
 namespace Cicada\Core\Framework\Test;
 
 use Cicada\Core\Framework\Log\Package;
-use Cicada\Core\Framework\Test\TestBundle;
+use Cicada\Core\Framework\Test\DependencyInjection\Test\TestBundle;
 use Cicada\Core\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

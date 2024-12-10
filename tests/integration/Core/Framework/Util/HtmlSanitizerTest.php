@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Cicada\Tests\Integration\Core\Framework\Util;
 
 use PHPUnit\Framework\TestCase;
-use Cicada\Core\Framework\Test\TestCaseBase\IntegrationTestBehaviour;
+use Cicada\Core\Framework\Test\DependencyInjection\Test\TestCaseBase\IntegrationTestBehaviour;
 use Cicada\Core\Framework\Util\HtmlSanitizer;
 
 /**

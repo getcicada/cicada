@@ -4,7 +4,7 @@ namespace Cicada\Core\Framework\Test\RateLimiter;
 
 use Cicada\Core\Framework\RateLimiter\RateLimiter;
 use Cicada\Core\Framework\RateLimiter\RateLimiterFactory;
-use Cicada\Core\Framework\Test\TestCaseBase\IntegrationTestBehaviour;
+use Cicada\Core\Framework\Test\DependencyInjection\Test\TestCaseBase\IntegrationTestBehaviour;
 use Symfony\Component\RateLimiter\LimiterInterface;
 use Symfony\Component\RateLimiter\RateLimit;
 

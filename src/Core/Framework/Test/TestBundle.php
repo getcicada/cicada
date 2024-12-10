@@ -3,7 +3,7 @@
 namespace Cicada\Core\Framework\Test;
 
 use Cicada\Core\Framework\Log\Package;
-use Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use Cicada\Core\Framework\Test\DependencyInjection\Test\RemoveDeprecatedServicesPass;use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

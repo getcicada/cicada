@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Cicada\Core\Framework\RateLimiter;
 
 use Cicada\Core\Framework\Log\Package;
-use Cicada\Core\Framework\Test\RateLimiter\DisableRateLimiterCompilerPass;
+use Cicada\Core\Framework\Test\DependencyInjection\Test\RateLimiter\DisableRateLimiterCompilerPass;
 use Symfony\Component\RateLimiter\LimiterInterface;
 use Symfony\Component\RateLimiter\Policy\NoLimiter;
 

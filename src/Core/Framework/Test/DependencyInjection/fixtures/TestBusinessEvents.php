@@ -2,7 +2,7 @@
 
 namespace Cicada\Core\Framework\Test\DependencyInjection\fixtures;
 
-/**
+use Cicada\Core\Framework\Test\DependencyInjection\Test\DependencyInjection\fixtures\TestEvent;/**
  * @internal
  */
 final class TestBusinessEvents

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:monolog="http://symfony.com/schema/dic/monolog"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd http://symfony.com/schema/dic/monolog http://symfony.com/schema/dic/monolog/monolog-1.0.xsd">
+
+    <monolog:config>
+        <monolog:handler
+                id="Monolog\Handler\NullHandler"
+                name="business_event_handler_discard"
+                type="service"
+                priority="1">
+            <monolog:channels>
+                <monolog:channel>business_events</monolog:channel>
+            </monolog:channels>
+        </monolog:handler>
+    </monolog:config>
+
+    <services>
+        <defaults public="true"/>
+
+        <service id="Cicada\Core\Framework\Test\Filesystem\Adapter\MemoryAdapterFactory">
+            <tag name="cicada.filesystem.factory"/>
+        </service>
+
+        <service id="messenger.test_receiver_locator" alias="messenger.receiver_locator" public="true"/>
+        <service id="messenger.bus.test_cicada" class="Symfony\Component\Messenger\TraceableMessageBus" decorates="messenger.default_bus">
+            <argument type="service" id=".inner"/>
+        </service>
+
+        <service id="mailer.mailer" class="Symfony\Component\Mailer\Mailer">
+            <argument type="service" id="mailer.transports" />
+            <argument type="service" id="messenger.default_bus" />
+            <argument type="service" id="debug.event_dispatcher" on-invalid="ignore" />
+        </service>
+
+        <service id="test.browser" alias="test.client" />
+
+        <service id="test.client" class="Cicada\Core\Framework\Test\TestCaseHelper\TestBrowser" shared="false" public="true">
+            <argument type="service" id="kernel" />
+            <argument>%test.client.parameters%</argument>
+            <argument type="service" id="test.client.history" />
+            <argument type="service" id="test.client.cookiejar" />
+        </service>
+
+        <service id="Monolog\Handler\NullHandler"/>
+
+        <service id="Cicada\Core\Framework\Test\MessageQueue\fixtures\TestMessageHandler">
+            <tag name="messenger.message_handler"/>
+        </service>
+
+
+        <service id="Cicada\Core\Framework\Test\TestCacheClearer">
+            <argument type="collection">
+                <argument type="service" id="cache.object" />
+                <argument type="service" id="cache.http" />
+            </argument>
+            <argument type="service" id="cache_clearer"/>
+            <argument>%kernel.cache_dir%</argument>
+        </service>
+
+        <service id="GuzzleHttp\Handler\MockHandler" public="true">
+            <argument type="collection">
+            </argument>
+        </service>
+
+        <service id="Cicada\Core\Framework\Test\Api\Acl\fixtures\AclTestController" public="true"/>
+
+        <service id="Cicada\Core\Framework\Test\TestSessionStorageFactory" decorates="session.storage.factory.mock_file"/>
+    </services>
+
+</container>
