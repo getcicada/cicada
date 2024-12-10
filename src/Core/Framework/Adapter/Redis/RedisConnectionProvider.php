@@ -45,24 +45,6 @@ class RedisConnectionProvider
         return $this->serviceLocator->has($this->getServiceName($connectionName));
     }
 
-    /**
-     * @internal
-     *
-     * @deprecated tag:v6.7.0 reason:factory-for-deprecation - Will be replaced by getConnection, as only named based connection will be supported - Remove in 6.7
-     */
-    public function getOrCreateFromDsn(?string $connectionName, ?string $dsn): object
-    {
-        if ($connectionName === null && $dsn === null) {
-            throw AdapterException::missingRedisConnectionParameter($connectionName, $dsn);
-        }
-
-        if ($connectionName !== null) {
-            return $this->getConnection($connectionName);
-        }
-
-        return $this->redisConnectionFactory->create($dsn);
-    }
-
     private function getServiceName(string $connectionName): string
     {
         return 'cicada.redis.connection.' . $connectionName;
