@@ -116,7 +116,6 @@
             <argument>%cicada.http.cache.default_ttl%</argument>
             <argument>%cicada.http.cache.enabled%</argument>
             <argument type="service" id="Cicada\Core\Framework\Routing\MaintenanceModeResolver"/>
-            <argument type="service" id="Symfony\Component\HttpFoundation\RequestStack"/>
             <argument>%cicada.http_cache.stale_while_revalidate%</argument>
             <argument>%cicada.http_cache.stale_if_error%</argument>
             <tag name="kernel.event_subscriber"/>

@@ -3,7 +3,6 @@
 namespace Cicada\Core\Framework\Routing;
 
 use Doctrine\DBAL\Connection;
-use Cicada\Core\Checkout\Cart\Price\Struct\CartPrice;
 use Cicada\Core\Defaults;
 use Cicada\Core\Framework\Api\Context\AdminApiSource;
 use Cicada\Core\Framework\Api\Context\ContextSource;
@@ -45,18 +44,12 @@ class ApiRequestContextResolver implements RequestContextResolverInterface
         $params = $this->getContextParameters($request);
         $languageIdChain = $this->getLanguageIdChain($params);
 
-        $rounding = $this->getCashRounding($params['currencyId']);
-
         $context = new Context(
             $this->resolveContextSource($request),
             [],
-            $params['currencyId'],
             $languageIdChain,
             $params['versionId'] ?? Defaults::LIVE_VERSION,
-            $params['currencyFactory'],
             $params['considerInheritance'],
-            CartPrice::TAX_STATE_GROSS,
-            $rounding
         );
 
         if ($request->headers->has(PlatformRequest::HEADER_SKIP_TRIGGER_FLOW)) {
@@ -81,11 +74,8 @@ class ApiRequestContextResolver implements RequestContextResolverInterface
     private function getContextParameters(Request $request): array
     {
         $params = [
-            'currencyId' => Defaults::CURRENCY,
             'languageId' => Defaults::LANGUAGE_SYSTEM,
             'systemFallbackLanguageId' => Defaults::LANGUAGE_SYSTEM,
-            'currencyFactory' => 1.0,
-            'currencyPrecision' => 2,
             'versionId' => $request->headers->get(PlatformRequest::HEADER_VERSION_ID),
             'considerInheritance' => false,
         ];

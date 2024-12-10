@@ -40,7 +40,6 @@ class DomainLoader extends AbstractDomainLoader
             'LOWER(HEX(channel.id)) channelId',
             'LOWER(HEX(channel.type_id)) typeId',
             'LOWER(HEX(domain.snippet_set_id)) snippetSetId',
-            'LOWER(HEX(domain.currency_id)) currencyId',
             'LOWER(HEX(domain.language_id)) languageId',
             'LOWER(HEX(theme.id)) themeId',
             'channel.maintenance maintenance',

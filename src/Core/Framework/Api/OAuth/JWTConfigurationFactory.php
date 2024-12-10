@@ -19,36 +19,9 @@ use Cicada\Core\Framework\Log\Package;
 #[Package('core')]
 class JWTConfigurationFactory
 {
-    /**
-     * @param non-empty-string $privateKey
-     * @param non-empty-string $publicKey
-     */
+
     public static function createJWTConfiguration(
-        bool $useAppSecret,
-        string $privateKey,
-        string $keyPassphrase,
-        string $publicKey,
     ): Configuration {
-        if (!$useAppSecret && !Feature::isActive('v6.7.0.0')) {
-            $privateKey = self::createKey($privateKey, $keyPassphrase);
-            $publicKey = self::createKey($publicKey, '');
-
-            $configuration = Configuration::forAsymmetricSigner(
-                new Rsa256(),
-                $privateKey,
-                $publicKey,
-            );
-
-            $clock = new SystemClock(new \DateTimeZone(\date_default_timezone_get()));
-
-            $configuration->setValidationConstraints(
-                new SignedWith(new Rsa256(), $publicKey),
-                new LooseValidAt($clock, null),
-            );
-
-            return $configuration;
-        }
-
         return self::createUsingAppSecret();
     }
 

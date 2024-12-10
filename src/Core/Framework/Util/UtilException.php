@@ -51,7 +51,7 @@ class UtilException extends HttpException
     /**
      * @deprecated tag:v6.7.0 - reason:return-type-change - Will only return `self` in the future
      */
-    public static function xmlParsingException(string $file, string $message): self|XmlParsingException
+    public static function xmlParsingException(string $file, string $message): self
     {
         return new UtilXmlParsingException($file, $message);
     }
