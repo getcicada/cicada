@@ -7,6 +7,7 @@ use Cicada\Core\DevOps\Environment\EnvironmentHelper;
 use Cicada\Core\Framework\Feature\FeatureException;
 use Cicada\Core\Framework\Log\Package;
 
+
 /**
  * @phpstan-type FeatureFlagConfig array{name?: string, default?: boolean, major?: boolean, description?: string, active?: bool, static?: bool}
  */
@@ -221,6 +222,7 @@ class Feature
         if (self::isActive($flag) === $state || (self::$registeredFeatures !== [] && !self::has($flag))) {
             throw FeatureException::error($message);
         }
+
     }
 
     public static function triggerDeprecationOrThrow(string $majorFlag, string $message): void

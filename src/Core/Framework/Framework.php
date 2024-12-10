@@ -2,9 +2,12 @@
 
 namespace Cicada\Core\Framework;
 
+use Cicada\Core\Framework\Adapter\Cache\CacheValueCompressor;
 use Cicada\Core\Framework\Adapter\Cache\ReverseProxy\ReverseProxyCompilerPass;
 use Cicada\Core\Framework\Adapter\Redis\RedisConnectionsCompilerPass;
 use Cicada\Core\Framework\DataAbstractionLayer\AttributeEntityCompiler;
+use Cicada\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry;
+use Cicada\Core\Framework\DataAbstractionLayer\ExtensionRegistry;
 use Cicada\Core\Framework\DependencyInjection\CompilerPass\AssetBundleRegistrationCompilerPass;
 use Cicada\Core\Framework\DependencyInjection\CompilerPass\AssetRegistrationCompilerPass;
 use Cicada\Core\Framework\DependencyInjection\CompilerPass\AttributeEntityCompilerPass;
@@ -24,14 +27,18 @@ use Cicada\Core\Framework\DependencyInjection\CompilerPass\RouteScopeCompilerPas
 use Cicada\Core\Framework\DependencyInjection\CompilerPass\TwigEnvironmentCompilerPass;
 use Cicada\Core\Framework\DependencyInjection\CompilerPass\TwigLoaderConfigCompilerPass;
 use Cicada\Core\Framework\DependencyInjection\FrameworkExtension;
+use Cicada\Core\Framework\Feature\FeatureFlagRegistry;
 use Cicada\Core\Framework\Increment\IncrementerGatewayCompilerPass;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\Framework\MessageQueue\MessageHandlerCompilerPass;
+use Cicada\Core\Framework\Telemetry\Metrics\MeterProvider;
 use Cicada\Core\Framework\Test\DependencyInjection\CompilerPass\ContainerVisibilityCompilerPass;
 use Cicada\Core\Framework\Test\RateLimiter\DisableRateLimiterCompilerPass;
+use Cicada\Core\System\Channel\Entity\ChannelDefinitionInstanceRegistry;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -111,5 +118,26 @@ class Framework extends Bundle
         parent::build($container);
         $this->buildDefaultConfig($container);
     }
+    public function boot(): void
+    {
+        parent::boot();
 
+        \assert($this->container instanceof ContainerInterface, 'Container is not set yet, please call setContainer() before calling boot(), see `src/Core/Kernel.php:186`.');
+
+        /** @var FeatureFlagRegistry $featureFlagRegistry */
+        $featureFlagRegistry = $this->container->get(FeatureFlagRegistry::class);
+        $featureFlagRegistry->register();
+        // Inject the meter early in the application lifecycle. This is needed to use the meter in special case (static contexts).
+        MeterProvider::bindMeter($this->container);
+
+        $this->container
+            ->get(ExtensionRegistry::class)
+            ->configureExtensions(
+                $this->container->get(DefinitionInstanceRegistry::class),
+                $this->container->get(ChannelDefinitionInstanceRegistry::class)
+            );
+
+        CacheValueCompressor::$compress = $this->container->getParameter('cicada.cache.cache_compression');
+        CacheValueCompressor::$compressMethod = $this->container->getParameter('cicada.cache.cache_compression_method');
+    }
 }

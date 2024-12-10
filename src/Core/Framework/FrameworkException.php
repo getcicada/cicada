@@ -100,17 +100,8 @@ class FrameworkException extends HttpException
         );
     }
 
-    /**
-     * @deprecated tag:v6.7.0 - reason:return-type-change - Will only return 'self' in the future
-     */
-    public static function collectionElementInvalidType(string $expectedClass, string $elementClass): self|\InvalidArgumentException
+    public static function collectionElementInvalidType(string $expectedClass, string $elementClass): self
     {
-        if (!Feature::isActive('v6.7.0.0')) {
-            return new \InvalidArgumentException(
-                \sprintf('Expected collection element of type %s got %s', $expectedClass, $elementClass)
-            );
-        }
-
         return new self(
             Response::HTTP_INTERNAL_SERVER_ERROR,
             self::INVALID_COLLECTION_ELEMENT_TYPE,
