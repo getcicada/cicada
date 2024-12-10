@@ -2,13 +2,13 @@
 
 namespace Cicada\Core\Framework\Test\TestCaseBase;
 
+use Cicada\Core\Framework\Test\Filesystem\Adapter\MemoryAdapterFactory;
+use Cicada\Core\Framework\Test\TestCaseHelper\TestBrowser;
 use Composer\Autoload\ClassLoader;
 use Doctrine\DBAL\Connection;
 use Cicada\Core\DevOps\Environment\EnvironmentHelper;
 use Cicada\Core\Framework\Adapter\Database\MySQLFactory;
 use Cicada\Core\Framework\Adapter\Kernel\KernelFactory;
-use Cicada\Core\Framework\Test\DependencyInjection\Test\Filesystem\Adapter\MemoryAdapterFactory;
-use Cicada\Core\Framework\Test\DependencyInjection\Test\TestCaseHelper\TestBrowser;
 use Cicada\Core\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\Service\ResetInterface;

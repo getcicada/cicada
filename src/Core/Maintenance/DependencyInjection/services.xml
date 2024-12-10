@@ -24,5 +24,27 @@
             <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
             <argument type="service" id="channel.repository"/>
         </service>
+        <service id="Cicada\Core\Maintenance\System\Command\SystemIsInstalledCommand">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <tag name="console.command"/>
+        </service>
+        <service id="Cicada\Core\Maintenance\User\Command\UserCreateCommand">
+            <argument type="service" id="Cicada\Core\Maintenance\User\Service\UserProvisioner"/>
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Cicada\Core\Maintenance\User\Command\UserChangePasswordCommand">
+            <argument type="service" id="user.repository"/>
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Cicada\Core\Maintenance\User\Command\UserListCommand">
+            <argument type="service" id="user.repository"/>
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Cicada\Core\Maintenance\User\Service\UserProvisioner" public="true">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
     </services>
 </container>

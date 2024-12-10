@@ -108,15 +108,15 @@ class SystemInstallCommand extends Command
                 'command' => 'user:create',
                 'username' => 'admin',
                 '--admin' => true,
-                '--password' => 'shopware',
+                '--password' => 'cicada',
             ];
 
-            if ($application->has('sales-channel:create:storefront')) {
+            if ($application->has('channel:create:frontend')) {
                 $commands[] = [
-                    'command' => 'sales-channel:create:storefront',
-                    '--name' => $input->getOption('shop-name') ?? 'Storefront',
+                    'command' => 'channel:create:frontend',
+                    '--name' => $input->getOption('frontend-name') ?? 'Web',
                     '--url' => (string) EnvironmentHelper::getVariable('APP_URL', 'http://localhost'),
-                    '--isoCode' => $input->getOption('shop-locale') ?? 'en-GB',
+                    '--isoCode' => $input->getOption('frontend-locale') ?? 'zh-CN',
                 ];
             }
 
