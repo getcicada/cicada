@@ -10,7 +10,7 @@ use Lcobucci\JWT\Validation\ConstraintViolation;
 use Lcobucci\JWT\Validation\Validator;
 use Cicada\Core\Framework\Log\Package;
 
-#[Package('checkout')]
+#[Package('member')]
 final class JWTDecoder
 {
     /**

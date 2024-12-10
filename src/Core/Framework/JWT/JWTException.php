@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @codeCoverageIgnore
  */
-#[Package('checkout')]
+#[Package('member')]
 class JWTException extends HttpException
 {
     private const INVALID_JWT = 'UTIL__INVALID_JWT';

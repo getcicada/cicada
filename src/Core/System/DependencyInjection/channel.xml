@@ -1,0 +1,182 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Cicada\Core\System\Channel\ChannelDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Aggregate\ChannelTranslation\ChannelTranslationDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Aggregate\ChannelCountry\ChannelCountryDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Aggregate\ChannelCurrency\ChannelCurrencyDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Aggregate\ChannelDomain\ChannelDomainDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Aggregate\ChannelLanguage\ChannelLanguageDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Aggregate\ChannelPaymentMethod\ChannelPaymentMethodDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Aggregate\ChannelShippingMethod\ChannelShippingMethodDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Aggregate\ChannelType\ChannelTypeDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Aggregate\ChannelTypeTranslation\ChannelTypeTranslationDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Aggregate\ChannelAnalytics\ChannelAnalyticsDefinition">
+            <tag name="cicada.entity.definition" entity="channel_analytics" />
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Context\ChannelContextPersister">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="string">%cicada.api.store.context_lifetime%</argument>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Context\ChannelContextFactory" public="true">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Cicada\Core\System\Channel\Context\BaseContextFactory"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Context\BaseContextFactory">
+            <argument type="service" id="channel.repository"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Context\CachedBaseContextFactory" decorates="Cicada\Core\System\Channel\Context\BaseContextFactory">
+            <argument type="service" id="Cicada\Core\System\Channel\Context\CachedBaseContextFactory.inner"/>
+            <argument type="service" id="cache.object"/>
+            <argument type="service" id="Cicada\Core\Framework\Adapter\Cache\CacheTracer"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Context\CachedChannelContextFactory" decorates="Cicada\Core\System\Channel\Context\ChannelContextFactory" decoration-priority="-1000">
+            <argument type="service" id="Cicada\Core\System\Channel\Context\CachedChannelContextFactory.inner"/>
+            <argument type="service" id="cache.object"/>
+            <argument type="service" id="Cicada\Core\Framework\Adapter\Cache\CacheTracer"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Context\ChannelContextService">
+            <argument type="service" id="Cicada\Core\System\Channel\Context\ChannelContextFactory"/>
+            <argument type="service" id="Cicada\Core\System\Channel\Context\ChannelContextPersister"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Context\ChannelContextRestorer">
+            <argument type="service" id="Cicada\Core\System\Channel\Context\ChannelContextFactory"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Channel\FrontendApiInfoController" public="true">
+            <argument type="service" id="Cicada\Core\Framework\Api\ApiDefinition\DefinitionService"/>
+            <argument type="service" id="twig"/>
+            <argument>%cicada.security.csp_templates%</argument>
+            <argument type="service" id="Cicada\Core\Framework\Api\Route\ApiRouteInfoResolver"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Channel\ChannelContextSwitcher">
+            <argument type="service" id="Cicada\Core\System\Channel\Channel\ContextSwitchRoute"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Channel\ContextSwitchRoute" public="true">
+            <argument type="service" id="Cicada\Core\Framework\Validation\DataValidator"/>
+            <argument type="service" id="Cicada\Core\System\Channel\Context\ChannelContextPersister"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Channel\ContextRoute" public="true"/>
+
+        <service id="Cicada\Core\System\Channel\Entity\ChannelDefinitionInstanceRegistry" public="true">
+            <argument type="string"/>
+            <argument type="service" id="service_container" />
+            <argument type="collection"/>
+            <argument type="collection"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Entity\DefinitionRegistryChain">
+            <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="Cicada\Core\System\Channel\Entity\ChannelDefinitionInstanceRegistry"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Context\ChannelContextValueResolver">
+            <tag name="controller.argument_value_resolver" priority="1000"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\ChannelExceptionHandler">
+            <tag name="cicada.dal.exception_handler"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Api\FrontendApiResponseListener">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="Cicada\Core\System\Channel\Api\StructEncoder"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Api\StructEncoder">
+            <argument type="service" id="Cicada\Core\System\Channel\Entity\DefinitionRegistryChain"/>
+            <argument type="service" id="serializer"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\DataAbstractionLayer\ChannelIndexer">
+            <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\Dbal\Common\IteratorFactory"/>
+            <argument type="service" id="channel.repository"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\Indexing\ManyToManyIdFieldUpdater"/>
+            <tag name="cicada.entity_indexer"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Context\Cleanup\CleanupChannelContextTask">
+            <tag name="cicada.scheduled.task"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Context\Cleanup\CleanupChannelContextTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument>%cicada.channel_context.expire_days%</argument>
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Validation\ChannelValidator">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Subscriber\ChannelTypeValidator">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Cicada\Core\System\Channel\Subscriber\ChannelAnalyticsLoader">
+            <argument type="service" id="channel_analytics.repository"/>
+
+            <tag name="kernel.event_listener" event="Cicada\Frontend\Event\FrontendRenderEvent" method="loadAnalytics" priority="2000" />
+        </service>
+
+        <service id="Cicada\Core\System\Channel\StoreApiCustomFieldMapper">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <tag name="kernel.reset" method="reset"/>
+        </service>
+    </services>
+</container>

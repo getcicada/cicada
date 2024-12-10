@@ -13,7 +13,7 @@ use Cicada\Core\Framework\Validation\ValidatorFactory;
  *
  * @extends Collection<JWKStruct>
  */
-#[Package('checkout')]
+#[Package('member')]
 class JWKCollection extends Collection
 {
     use AssignArrayTrait;

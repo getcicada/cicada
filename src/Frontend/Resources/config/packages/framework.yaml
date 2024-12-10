@@ -1,0 +1,8 @@
+framework:
+    exceptions:
+        Shopware\Frontend\Framework\Captcha\Exception\CaptchaInvalidException:
+            log_level: notice
+        Shopware\Frontend\Theme\Exception\ThemeException:
+            log_level: notice
+        Shopware\Frontend\Theme\Exception\ThemeAssignmentException:
+            log_level: notice

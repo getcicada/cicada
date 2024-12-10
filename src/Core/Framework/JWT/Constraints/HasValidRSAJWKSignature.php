@@ -16,7 +16,7 @@ use Cicada\Core\Framework\JWT\Struct\JWKCollection;
 use Cicada\Core\Framework\JWT\Struct\JWKStruct;
 use Cicada\Core\Framework\Log\Package;
 
-#[Package('checkout')]
+#[Package('member')]
 final class HasValidRSAJWKSignature implements Constraint
 {
     private const ALGORITHMS = ['RS256', 'RS384', 'RS512'];

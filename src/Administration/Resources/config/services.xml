@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="env(CICADA_ADMINISTRATION_PATH_NAME)">admin</parameter>
+        <parameter key="cicada_administration.path_name">%env(resolve:CICADA_ADMINISTRATION_PATH_NAME)%</parameter>
+    </parameters>
+
+    <services>
+        <service id="Cicada\Administration\Notification\NotificationDefinition">
+            <tag name="cicada.entity.definition"/>
+        </service>
+        <service id="Cicada\Administration\Notification\NotificationService" public="true">
+            <argument type="service" id="notification.repository"/>
+        </service>
+    </services>
+</container>

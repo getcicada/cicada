@@ -1,4 +1,83 @@
+parameters:
+  messenger.default_transport_name: 'v65'
+  env(MESSENGER_TRANSPORT_DSN): 'doctrine://default?auto_setup=false'
+  env(MESSENGER_TRANSPORT_LOW_PRIORITY_DSN): 'doctrine://default?auto_setup=false&queue_name=low_priority'
+  env(MESSENGER_TRANSPORT_FAILURE_DSN): 'doctrine://default?queue_name=failed&auto_setup=false'
+  env(MAILER_DSN): 'null://null'
+  env(LOCK_DSN): 'flock'
+  '.container.dumper.inline_class_loader': false
+  '.container.dumper.inline_factories': true
+
 framework:
+  esi: true
+  trusted_hosts: ~
+  fragments: ~
+  assets: ~
+  http_cache:
+    enabled: true
+  session:
+    name: 'session-'
+    handler_id: ~
+    cookie_secure: 'auto'
+    cookie_samesite: lax
+    storage_factory_id: session.storage.factory.native
   serializer: { enabled: true }
   secret: "%env(APP_SECRET)%"
+  validation:
+    enable_attributes: true
+    email_validation_mode: html5
   default_locale:  zh_CN
+  http_method_override: true
+  mailer:
+    message_bus: false
+    dsn: '%env(MAILER_DSN)%'
+  lock: '%env(LOCK_DSN)%'
+  php_errors:
+    log: true
+  cache:
+    prefix_seed: "%kernel.cache.hash%"
+    app: cache.adapter.filesystem
+    pools:
+      cache.object:
+        default_lifetime: 172800
+        adapter: cache.app
+        tags: cache.tags
+      cache.http:
+        default_lifetime: 172800
+        adapter: cache.app
+        tags: cache.tags
+      cache.tags:
+        adapter: cache.app
+      cache.rate_limiter:
+        adapter: cache.app
+  messenger:
+    failure_transport: failed
+    serializer:
+      default_serializer: messenger.transport.symfony_serializer
+      symfony_serializer:
+        format: json
+        context: { }
+
+    transports:
+      failed: "%env(MESSENGER_TRANSPORT_FAILURE_DSN)%"
+      async:
+        dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+        serializer: messenger.transport.symfony_serializer
+        retry_strategy:
+          max_retries: 3
+          delay: 1000
+          multiplier: 2
+          max_delay: 0
+      low_priority:
+        dsn: "%env(MESSENGER_TRANSPORT_LOW_PRIORITY_DSN)%"
+        serializer: messenger.transport.symfony_serializer
+        retry_strategy:
+          max_retries: 3
+          delay: 1000
+          multiplier: 2
+          max_delay: 0
+
+    routing:
+      'Cicada\Core\Framework\MessageQueue\AsyncMessageInterface': async
+      'Cicada\Core\Framework\MessageQueue\LowPriorityMessageInterface': low_priority
+      'Symfony\Component\Mailer\Messenger\SendEmailMessage': async

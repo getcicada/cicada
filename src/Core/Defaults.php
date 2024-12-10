@@ -9,4 +9,8 @@ class Defaults
     public const STORAGE_DATE_FORMAT = 'Y-m-d';
     public const STORAGE_DATE_TIME_FORMAT = 'Y-m-d H:i:s.v';
 
+    public const CHANNEL_TYPE_API = 'f183ee5650cf4bdb8a774337575067a6';
+
+    public const CHANNEL_TYPE_STOREFRONT = '8a243080f92e4c719546314b577cf82b';
+
 }

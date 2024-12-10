@@ -1,0 +1,6 @@
+/vendor/
+composer.lock
+phpunit.xml
+Resources/app/frontend/build/artifacts
+Resources/app/frontend/vendor/*
+!Resources/app/frontend/vendor/Inter-3.5

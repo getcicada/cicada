@@ -1,0 +1,25 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\Frontend\Controller;
+
+use Cicada\Core\System\Channel\ChannelContext;
+use Cicada\Frontend\Controller\FrontendController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+
+#[Route(defaults: ['_routeScope' => ['frontend']])]
+class ExampleController extends FrontendController
+{
+    #[Route(
+        path: '/example',
+        name: 'frontend.example.example',
+        methods: ['GET']
+    )]
+    public function showExample(Request $request, ChannelContext $context): Response
+    {
+        return $this->renderFrontend('@{{ className }}/frontend/page/example.html.twig', [
+            'example' => 'Hello world'
+        ]);
+    }
+}

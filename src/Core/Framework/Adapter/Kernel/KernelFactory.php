@@ -2,17 +2,29 @@
 
 namespace Cicada\Core\Framework\Adapter\Kernel;
 
-use Cicada\Core\Framework\Adapter\Database\MySQLFactory;
-use Cicada\Core\Framework\Adapter\Storage\MySQLKeyValueStorage;
-use Cicada\Core\Framework\Log\Package;
-use Cicada\Core\Kernel;
-use Cicada\Core\Profiling\Doctrine\ProfilingMiddleware;
 use Composer\Autoload\ClassLoader;
 use Composer\InstalledVersions;
 use Doctrine\DBAL\Connection;
+use Cicada\Core\Framework\Adapter\Cache\CacheIdLoader;
+use Cicada\Core\Framework\Adapter\Database\MySQLFactory;
+use Cicada\Core\Framework\Adapter\Storage\MySQLKeyValueStorage;
+use Cicada\Core\Framework\Log\Package;
+use Cicada\Core\Framework\Plugin\KernelPluginLoader\DbalKernelPluginLoader;
+use Cicada\Core\Framework\Plugin\KernelPluginLoader\KernelPluginLoader;
+use Cicada\Core\Kernel;
+use Cicada\Core\Profiling\Doctrine\ProfilingMiddleware;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
+/**
+ * Cicada\Core\Framework\Adapter\Kernel\KernelFactory
+ *      Cicada\Core\Kernel
+ *          Cicada\Core\Framework\Adapter\Kernel\HttpCacheKernel (http caching)
+ *              Cicada\Core\Framework\Adapter\Kernel\HttpKernel (runs request transformer)
+ *                  Cicada\Frontend\Controller\Any
+ *
+ * @final
+ */
 #[Package('core')]
 class KernelFactory
 {
@@ -22,12 +34,12 @@ class KernelFactory
     public static string $kernelClass = Kernel::class;
 
     public static function create(
-        string      $environment,
-        bool        $debug,
+        string $environment,
+        bool $debug,
         ClassLoader $classLoader,
+        ?KernelPluginLoader $pluginLoader = null,
         ?Connection $connection = null
-    ): HttpKernelInterface
-    {
+    ): HttpKernelInterface {
         if (InstalledVersions::isInstalled('cicada-ag/platform')) {
             $cicadaVersion = InstalledVersions::getVersion('cicada-ag/platform')
                 . '@' . InstalledVersions::getReference('cicada-ag/platform');
@@ -35,6 +47,7 @@ class KernelFactory
             $cicadaVersion = InstalledVersions::getVersion('cicada-ag/core')
                 . '@' . InstalledVersions::getReference('cicada-ag/core');
         }
+
         $middlewares = [];
         if ((\PHP_SAPI !== 'cli' || \in_array('--profile', $_SERVER['argv'] ?? [], true))
             && $environment !== 'prod' && InstalledVersions::isInstalled('symfony/doctrine-bridge')) {
@@ -42,11 +55,18 @@ class KernelFactory
         }
 
         $connection = $connection ?? MySQLFactory::create($middlewares);
+
+        $pluginLoader = $pluginLoader ?? new DbalKernelPluginLoader($classLoader, null, $connection);
+
         $storage = new MySQLKeyValueStorage($connection);
+        $cacheId = (new CacheIdLoader($storage))->load();
+
         /** @var KernelInterface $kernel */
         $kernel = new static::$kernelClass(
             $environment,
             $debug,
+            $pluginLoader,
+            $cacheId,
             $cicadaVersion,
             $connection,
             self::getProjectDir()

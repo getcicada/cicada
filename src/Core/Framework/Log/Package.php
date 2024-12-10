@@ -5,7 +5,7 @@ namespace Cicada\Core\Framework\Log;
 /**
  * @internal
  *
- * @phpstan-type PackageString 'content'|'core'|'administration'|'services-settings'|'frontend'
+ * @phpstan-type PackageString 'content'|'core'|'administration'|'services-settings'|'frontend'|'member'
  */
 #[\Attribute(\Attribute::TARGET_CLASS)]
 #[Package('core')]

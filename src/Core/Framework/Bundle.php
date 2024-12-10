@@ -1,17 +1,18 @@
 <?php declare(strict_types=1);
 
-
 namespace Cicada\Core\Framework;
 
+use League\Flysystem\FilesystemOperator;
 use Cicada\Core\Framework\Adapter\Filesystem\PrefixFilesystem;
+use Cicada\Core\Framework\DependencyInjection\CompilerPass\BusinessEventRegisterCompilerPass;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\Framework\Migration\MigrationSource;
 use Cicada\Core\Framework\Parameter\AdditionalBundleParameters;
 use Cicada\Core\Kernel;
-use League\Flysystem\FilesystemOperator;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
@@ -26,12 +27,19 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Bundle\Bundle as SymfonyBundle;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+
 #[Package('core')]
 abstract class Bundle extends SymfonyBundle
 {
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);
+
+        $this->registerContainerFile($container);
+        $this->registerMigrationPath($container);
+        $this->registerFilesystem($container, 'private');
+        $this->registerFilesystem($container, 'public');
+        $this->registerEvents($container);
     }
 
     public function getMigrationNamespace(): string
@@ -113,6 +121,7 @@ abstract class Bundle extends SymfonyBundle
             ->addArgument([$migrationPath => $this->getMigrationNamespace()])
             ->addTag('cicada.migration_source');
     }
+
     protected function buildDefaultConfig(ContainerBuilder $container): void
     {
         $locator = new FileLocator('Resources/config');
@@ -163,6 +172,17 @@ abstract class Bundle extends SymfonyBundle
         // SwagMigrationAssistant -> swagMigrationAssistantPublicFilesystem
         $aliasName = (new CamelCaseToSnakeCaseNameConverter())->denormalize($this->getName()) . ucfirst($key) . 'Filesystem';
         $container->registerAliasForArgument($serviceId, FilesystemOperator::class, $aliasName);
+    }
+
+    private function registerEvents(ContainerBuilder $container): void
+    {
+        $classes = $this->getActionEventClasses();
+
+        if ($classes === []) {
+            return;
+        }
+
+        $container->addCompilerPass(new BusinessEventRegisterCompilerPass($classes), PassConfig::TYPE_BEFORE_OPTIMIZATION, 0);
     }
 
     /**

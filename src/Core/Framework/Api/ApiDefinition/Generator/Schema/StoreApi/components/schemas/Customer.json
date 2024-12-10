@@ -1,0 +1,71 @@
+{
+    "openapi": "3.0.0",
+    "info": [],
+    "paths": [],
+    "components": {
+        "schemas": {
+            "Member": {
+                "type": "object",
+                "required": [
+                    "apiAlias",
+                    "activeBillingAddress",
+                    "activeShippingAddress"
+                ],
+                "properties": {
+                    "apiAlias": {
+                        "type": "string",
+                        "enum": [
+                            "member"
+                        ]
+                    },
+                    "activeBillingAddress": {
+                        "$ref": "#/components/schemas/MemberAddress"
+                    },
+                    "activeShippingAddress": {
+                        "$ref": "#/components/schemas/MemberAddress"
+                    }
+                },
+                "oneOf": [
+                    {
+                        "required": [
+                            "accountType"
+                        ],
+                        "properties": {
+                            "accountType": {
+                                "type": "string",
+                                "enum": [
+                                    "private"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "required": [
+                            "accountType",
+                            "vatIds",
+                            "company"
+                        ],
+                        "properties": {
+                            "accountType": {
+                                "type": "string",
+                                "enum": [
+                                    "business"
+                                ]
+                            },
+                            "vatIds": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "minItems": 1
+                            },
+                            "company": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

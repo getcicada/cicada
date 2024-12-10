@@ -4,6 +4,7 @@ namespace Cicada\Core\Maintenance\System\Command;
 
 use Cicada\Core\DevOps\Environment\EnvironmentHelper;
 use Cicada\Core\Framework\Adapter\Console\CicadaStyle;
+use Cicada\Core\Framework\Feature;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\Maintenance\MaintenanceException;
 use Cicada\Core\Maintenance\System\Service\DatabaseConnectionFactory;
@@ -28,11 +29,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 class SystemInstallCommand extends Command
 {
     public function __construct(
-        private readonly string                    $projectDir,
-        private readonly SetupDatabaseAdapter      $setupDatabaseAdapter,
+        private readonly string $projectDir,
+        private readonly SetupDatabaseAdapter $setupDatabaseAdapter,
         private readonly DatabaseConnectionFactory $databaseConnectionFactory
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -40,7 +40,11 @@ class SystemInstallCommand extends Command
     {
         $this->addOption('create-database', null, InputOption::VALUE_NONE, 'Create database if it doesn\'t exist.')
             ->addOption('drop-database', null, InputOption::VALUE_NONE, 'Drop existing database')
-            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force install even if install.lock exists');
+            ->addOption('basic-setup', null, InputOption::VALUE_NONE, 'Create frontend channel and admin user')
+            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force install even if install.lock exists')
+            ->addOption('no-assign-theme', null, InputOption::VALUE_NONE, 'Do not assign the default theme')
+            ->addOption('skip-assets-install', null, InputOption::VALUE_NONE, 'Skips installing of assets')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -61,9 +65,82 @@ class SystemInstallCommand extends Command
 
         $this->initializeDatabase($output, $input);
 
+        $commands = [
+            [
+                'command' => 'database:migrate',
+                'identifier' => 'core',
+                '--all' => true,
+            ],
+            [
+                'command' => 'database:migrate-destructive',
+                'identifier' => 'core',
+                '--all' => true,
+                '--version-selection-mode' => 'all',
+            ],
+            [
+                'command' => 'dal:refresh:index',
+            ],
+            [
+                'command' => 'scheduled-task:register',
+            ],
+            [
+                'command' => 'plugin:refresh',
+            ],
+        ];
+
+        $application = $this->getConsoleApplication();
+        if ($application->has('theme:refresh')) {
+            $commands[] = [
+                'command' => 'theme:refresh',
+            ];
+        }
+
+        if ($application->has('theme:compile')) {
+            $commands[] = [
+                'command' => 'theme:compile',
+                '--sync' => true,
+                'allowedToFail' => true,
+            ];
+        }
+
+        if ($input->getOption('basic-setup')) {
+            $commands[] = [
+                'command' => 'user:create',
+                'username' => 'admin',
+                '--admin' => true,
+                '--password' => 'shopware',
+            ];
+
+            if ($application->has('sales-channel:create:storefront')) {
+                $commands[] = [
+                    'command' => 'sales-channel:create:storefront',
+                    '--name' => $input->getOption('shop-name') ?? 'Storefront',
+                    '--url' => (string) EnvironmentHelper::getVariable('APP_URL', 'http://localhost'),
+                    '--isoCode' => $input->getOption('shop-locale') ?? 'en-GB',
+                ];
+            }
+
+            if ($application->has('theme:change') && !$input->getOption('no-assign-theme')) {
+                $commands[] = [
+                    'command' => 'theme:change',
+                    'allowedToFail' => true,
+                    '--all' => true,
+                    '--sync' => true,
+                    'theme-name' => 'Storefront',
+                ];
+            }
+        }
+
+        if (!$input->getOption('skip-assets-install')) {
+            $commands[] = [
+                'command' => 'assets:install',
+            ];
+        }
+
         $commands[] = [
             'command' => 'cache:clear',
         ];
+
         $result = $this->runCommands($commands, $output);
 
         if (!file_exists($this->projectDir . '/public/.htaccess')

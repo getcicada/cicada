@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults public="true" />
+
+        <service id="Cicada\Frontend\Controller\Api\CaptchaController" public="true">
+            <argument type="tagged_iterator" tag="cicada.frontend.captcha"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Cicada\Frontend\Controller\CookieController">
+            <argument type="service" id="Cicada\Frontend\Framework\Cookie\CookieProviderInterface"/>
+            <argument type="service" id="Cicada\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="channel_analytics.repository"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Cicada\Frontend\Controller\CmsController">
+            <argument type="service" id="Cicada\Core\Content\Cms\Channel\CmsRoute"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Cicada\Frontend\Controller\ContextController">
+            <argument type="service" id="Cicada\Core\System\Channel\Channel\ContextSwitchRoute"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="router.default"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Cicada\Frontend\Controller\MaintenanceController" public="true">
+            <argument type="service" id="Cicada\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Cicada\Frontend\Page\Maintenance\MaintenancePageLoader"/>
+            <argument type="service" id="Cicada\Frontend\Framework\Routing\MaintenanceModeResolver"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Cicada\Frontend\Controller\LandingPageController">
+            <argument type="service" id="Cicada\Frontend\Page\LandingPage\LandingPageLoader"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+        <service id="Cicada\Frontend\Controller\VerificationHashController" public="true">
+            <argument type="service" id="Cicada\Core\System\SystemConfig\SystemConfigService"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+    </services>
+</container>
