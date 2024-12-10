@@ -68,7 +68,7 @@ class FirstRunWizardSubscriber implements EventSubscriberInterface
         }
 
         $channelCriteria = new Criteria();
-        $channelCriteria->addFilter(new EqualsFilter('typeId', Defaults::CHANNEL_TYPE_STOREFRONT));
+        $channelCriteria->addFilter(new EqualsFilter('typeId', Defaults::CHANNEL_TYPE_WEB));
         $channelIds = $this->channelRepository->search($channelCriteria, $context)->getIds();
         foreach ($channelIds as $id) {
             $this->themeService->compileTheme($id, $theme->getId(), $context);

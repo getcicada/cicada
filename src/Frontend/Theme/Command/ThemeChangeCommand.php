@@ -76,7 +76,7 @@ class ThemeChangeCommand extends Command
         \assert(\is_string($themeName));
 
         /** @var ChannelCollection $channels */
-        $channels = $this->channelRepository->search((new Criteria())->addFilter(new EqualsFilter('typeId', Defaults::CHANNEL_TYPE_STOREFRONT)), $this->context)->getEntities();
+        $channels = $this->channelRepository->search((new Criteria())->addFilter(new EqualsFilter('typeId', Defaults::CHANNEL_TYPE_WEB)), $this->context)->getEntities();
 
         if ($input->getOption('all')) {
             $selectedChannel = $channels;

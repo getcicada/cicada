@@ -33,7 +33,7 @@ class ChannelTypeValidator implements EventSubscriberInterface
 
             $id = Uuid::fromBytesToHex($command->getPrimaryKey()['id']);
 
-            if (\in_array($id, [Defaults::CHANNEL_TYPE_API, Defaults::CHANNEL_TYPE_STOREFRONT, Defaults::SALES_CHANNEL_TYPE_PRODUCT_COMPARISON], true)) {
+            if (\in_array($id, [Defaults::CHANNEL_TYPE_API, Defaults::CHANNEL_TYPE_WEB, Defaults::SALES_CHANNEL_TYPE_PRODUCT_COMPARISON], true)) {
                 $event->getExceptions()->add(new DefaultChannelTypeCannotBeDeleted($id));
             }
         }

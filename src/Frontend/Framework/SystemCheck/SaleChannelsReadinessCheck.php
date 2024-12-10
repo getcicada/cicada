@@ -71,7 +71,7 @@ class SaleChannelsReadinessCheck extends BaseCheck
                     INNER JOIN `channel` ON `channel_domain`.`channel_id` = `channel`.`id`
                     WHERE `channel`.`type_id` = :typeId
                     AND `channel`.`active` = :active',
-            ['typeId' => Uuid::fromHexToBytes(Defaults::CHANNEL_TYPE_STOREFRONT), 'active' => 1]
+            ['typeId' => Uuid::fromHexToBytes(Defaults::CHANNEL_TYPE_WEB), 'active' => 1]
         );
 
         return array_map(fn (array $row): string => $row['url'], $result);

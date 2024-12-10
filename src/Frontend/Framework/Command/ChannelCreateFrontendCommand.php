@@ -50,7 +50,7 @@ class ChannelCreateFrontendCommand extends ChannelCreateCommand
 
     protected function getTypeId(): string
     {
-        return Defaults::CHANNEL_TYPE_STOREFRONT;
+        return Defaults::CHANNEL_TYPE_WEB;
     }
 
     protected function getChannelConfiguration(InputInterface $input, OutputInterface $output): array

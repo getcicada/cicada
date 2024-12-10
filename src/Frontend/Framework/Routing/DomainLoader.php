@@ -57,7 +57,7 @@ class DomainLoader extends AbstractDomainLoader
         $query->leftJoin('theme', 'theme', 'parentTheme', 'theme.parent_theme_id = parentTheme.id');
         $query->where('channel.type_id = UNHEX(:typeId)');
         $query->andWhere('channel.active');
-        $query->setParameter('typeId', Defaults::CHANNEL_TYPE_STOREFRONT);
+        $query->setParameter('typeId', Defaults::CHANNEL_TYPE_WEB);
 
         /** @var array<string, Domain> $domains */
         $domains = FetchModeHelper::groupUnique($query->executeQuery()->fetchAllAssociative());

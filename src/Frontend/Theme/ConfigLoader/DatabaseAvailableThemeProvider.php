@@ -32,7 +32,7 @@ class DatabaseAvailableThemeProvider extends AbstractAvailableThemeProvider
             ->select(['LOWER(HEX(channel_id))', 'LOWER(HEX(theme_id))'])
             ->leftJoin('theme_channel', 'channel', 'channel', 'channel.id = theme_channel.channel_id')
             ->where('channel.type_id = :typeId')
-            ->setParameter('typeId', Uuid::fromHexToBytes(Defaults::CHANNEL_TYPE_STOREFRONT));
+            ->setParameter('typeId', Uuid::fromHexToBytes(Defaults::CHANNEL_TYPE_WEB));
 
         if ($activeOnly) {
             $qb->andWhere('channel.active = 1');

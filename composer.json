@@ -217,7 +217,8 @@
   "autoload-dev": {
     "psr-4": {
       "Cicada\\Tests\\Unit\\": "tests/unit/",
-      "Cicada\\Tests\\Integration\\": "tests/integration/"
+      "Cicada\\Tests\\Integration\\": "tests/integration/",
+      "Cicada\\Tests\\DevOps\\": "tests/devops/"
     }
   }
 }

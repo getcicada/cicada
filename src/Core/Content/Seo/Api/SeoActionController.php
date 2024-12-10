@@ -303,7 +303,7 @@ class SeoActionController extends AbstractController
             /** @var ChannelEntity|null $channel */
             $channel = $this->channelRepository
                 ->search(
-                    (new Criteria())->addFilter(new EqualsFilter('typeId', Defaults::CHANNEL_TYPE_STOREFRONT))->setLimit(1),
+                    (new Criteria())->addFilter(new EqualsFilter('typeId', Defaults::CHANNEL_TYPE_WEB))->setLimit(1),
                     $context
                 )
                 ->first();
