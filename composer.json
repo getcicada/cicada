@@ -194,7 +194,9 @@
   "scripts-descriptions": {
     "ecs": "Checks all files regarding the PHP-CS-Fixer",
     "ecs-fix": "Checks all files regarding the PHP-CS-Fixer and fixes them if possible",
-    "phpstan": "Launches the PHP static analysis tool"
+    "phpstan": "Launches the PHP static analysis tool",
+    "phpunit": "Launches the PHP unit test-suite",
+    "static-analyze": "Launches the PHP Stan static analysis tool"
   },
   "scripts": {
     "ecs": "php-cs-fixer fix --dry-run --diff",
@@ -203,6 +205,12 @@
       "Composer\\Config::disableProcessTimeout",
       "@php src/Core/DevOps/StaticAnalyze/phpstan-bootstrap.php",
       "phpstan analyze --memory-limit=2G -v"
+    ],
+    "phpunit": [
+      "phpunit"
+    ],
+    "static-analyze": [
+      "@phpstan src/"
     ]
   },
   "autoload": {
@@ -218,7 +226,8 @@
     "psr-4": {
       "Cicada\\Tests\\Unit\\": "tests/unit/",
       "Cicada\\Tests\\Integration\\": "tests/integration/",
-      "Cicada\\Tests\\DevOps\\": "tests/devops/"
+      "Cicada\\Tests\\DevOps\\": "tests/devops/",
+      "Cicada\\Tests\\Migration\\": "tests/migration/"
     }
   }
 }

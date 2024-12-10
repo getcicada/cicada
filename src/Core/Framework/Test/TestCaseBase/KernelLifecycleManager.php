@@ -2,13 +2,15 @@
 
 namespace Cicada\Core\Framework\Test\TestCaseBase;
 
-use Cicada\Core\Framework\Test\Filesystem\Adapter\MemoryAdapterFactory;
-use Cicada\Core\Framework\Test\TestCaseHelper\TestBrowser;
 use Composer\Autoload\ClassLoader;
 use Doctrine\DBAL\Connection;
 use Cicada\Core\DevOps\Environment\EnvironmentHelper;
 use Cicada\Core\Framework\Adapter\Database\MySQLFactory;
 use Cicada\Core\Framework\Adapter\Kernel\KernelFactory;
+use Cicada\Core\Framework\Plugin\KernelPluginLoader\DbalKernelPluginLoader;
+use Cicada\Core\Framework\Plugin\KernelPluginLoader\StaticKernelPluginLoader;
+use Cicada\Core\Framework\Test\Filesystem\Adapter\MemoryAdapterFactory;
+use Cicada\Core\Framework\Test\TestCaseHelper\TestBrowser;
 use Cicada\Core\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\Service\ResetInterface;
@@ -142,13 +144,17 @@ class KernelLifecycleManager
             // force connection to database
             $existingConnection->fetchOne('SELECT 1');
 
+            $pluginLoader = new DbalKernelPluginLoader(self::$classLoader, null, $existingConnection);
         } catch (\Throwable) {
+            // if we don't have database yet, we'll boot the kernel without plugins
+            $pluginLoader = new StaticKernelPluginLoader(self::$classLoader);
         }
 
         $kernel = KernelFactory::create(
             environment: $env,
             debug: $debug,
             classLoader: self::$classLoader,
+            pluginLoader: $pluginLoader,
             connection: $existingConnection
         );
 
