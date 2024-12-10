@@ -2,7 +2,7 @@
 
 namespace Cicada\Core\Framework\Test\MessageQueue\fixtures;
 
-use Cicada\Core\Framework\Test\DependencyInjection\Test\MessageQueue\fixtures\BarMessage;use Cicada\Core\Framework\Test\DependencyInjection\Test\MessageQueue\fixtures\FooMessage;use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 /**
  * @internal
