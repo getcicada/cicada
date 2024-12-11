@@ -105,7 +105,7 @@ class UserListCommandTest extends TestCase
         $user->setEmail($email);
         $user->setActive(true);
         $user->setUsername($username);
-        $user->setFirstName($firstName);
+        $user->setName($firstName);
         $user->setLastName($secondName);
         $user->setAdmin($roles === null);
         $user->setCreatedAt(new \DateTime());

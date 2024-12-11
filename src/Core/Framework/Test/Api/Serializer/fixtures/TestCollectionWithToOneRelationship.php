@@ -24,7 +24,7 @@ class TestCollectionWithToOneRelationship extends SerializationFixture
 
         $user = new UserEntity();
         $user->setId($userId);
-        $user->setFirstName('Manufacturer');
+        $user->setName('Manufacturer');
         $user->setLastName('');
         $user->setPassword('password');
         $user->setUsername('user1');

@@ -2,9 +2,6 @@
 
 namespace Cicada\Core\System\User;
 
-use Cicada\Frontend\Member\MemberDefinition;
-use Cicada\Core\Checkout\Order\OrderDefinition;
-use Cicada\Core\Content\ImportExport\Aggregate\ImportExportLog\ImportExportLogDefinition;
 use Cicada\Core\Content\Media\MediaDefinition;
 use Cicada\Core\Framework\Api\Acl\Role\AclRoleDefinition;
 use Cicada\Core\Framework\Api\Acl\Role\AclUserRoleDefinition;
@@ -34,7 +31,6 @@ use Cicada\Core\Framework\DataAbstractionLayer\Field\TimeZoneField;
 use Cicada\Core\Framework\DataAbstractionLayer\FieldCollection;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\System\Locale\LocaleDefinition;
-use Cicada\Core\System\StateMachine\Aggregation\StateMachineHistory\StateMachineHistoryDefinition;
 use Cicada\Core\System\User\Aggregate\UserAccessKey\UserAccessKeyDefinition;
 use Cicada\Core\System\User\Aggregate\UserConfig\UserConfigDefinition;
 use Cicada\Core\System\User\Aggregate\UserRecovery\UserRecoveryDefinition;
@@ -67,7 +63,7 @@ class UserDefinition extends EntityDefinition
     public function getDefaults(): array
     {
         return [
-            'timeZone' => 'UTC',
+            'timeZone' => 'Asia/Shanghai',
         ];
     }
 
@@ -83,8 +79,7 @@ class UserDefinition extends EntityDefinition
             (new FkField('locale_id', 'localeId', LocaleDefinition::class))->addFlags(new Required()),
             (new StringField('username', 'username'))->addFlags(new Required(), new SearchRanking(SearchRanking::HIGH_SEARCH_RANKING)),
             (new PasswordField('password', 'password', \PASSWORD_DEFAULT, [], PasswordField::FOR_ADMIN))->removeFlag(ApiAware::class)->addFlags(new Required()),
-            (new StringField('first_name', 'firstName'))->addFlags(new Required(), new SearchRanking(SearchRanking::HIGH_SEARCH_RANKING)),
-            (new StringField('last_name', 'lastName'))->addFlags(new Required(), new SearchRanking(SearchRanking::HIGH_SEARCH_RANKING)),
+            (new StringField('name', 'name'))->addFlags(new SearchRanking(SearchRanking::HIGH_SEARCH_RANKING)),
             (new StringField('title', 'title'))->addFlags(new SearchRanking(SearchRanking::MIDDLE_SEARCH_RANKING)),
             (new EmailField('email', 'email'))->addFlags(new Required(), new SearchRanking(SearchRanking::HIGH_SEARCH_RANKING)),
             new BoolField('active', 'active'),
@@ -98,15 +93,9 @@ class UserDefinition extends EntityDefinition
             (new OneToManyAssociationField('media', MediaDefinition::class, 'user_id'))->addFlags(new SetNullOnDelete()),
             (new OneToManyAssociationField('accessKeys', UserAccessKeyDefinition::class, 'user_id', 'id'))->addFlags(new CascadeDelete()),
             (new OneToManyAssociationField('configs', UserConfigDefinition::class, 'user_id', 'id'))->addFlags(new CascadeDelete()),
-            new OneToManyAssociationField('stateMachineHistoryEntries', StateMachineHistoryDefinition::class, 'user_id', 'id'),
-            (new OneToManyAssociationField('importExportLogEntries', ImportExportLogDefinition::class, 'user_id', 'id'))->addFlags(new SetNullOnDelete()),
             new ManyToManyAssociationField('aclRoles', AclRoleDefinition::class, AclUserRoleDefinition::class, 'user_id', 'acl_role_id'),
             new OneToOneAssociationField('recoveryUser', 'id', 'user_id', UserRecoveryDefinition::class, false),
             (new StringField('store_token', 'storeToken'))->removeFlag(ApiAware::class),
-            new OneToManyAssociationField('createdOrders', OrderDefinition::class, 'created_by_id', 'id'),
-            new OneToManyAssociationField('updatedOrders', OrderDefinition::class, 'updated_by_id', 'id'),
-            new OneToManyAssociationField('createdMembers', MemberDefinition::class, 'created_by_id', 'id'),
-            new OneToManyAssociationField('updatedMembers', MemberDefinition::class, 'updated_by_id', 'id'),
         ]);
     }
 }

@@ -2,9 +2,6 @@
 
 namespace Cicada\Core\System\User;
 
-use Cicada\Frontend\Member\MemberCollection;
-use Cicada\Core\Checkout\Order\OrderCollection;
-use Cicada\Core\Content\ImportExport\Aggregate\ImportExportLog\ImportExportLogCollection;
 use Cicada\Core\Content\Media\MediaCollection;
 use Cicada\Core\Content\Media\MediaEntity;
 use Cicada\Core\Framework\Api\Acl\Role\AclRoleCollection;
@@ -13,7 +10,6 @@ use Cicada\Core\Framework\DataAbstractionLayer\EntityCustomFieldsTrait;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\System\Locale\LocaleEntity;
-use Cicada\Core\System\StateMachine\Aggregation\StateMachineHistory\StateMachineHistoryCollection;
 use Cicada\Core\System\User\Aggregate\UserAccessKey\UserAccessKeyCollection;
 use Cicada\Core\System\User\Aggregate\UserConfig\UserConfigCollection;
 use Cicada\Core\System\User\Aggregate\UserRecovery\UserRecoveryEntity;
@@ -59,14 +55,7 @@ class UserEntity extends Entity
      *
      * @deprecated tag:v6.7.0 - Will be natively typed
      */
-    protected $firstName;
-
-    /**
-     * @var string
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $lastName;
+    protected $name;
 
     /**
      * @var string|null
@@ -139,20 +128,6 @@ class UserEntity extends Entity
     protected $configs;
 
     /**
-     * @var StateMachineHistoryCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $stateMachineHistoryEntries;
-
-    /**
-     * @var ImportExportLogCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $importExportLogEntries;
-
-    /**
      * @var UserRecoveryEntity|null
      *
      * @deprecated tag:v6.7.0 - Will be natively typed
@@ -182,48 +157,9 @@ class UserEntity extends Entity
      */
     protected $createdOrders;
 
-    /**
-     * @var OrderCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $updatedOrders;
 
-    /**
-     * @var MemberCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $createdMembers;
-
-    /**
-     * @var MemberCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $updatedMembers;
 
     protected string $timeZone;
-
-    public function getStateMachineHistoryEntries(): ?StateMachineHistoryCollection
-    {
-        return $this->stateMachineHistoryEntries;
-    }
-
-    public function setStateMachineHistoryEntries(StateMachineHistoryCollection $stateMachineHistoryEntries): void
-    {
-        $this->stateMachineHistoryEntries = $stateMachineHistoryEntries;
-    }
-
-    public function getImportExportLogEntries(): ?ImportExportLogCollection
-    {
-        return $this->importExportLogEntries;
-    }
-
-    public function setImportExportLogEntries(ImportExportLogCollection $importExportLogEntries): void
-    {
-        $this->importExportLogEntries = $importExportLogEntries;
-    }
 
     public function getLocaleId(): string
     {
@@ -273,24 +209,14 @@ class UserEntity extends Entity
         $this->password = $password;
     }
 
-    public function getFirstName(): string
+    public function getName(): string
     {
-        return $this->firstName;
+        return $this->name;
     }
 
-    public function setFirstName(string $firstName): void
+    public function setName(string $name): void
     {
-        $this->firstName = $firstName;
-    }
-
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): void
-    {
-        $this->lastName = $lastName;
+        $this->name = $name;
     }
 
     public function getEmail(): string

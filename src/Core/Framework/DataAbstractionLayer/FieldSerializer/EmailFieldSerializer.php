@@ -2,11 +2,11 @@
 
 namespace Cicada\Core\Framework\DataAbstractionLayer\FieldSerializer;
 
-use Cicada\Frontend\Member\Service\EmailIdnConverter;
 use Cicada\Core\Framework\DataAbstractionLayer\DataAbstractionLayerException;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Field;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\StorageAware;
+use Cicada\Core\Framework\DataAbstractionLayer\Service\EmailIdnConverter;
 use Cicada\Core\Framework\DataAbstractionLayer\Write\DataStack\KeyValuePair;
 use Cicada\Core\Framework\DataAbstractionLayer\Write\EntityExistence;
 use Cicada\Core\Framework\DataAbstractionLayer\Write\WriteParameterBag;

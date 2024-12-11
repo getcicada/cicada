@@ -5,7 +5,18 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="cicada.maintenance.client" class="GuzzleHttp\Client"/>
-
+        <service id="Symfony\Component\Dotenv\Command\DotenvDumpCommand">
+            <argument>%kernel.project_dir%</argument>
+            <tag name="console.command"/>
+        </service>
+        <service id="Cicada\Core\Maintenance\System\Command\SystemGenerateAppSecretCommand">
+            <tag name="console.command"/>
+        </service>
+        <service id="Cicada\Core\Maintenance\System\Command\SystemSetupCommand">
+            <argument>%kernel.project_dir%</argument>
+            <argument type="service" id="Symfony\Component\Dotenv\Command\DotenvDumpCommand"/>
+            <tag name="console.command"/>
+        </service>
         <service id="Cicada\Core\Maintenance\System\Service\DatabaseConnectionFactory"/>
         <service id="Cicada\Core\Maintenance\System\Service\SetupDatabaseAdapter"/>
         <service id="Cicada\Core\Maintenance\System\Command\SystemInstallCommand">

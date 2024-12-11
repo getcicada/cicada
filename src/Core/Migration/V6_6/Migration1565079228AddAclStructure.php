@@ -22,7 +22,7 @@ class Migration1565079228AddAclStructure extends MigrationStep
     public function update(Connection $connection): void
     {
         $connection->executeStatement('
-            CREATE TABLE `acl_role` (
+            CREATE TABLE IF NOT EXISTS `acl_role` (
               `id` binary(16) NOT NULL,
               `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
               `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
