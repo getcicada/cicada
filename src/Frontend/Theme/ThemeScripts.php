@@ -50,10 +50,10 @@ readonly class ThemeScripts
             return [];
         }
 
-        $channelId = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID);
+        $channelId = $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_ID);
         $path = $this->themePathBuilder->assemblePath($channelId, $themeId);
 
-        $channelContext = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
+        $channelContext = $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT);
 
         if (!$channelContext instanceof ChannelContext) {
             return [];

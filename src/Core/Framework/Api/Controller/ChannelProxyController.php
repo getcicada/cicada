@@ -136,7 +136,7 @@ class ChannelProxyController extends AbstractController
 
         $channelContext = $this->fetchChannelContext($channelId, $subrequest, $context);
 
-        $subrequest->attributes->set(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT, $channelContext);
+        $subrequest->attributes->set(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT, $channelContext);
         $subrequest->attributes->set(PlatformRequest::ATTRIBUTE_CONTEXT_OBJECT, $channelContext->getContext());
 
         return $subrequest;

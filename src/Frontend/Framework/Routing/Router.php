@@ -52,7 +52,7 @@ class Router implements RouterInterface, RequestMatcherInterface, WarmableInterf
      */
     public function matchRequest(Request $request): array
     {
-        if (!$request->attributes->has(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID)) {
+        if (!$request->attributes->has(PlatformRequest::ATTRIBUTE_CHANNEL_ID)) {
             return $this->decorated->matchRequest($request);
         }
 

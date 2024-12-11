@@ -103,14 +103,6 @@ class ApiRequestContextResolver implements RequestContextResolverInterface
             }
         }
 
-        if ($request->headers->has(PlatformRequest::HEADER_CURRENCY_ID)) {
-            $currencyHeader = $request->headers->get(PlatformRequest::HEADER_CURRENCY_ID);
-
-            if ($currencyHeader !== null) {
-                $parameters['currencyId'] = $currencyHeader;
-            }
-        }
-
         if ($request->headers->has(PlatformRequest::HEADER_INHERITANCE)) {
             $parameters['considerInheritance'] = true;
         }
@@ -152,7 +144,7 @@ class ApiRequestContextResolver implements RequestContextResolverInterface
             return $this->getAdminApiSource(null, $integrationId);
         }
 
-        if ($keyOrigin === 'sales-channel') {
+        if ($keyOrigin === 'channel') {
             $channelId = $this->getChannelIdByAccessKey($clientId);
 
             return new ChannelApiSource($channelId);

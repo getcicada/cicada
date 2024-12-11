@@ -86,11 +86,11 @@ class NotFoundSubscriber implements EventSubscriberInterface, ResetInterface
 
         $event->stopPropagation();
 
-        $channelId = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID, '');
+        $channelId = $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_ID, '');
         $domainId = $request->attributes->get(ChannelRequest::ATTRIBUTE_DOMAIN_ID, '');
         $languageId = $request->attributes->get(PlatformRequest::HEADER_LANGUAGE_ID, '');
 
-        if (!$request->attributes->has(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT)) {
+        if (!$request->attributes->has(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT)) {
             // When no sales-channel context is resolved, we need to resolve it now.
             $this->setChannelContext($request);
         }
@@ -112,7 +112,7 @@ class NotFoundSubscriber implements EventSubscriberInterface, ResetInterface
         }
 
         /** @var ChannelContext $context */
-        $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
+        $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT);
 
         $name = self::buildName($channelId, $domainId, $languageId);
         $key = $this->generateKey($channelId, $domainId, $languageId, $request, $context);
@@ -187,7 +187,7 @@ class NotFoundSubscriber implements EventSubscriberInterface, ResetInterface
 
     private function setChannelContext(Request $request): void
     {
-        $channelId = (string) $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID);
+        $channelId = (string) $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_ID);
 
         $context = $this->contextService->get(
             new ChannelContextServiceParameters(
@@ -199,7 +199,7 @@ class NotFoundSubscriber implements EventSubscriberInterface, ResetInterface
             )
         );
 
-        $request->attributes->set(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT, $context);
+        $request->attributes->set(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT, $context);
     }
 
     /**

@@ -76,7 +76,7 @@ abstract class FrontendController extends AbstractController
             throw FrontendException::noRequestProvided();
         }
 
-        $channelContext = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
+        $channelContext = $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT);
 
         $event = new FrontendRenderEvent($view, $parameters, $request, $channelContext);
 

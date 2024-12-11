@@ -35,7 +35,7 @@ class TemplateDataExtension extends AbstractExtension implements GlobalsInterfac
         }
 
         /** @var ChannelContext|null $context */
-        $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
+        $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT);
 
         if (!$context) {
             return [];

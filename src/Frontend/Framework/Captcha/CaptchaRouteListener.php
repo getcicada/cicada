@@ -53,7 +53,7 @@ readonly class CaptchaRouteListener implements EventSubscriberInterface
         }
 
         /** @var ChannelContext|null $context */
-        $context = $event->getRequest()->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
+        $context = $event->getRequest()->get(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT);
 
         $channelId = $context ? $context->getChannelId() : null;
 

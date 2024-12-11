@@ -34,7 +34,7 @@ class BasicCaptcha extends AbstractCaptcha
     public function supports(Request $request, array $captchaConfig): bool
     {
         /** @var ChannelContext|null $context */
-        $context = $request->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
+        $context = $request->get(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT);
         $channelId = $context ? $context->getChannelId() : null;
 
         $activeCaptchas = $this->systemConfigService->get('core.basicInformation.activeCaptchasV2', $channelId);

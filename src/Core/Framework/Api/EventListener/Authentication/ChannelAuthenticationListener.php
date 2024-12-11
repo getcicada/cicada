@@ -85,7 +85,7 @@ class ChannelAuthenticationListener implements EventSubscriberInterface
 
         $this->handleMaintenanceMode($request, $channelData);
 
-        $request->attributes->set(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID, $channelData['id']);
+        $request->attributes->set(PlatformRequest::ATTRIBUTE_CHANNEL_ID, $channelData['id']);
     }
 
     protected function getScopeRegistry(): RouteScopeRegistry

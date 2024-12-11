@@ -18,6 +18,6 @@ class ChannelContextValueResolver implements ValueResolverInterface
             return;
         }
 
-        yield $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
+        yield $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT);
     }
 }

@@ -57,7 +57,7 @@ class CacheResponseSubscriber implements EventSubscriberInterface
 
         $request = $event->getRequest();
 
-        $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
+        $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT);
 
         if (!$context instanceof ChannelContext) {
             return;

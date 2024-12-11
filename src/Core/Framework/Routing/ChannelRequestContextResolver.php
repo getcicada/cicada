@@ -32,7 +32,7 @@ class ChannelRequestContextResolver implements RequestContextResolverInterface
 
     public function resolve(Request $request): void
     {
-        if (!$request->attributes->has(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID)) {
+        if (!$request->attributes->has(PlatformRequest::ATTRIBUTE_CHANNEL_ID)) {
             $this->decorated->resolve($request);
 
             return;
@@ -55,7 +55,7 @@ class ChannelRequestContextResolver implements RequestContextResolverInterface
         // Retrieve context for current request
         $usedContextToken = (string) $request->headers->get(PlatformRequest::HEADER_CONTEXT_TOKEN);
         $contextServiceParameters = new ChannelContextServiceParameters(
-            (string) $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID),
+            (string) $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_ID),
             $usedContextToken,
             $request->headers->get(PlatformRequest::HEADER_LANGUAGE_ID),
             $request->attributes->get(ChannelRequest::ATTRIBUTE_DOMAIN_CURRENCY_ID),
@@ -77,7 +77,7 @@ class ChannelRequestContextResolver implements RequestContextResolverInterface
 
         // Update attributes and headers of the current request
         $request->attributes->set(PlatformRequest::ATTRIBUTE_CONTEXT_OBJECT, $context->getContext());
-        $request->attributes->set(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT, $context);
+        $request->attributes->set(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT, $context);
         $request->headers->set(PlatformRequest::HEADER_CONTEXT_TOKEN, $context->getToken());
 
         $this->eventDispatcher->dispatch(
@@ -102,7 +102,7 @@ class ChannelRequestContextResolver implements RequestContextResolverInterface
             ->get(new ChannelContextServiceParameters($channelId, $contextToken, $language, $currencyId));
 
         $request->attributes->set(PlatformRequest::ATTRIBUTE_CONTEXT_OBJECT, $context->getContext());
-        $request->attributes->set(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT, $context);
+        $request->attributes->set(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT, $context);
     }
 
     protected function getScopeRegistry(): RouteScopeRegistry

@@ -54,7 +54,7 @@ class ThemeAssetPackage extends FallbackUrlPackage
             return '';
         }
 
-        $channelId = $currentRequest->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID);
+        $channelId = $currentRequest->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_ID);
         $themeId = $currentRequest->attributes->get(ChannelRequest::ATTRIBUTE_THEME_ID);
 
         if ($themeId === null || $channelId === null) {

@@ -57,7 +57,7 @@ class RequestTransformer implements RequestTransformerInterface
         self::STOREFRONT_URL,
         self::SALES_CHANNEL_RESOLVED_URI,
 
-        PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID,
+        PlatformRequest::ATTRIBUTE_CHANNEL_ID,
         ChannelRequest::ATTRIBUTE_IS_SALES_CHANNEL_REQUEST,
 
         ChannelRequest::ATTRIBUTE_DOMAIN_LOCALE,
@@ -171,7 +171,7 @@ class RequestTransformer implements RequestTransformerInterface
         );
         $transformedRequest->attributes->set(self::SALES_CHANNEL_RESOLVED_URI, $resolved['pathInfo']);
 
-        $transformedRequest->attributes->set(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID, $channel['channelId']);
+        $transformedRequest->attributes->set(PlatformRequest::ATTRIBUTE_CHANNEL_ID, $channel['channelId']);
         $transformedRequest->attributes->set(ChannelRequest::ATTRIBUTE_IS_SALES_CHANNEL_REQUEST, true);
         $transformedRequest->attributes->set(ChannelRequest::ATTRIBUTE_DOMAIN_LOCALE, $channel['locale']);
         $transformedRequest->attributes->set(ChannelRequest::ATTRIBUTE_DOMAIN_SNIPPET_SET_ID, $channel['snippetSetId']);

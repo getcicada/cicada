@@ -378,6 +378,6 @@ class Translator extends AbstractTranslator
             return;
         }
 
-        $this->channelId = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID);
+        $this->channelId = $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_ID);
     }
 }

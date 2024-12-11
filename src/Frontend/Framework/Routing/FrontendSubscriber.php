@@ -91,10 +91,10 @@ class FrontendSubscriber implements EventSubscriberInterface
             $session->set('sessionId', $session->getId());
         }
 
-        $channelId = $master->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID);
+        $channelId = $master->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_ID);
         if ($channelId === null) {
             /** @var ChannelContext|null $channelContext */
-            $channelContext = $master->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
+            $channelContext = $master->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT);
             if ($channelContext !== null) {
                 $channelId = $channelContext->getChannel()->getId();
             }
@@ -103,7 +103,7 @@ class FrontendSubscriber implements EventSubscriberInterface
         if ($this->shouldRenewToken($session, $channelId)) {
             $token = Random::getAlphanumericString(32);
             $session->set(PlatformRequest::HEADER_CONTEXT_TOKEN, $token);
-            $session->set(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID, $channelId);
+            $session->set(PlatformRequest::ATTRIBUTE_CHANNEL_ID, $channelId);
         }
 
         $master->headers->set(
@@ -224,7 +224,7 @@ class FrontendSubscriber implements EventSubscriberInterface
         }
 
         if ($this->systemConfigService->get('core.systemWideLoginRegistration.isMemberBoundToChannel')) {
-            return $session->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_ID) !== $channelId;
+            return $session->get(PlatformRequest::ATTRIBUTE_CHANNEL_ID) !== $channelId;
         }
 
         return false;
