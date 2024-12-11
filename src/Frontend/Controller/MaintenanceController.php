@@ -9,7 +9,6 @@ use Cicada\Core\ChannelRequest;
 use Cicada\Core\System\Channel\ChannelContext;
 use Cicada\Core\System\SystemConfig\SystemConfigService;
 use Cicada\Frontend\Framework\Routing\MaintenanceModeResolver;
-use Cicada\Frontend\Page\Maintenance\MaintenancePageLoadedHook;
 use Cicada\Frontend\Page\Maintenance\MaintenancePageLoader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,8 +58,6 @@ class MaintenanceController extends FrontendController
         }
 
         $maintenancePage = $this->maintenancePageLoader->load($maintenanceLayoutId, $request, $context);
-
-        $this->hook(new MaintenancePageLoadedHook($maintenancePage, $context));
 
         $response = $this->renderFrontend(
             '@Frontend/frontend/page/error/error-maintenance.html.twig',

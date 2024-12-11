@@ -30,8 +30,6 @@ class LandingPageController extends FrontendController
     {
         $page = $this->landingPageLoader->load($request, $context);
 
-        $this->hook(new LandingPageLoadedHook($page, $context));
-
         return $this->renderFrontend('@Frontend/frontend/page/content/index.html.twig', ['page' => $page]);
     }
 }
