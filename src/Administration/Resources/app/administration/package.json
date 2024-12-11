@@ -1,0 +1,14 @@
+{
+  "name": "administration",
+  "version": "1.0.0",
+  "description": "Cicada administration",
+  "browserslist": [
+    "last 2 versions",
+    "safari >= 7"
+  ],
+  "dependencies": {
+    "@cicada-ag/webpack-copy-after-build": "1.0.1",
+    "@cicada-ag/webpack-kill-process-on-failed-build": "1.0.0",
+    "@cicada-ag/webpack-plugin-injector": "1.0.6"
+  }
+}
