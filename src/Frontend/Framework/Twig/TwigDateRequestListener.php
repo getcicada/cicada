@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Twig\Extension\CoreExtension;
 
 /**
- * @deprecated tag:v6.7.0 - reason:becomes-internal - This event listener will be internal
+ * @internal
  */
 #[Package('frontend')]
 class TwigDateRequestListener implements EventSubscriberInterface

@@ -94,7 +94,7 @@ abstract class FrontendController extends AbstractController
             IconCacheTwigFilter::disable();
         }
 
-        $host = $request->attributes->get(RequestTransformer::STOREFRONT_URL);
+        $host = $request->attributes->get(RequestTransformer::FRONTEND_URL);
 
         $seoUrlReplacer = $this->container->get(SeoUrlPlaceholderHandlerInterface::class);
         $mediaUrlReplacer = $this->container->get(MediaUrlPlaceholderHandlerInterface::class);

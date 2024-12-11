@@ -45,7 +45,7 @@ class RequestTransformer implements RequestTransformerInterface
      * - `http://localhost:8000/subdir` - with sub directory `/subdir`
      * - `http://localhost:8000/subdir/de` - with sub directory `/subdir` and virtual path `/de`
      */
-    final public const STOREFRONT_URL = 'sw-frontend-url';
+    final public const FRONTEND_URL = 'sw-frontend-url';
 
     final public const SALES_CHANNEL_RESOLVED_URI = 'resolved-uri';
 
@@ -54,7 +54,7 @@ class RequestTransformer implements RequestTransformerInterface
     private const INHERITABLE_ATTRIBUTE_NAMES = [
         self::SALES_CHANNEL_BASE_URL,
         self::SALES_CHANNEL_ABSOLUTE_BASE_URL,
-        self::STOREFRONT_URL,
+        self::FRONTEND_URL,
         self::SALES_CHANNEL_RESOLVED_URI,
 
         PlatformRequest::ATTRIBUTE_CHANNEL_ID,
@@ -165,7 +165,7 @@ class RequestTransformer implements RequestTransformerInterface
         $transformedRequest->attributes->set(self::SALES_CHANNEL_BASE_URL, $baseUrl);
         $transformedRequest->attributes->set(self::SALES_CHANNEL_ABSOLUTE_BASE_URL, rtrim($absoluteBaseUrl, '/'));
         $transformedRequest->attributes->set(
-            self::STOREFRONT_URL,
+            self::FRONTEND_URL,
             $transformedRequest->attributes->get(self::SALES_CHANNEL_ABSOLUTE_BASE_URL)
             . $transformedRequest->attributes->get(self::SALES_CHANNEL_BASE_URL)
         );
