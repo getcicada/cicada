@@ -18,7 +18,6 @@ use Cicada\Core\Framework\Uuid\Uuid;
 use Cicada\Core\System\SystemConfig\Event\BeforeSystemConfigChangedEvent;
 use Cicada\Core\System\SystemConfig\Event\BeforeSystemConfigMultipleChangedEvent;
 use Cicada\Core\System\SystemConfig\Event\SystemConfigChangedEvent;
-use Cicada\Core\System\SystemConfig\Event\SystemConfigChangedHook;
 use Cicada\Core\System\SystemConfig\Event\SystemConfigDomainLoadedEvent;
 use Cicada\Core\System\SystemConfig\Event\SystemConfigMultipleChangedEvent;
 use Cicada\Core\System\SystemConfig\Exception\BundleConfigNotFoundException;
@@ -349,9 +348,6 @@ class SystemConfigService implements ResetInterface
         }
 
         $insertQueue->execute();
-
-        // Dispatch the hook before the events to invalid the cache
-        $this->dispatcher->dispatch(new SystemConfigChangedHook($values, $this->getAppMapping()));
 
         // Dispatch events that the given values have been changed
         foreach ($events as $event) {
