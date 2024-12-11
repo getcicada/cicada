@@ -48,7 +48,7 @@ class ThemeCompilerTest extends TestCase
 {
     use EnvTestBehaviour;
 
-    private string $mockSalesChannelId;
+    private string $mockChannelId;
 
     /**
      * @var ThemeFileResolver&MockObject
@@ -105,7 +105,7 @@ class ThemeCompilerTest extends TestCase
         $this->filesystem = new Filesystem(new InMemoryFilesystemAdapter());
         $this->tempFilesystem = new Filesystem(new InMemoryFilesystemAdapter());
 
-        $this->mockSalesChannelId = '98432def39fc4624b33213a56b8c944d';
+        $this->mockChannelId = '98432def39fc4624b33213a56b8c944d';
     }
 
     public function testThemeCompileExceptionIsThrownWhenConcatenateFails(): void
@@ -186,7 +186,7 @@ class ThemeCompilerTest extends TestCase
     {
         $dumpVariables = ReflectionHelper::getMethod(ThemeCompiler::class, 'dumpVariables');
 
-        $actual = $dumpVariables->invoke($this->getThemeCompiler(), $config, 'themeId', $this->mockSalesChannelId, Context::createDefaultContext());
+        $actual = $dumpVariables->invoke($this->getThemeCompiler(), $config, 'themeId', $this->mockChannelId, Context::createDefaultContext());
 
         static::assertSame($expected, $actual);
     }
@@ -398,7 +398,7 @@ PHP_EOL,
             'sw-border-color' => '#bcc1c7',
         ];
 
-        $event = new ThemeCompilerEnrichScssVariablesEvent($variables, $this->mockSalesChannelId, Context::createDefaultContext());
+        $event = new ThemeCompilerEnrichScssVariablesEvent($variables, $this->mockChannelId, Context::createDefaultContext());
         $subscriber->onAddVariables($event);
 
         $actual = $event->getVariables();
@@ -420,7 +420,7 @@ PHP_EOL,
 
         $styles = 'body {}';
 
-        $event = new ThemeCompilerConcatenatedStylesEvent($styles, $this->mockSalesChannelId);
+        $event = new ThemeCompilerConcatenatedStylesEvent($styles, $this->mockChannelId);
         $subscriber->onGetConcatenatedStyles($event);
         $actual = $event->getConcatenatedStyles();
 
