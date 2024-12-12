@@ -2,7 +2,6 @@
 
 namespace Cicada\Core\Framework\Api\Acl\Role;
 
-use Cicada\Core\Framework\App\AppEntity;
 use Cicada\Core\Framework\DataAbstractionLayer\Entity;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 use Cicada\Core\Framework\Log\Package;
@@ -41,13 +40,6 @@ class AclRoleEntity extends Entity
      * @deprecated tag:v6.7.0 - Will be natively typed
      */
     protected $users;
-
-    /**
-     * @var AppEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $app;
 
     /**
      * @var IntegrationCollection|null
@@ -97,17 +89,6 @@ class AclRoleEntity extends Entity
     {
         $this->description = $description;
     }
-
-    public function getApp(): ?AppEntity
-    {
-        return $this->app;
-    }
-
-    public function setApp(?AppEntity $app): void
-    {
-        $this->app = $app;
-    }
-
     public function getIntegrations(): ?IntegrationCollection
     {
         return $this->integrations;

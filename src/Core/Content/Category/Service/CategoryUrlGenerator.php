@@ -42,7 +42,7 @@ class CategoryUrlGenerator extends AbstractCategoryUrlGenerator
         }
 
         switch ($linkType) {
-            case CategoryDefinition::LINK_TYPE_PRODUCT:
+            case CategoryDefinition::LINK_TYPE_BLOG:
                 return $this->seoUrlReplacer->generate('frontend.detail.page', ['productId' => $internalLink]);
 
             case CategoryDefinition::LINK_TYPE_CATEGORY:

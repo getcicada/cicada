@@ -3,7 +3,6 @@
 namespace Cicada\Core\Content\Seo\MainCategory;
 
 use Cicada\Core\Content\Category\CategoryDefinition;
-use Cicada\Core\Content\Product\ProductDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\FkField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
@@ -55,14 +54,9 @@ class MainCategoryDefinition extends EntityDefinition
     {
         return new FieldCollection([
             (new IdField('id', 'id'))->addFlags(new ApiAware(), new PrimaryKey(), new Required()),
-
-            (new FkField('product_id', 'productId', ProductDefinition::class))->addFlags(new ApiAware(), new Required()),
-            (new ReferenceVersionField(ProductDefinition::class))->addFlags(new ApiAware(), new Required()),
-
             (new FkField('category_id', 'categoryId', CategoryDefinition::class))->addFlags(new ApiAware(), new Required()),
             (new ReferenceVersionField(CategoryDefinition::class))->addFlags(new ApiAware(), new Required()),
             (new FkField('channel_id', 'channelId', ChannelDefinition::class))->addFlags(new ApiAware(), new Required()),
-            new ManyToOneAssociationField('product', 'product_id', ProductDefinition::class),
             new ManyToOneAssociationField('category', 'category_id', CategoryDefinition::class),
             new ManyToOneAssociationField('channel', 'channel_id', ChannelDefinition::class),
         ]);

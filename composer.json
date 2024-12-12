@@ -197,9 +197,22 @@
     "ecs-fix": "Checks all files regarding the PHP-CS-Fixer and fixes them if possible",
     "phpstan": "Launches the PHP static analysis tool",
     "phpunit": "Launches the PHP unit test-suite",
-    "static-analyze": "Launches the PHP Stan static analysis tool"
+    "static-analyze": "Launches the PHP Stan static analysis tool",
+    "admin:unit": "Launches the jest unit test-suite for the Admin",
+    "eslint": "Codestyle checks all (Administration/Frontend) JS/TS files",
+    "eslint:admin": "Codestyle checks Administration JS/TS files",
+    "eslint:admin:fix": "Codestyle checks Administration JS/TS files and fixes them if possible",
+    "format:admin": "Dry run Prettier for the Administration",
+    "format:admin:fix": "Format the Administration with Prettier",
+    "eslint:frontend": "Codestyle checks all Frontend JS/TS files"
   },
   "scripts": {
+    "admin:generate-entity-schema-types": [
+      "@framework:schema:dump",
+      "@npm:admin run convert-entity-schema"
+    ],
+    "npm:admin": "@npm:admin:bin npm",
+    "npm:admin:bin": "export PROJECT_ROOT=\"$PWD\"; cd src/Administration/Resources/app/administration; export PATH=\"$PWD/node_modules/.bin/:$PATH\"; \"$PROJECT_ROOT\"/bin/exec-with-env ",
     "ecs": "php-cs-fixer fix --dry-run --diff",
     "ecs-fix": "php-cs-fixer fix",
     "phpstan": [
@@ -212,7 +225,45 @@
     ],
     "static-analyze": [
       "@phpstan src/"
-    ]
+    ],
+    "admin:unit": [
+      "Composer\\Config::disableProcessTimeout",
+      "@framework:schema:dump",
+      "@npm:admin run unit-setup",
+      "@npm:admin run unit"
+    ],
+    "admin:unit:watch": [
+      "Composer\\Config::disableProcessTimeout",
+      "@framework:schema:dump",
+      "@npm:admin run unit-setup",
+      "@npm:admin run unit-watch"
+    ],
+    "build:js": [
+      "@build:js:admin",
+      "@build:js:frontend"
+    ],
+    "build:js:admin": [
+      "@php bin/console bundle:dump",
+      "@php bin/console feature:dump",
+      "@admin:generate-entity-schema-types",
+      "@npm:admin run build",
+      "@php bin/console assets:install"
+    ],
+    "build:js:frontend": [
+      "@php bin/console bundle:dump",
+      "@php bin/console feature:dump",
+      "@npm:frontend run production",
+      "cd src/Frontend/Resources/app/frontend && node copy-to-vendor.js",
+      "@php bin/console theme:compile --sync",
+      "@php bin/console assets:install"
+    ],
+    "eslint:admin": "@npm:admin run lint:all",
+    "eslint:admin:fix": "@npm:admin run lint:fix",
+    "format:admin": "@npm:admin run format",
+    "format:admin:fix": "@npm:admin run format:fix",
+    "eslint:frontend": "@npm:frontend run lint:js",
+    "eslint:frontend:fix": "@npm:frontend run lint:js:fix",
+    "framework:schema:dump": "@php bin/console -e prod framework:schema -s 'entity-schema' src/Administration/Resources/app/administration/test/_mocks_/entity-schema.json"
   },
   "autoload": {
     "psr-4": {

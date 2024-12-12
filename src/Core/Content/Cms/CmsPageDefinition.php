@@ -7,7 +7,6 @@ use Cicada\Core\Content\Cms\Aggregate\CmsPageTranslation\CmsPageTranslationDefin
 use Cicada\Core\Content\Cms\Aggregate\CmsSection\CmsSectionDefinition;
 use Cicada\Core\Content\LandingPage\LandingPageDefinition;
 use Cicada\Core\Content\Media\MediaDefinition;
-use Cicada\Core\Content\Product\ProductDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\FkField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
@@ -76,7 +75,6 @@ class CmsPageDefinition extends EntityDefinition
             (new OneToManyAssociationField('categories', CategoryDefinition::class, 'cms_page_id'))->addFlags(new RestrictDelete()),
             (new OneToManyAssociationField('landingPages', LandingPageDefinition::class, 'cms_page_id'))->addFlags(new ApiAware(), new RestrictDelete()),
             (new OneToManyAssociationField('homeChannels', ChannelDefinition::class, 'home_cms_page_id'))->addFlags(new RestrictDelete()),
-            (new OneToManyAssociationField('products', ProductDefinition::class, 'cms_page_id'))->addFlags(new RestrictDelete()),
         ]);
     }
 }

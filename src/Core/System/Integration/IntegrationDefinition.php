@@ -3,7 +3,6 @@
 namespace Cicada\Core\System\Integration;
 
 use Cicada\Core\Framework\Api\Acl\Role\AclRoleDefinition;
-use Cicada\Core\Framework\App\AppDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\BoolField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\CustomFields;
@@ -64,7 +63,6 @@ class IntegrationDefinition extends EntityDefinition
             new CustomFields(),
             new DateTimeField('deleted_at', 'deletedAt'),
 
-            (new OneToOneAssociationField('app', 'id', 'integration_id', AppDefinition::class, false))->addFlags(new RestrictDelete()),
             new ManyToManyAssociationField('aclRoles', AclRoleDefinition::class, IntegrationRoleDefinition::class, 'integration_id', 'acl_role_id'),
         ]);
     }

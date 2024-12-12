@@ -6,10 +6,6 @@ use Cicada\Core\Content\Category\Aggregate\CategoryTag\CategoryTagDefinition;
 use Cicada\Core\Content\Category\Aggregate\CategoryTranslation\CategoryTranslationDefinition;
 use Cicada\Core\Content\Cms\CmsPageDefinition;
 use Cicada\Core\Content\Media\MediaDefinition;
-use Cicada\Core\Content\Product\Aggregate\ProductCategory\ProductCategoryDefinition;
-use Cicada\Core\Content\Product\Aggregate\ProductCategoryTree\ProductCategoryTreeDefinition;
-use Cicada\Core\Content\Product\ProductDefinition;
-use Cicada\Core\Content\ProductStream\ProductStreamDefinition;
 use Cicada\Core\Content\Seo\MainCategory\MainCategoryDefinition;
 use Cicada\Core\Content\Seo\SeoUrl\SeoUrlDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityDefinition;
@@ -22,7 +18,6 @@ use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\CascadeDelete;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
-use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\ReverseInherited;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\Runtime;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\SearchRanking;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\WriteProtected;
@@ -42,7 +37,6 @@ use Cicada\Core\Framework\DataAbstractionLayer\Field\TreePathField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\VersionField;
 use Cicada\Core\Framework\DataAbstractionLayer\FieldCollection;
 use Cicada\Core\Framework\Log\Package;
-use Cicada\Core\System\CustomEntity\CustomEntityDefinition;
 use Cicada\Core\System\Channel\ChannelDefinition;
 use Cicada\Core\System\Tag\TagDefinition;
 
@@ -61,13 +55,11 @@ class CategoryDefinition extends EntityDefinition
 
     final public const LINK_TYPE_CATEGORY = 'category';
 
-    final public const LINK_TYPE_PRODUCT = 'product';
+    final public const LINK_TYPE_BLOG = 'blog';
 
     final public const LINK_TYPE_LANDING_PAGE = 'landing_page';
 
-    final public const PRODUCT_ASSIGNMENT_TYPE_PRODUCT = 'product';
-
-    final public const PRODUCT_ASSIGNMENT_TYPE_PRODUCT_STREAM = 'product_stream';
+    final public const PRODUCT_ASSIGNMENT_TYPE_BLOG = 'blog';
 
     final public const CONFIG_KEY_DEFAULT_CMS_PAGE_CATEGORY = 'core.cms.default_category_cms_page';
 
@@ -91,7 +83,7 @@ class CategoryDefinition extends EntityDefinition
         return [
             'displayNestedProducts' => true,
             'type' => self::TYPE_PAGE,
-            'productAssignmentType' => self::PRODUCT_ASSIGNMENT_TYPE_PRODUCT,
+            'assignmentType' => self::PRODUCT_ASSIGNMENT_TYPE_BLOG,
         ];
     }
 
@@ -128,7 +120,7 @@ class CategoryDefinition extends EntityDefinition
             (new ChildCountField())->addFlags(new ApiAware()),
 
             (new StringField('type', 'type'))->addFlags(new ApiAware(), new Required()),
-            (new StringField('product_assignment_type', 'productAssignmentType'))->addFlags(new ApiAware(), new Required()),
+            (new StringField('assignment_type', 'productAssignmentType'))->addFlags(new ApiAware(), new Required()),
             (new BoolField('visible', 'visible'))->addFlags(new ApiAware()),
             (new BoolField('active', 'active'))->addFlags(new ApiAware()),
 
@@ -152,18 +144,11 @@ class CategoryDefinition extends EntityDefinition
 
             (new ManyToOneAssociationField('media', 'media_id', MediaDefinition::class, 'id', false))->addFlags(new ApiAware()),
             (new TranslationsAssociationField(CategoryTranslationDefinition::class, 'category_id'))->addFlags(new ApiAware(), new Required()),
-            (new ManyToManyAssociationField('products', ProductDefinition::class, ProductCategoryDefinition::class, 'category_id', 'product_id'))->addFlags(new CascadeDelete(), new ReverseInherited('categories')),
-            (new ManyToManyAssociationField('nestedProducts', ProductDefinition::class, ProductCategoryTreeDefinition::class, 'category_id', 'product_id'))->addFlags(new CascadeDelete(), new WriteProtected()),
             (new ManyToManyAssociationField('tags', TagDefinition::class, CategoryTagDefinition::class, 'category_id', 'tag_id'))->addFlags(new ApiAware()),
 
             (new FkField('cms_page_id', 'cmsPageId', CmsPageDefinition::class))->addFlags(new ApiAware()),
             (new ReferenceVersionField(CmsPageDefinition::class))->addFlags(new Required(), new ApiAware()),
             (new ManyToOneAssociationField('cmsPage', 'cms_page_id', CmsPageDefinition::class, 'id', false))->addFlags(new ApiAware()),
-            new FkField('product_stream_id', 'productStreamId', ProductStreamDefinition::class),
-            new ManyToOneAssociationField('productStream', 'product_stream_id', ProductStreamDefinition::class, 'id', false),
-
-            // custom entity specific fields
-            (new FkField('custom_entity_type_id', 'customEntityTypeId', CustomEntityDefinition::class, 'id'))->addFlags(new ApiAware()),
 
             // Reverse Associations not available in store-api
             new OneToManyAssociationField('navigationChannels', ChannelDefinition::class, 'navigation_category_id'),

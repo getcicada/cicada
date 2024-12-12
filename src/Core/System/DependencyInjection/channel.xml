@@ -13,27 +13,11 @@
             <tag name="cicada.entity.definition"/>
         </service>
 
-        <service id="Cicada\Core\System\Channel\Aggregate\ChannelCountry\ChannelCountryDefinition">
-            <tag name="cicada.entity.definition"/>
-        </service>
-
-        <service id="Cicada\Core\System\Channel\Aggregate\ChannelCurrency\ChannelCurrencyDefinition">
-            <tag name="cicada.entity.definition"/>
-        </service>
-
         <service id="Cicada\Core\System\Channel\Aggregate\ChannelDomain\ChannelDomainDefinition">
             <tag name="cicada.entity.definition"/>
         </service>
 
         <service id="Cicada\Core\System\Channel\Aggregate\ChannelLanguage\ChannelLanguageDefinition">
-            <tag name="cicada.entity.definition"/>
-        </service>
-
-        <service id="Cicada\Core\System\Channel\Aggregate\ChannelPaymentMethod\ChannelPaymentMethodDefinition">
-            <tag name="cicada.entity.definition"/>
-        </service>
-
-        <service id="Cicada\Core\System\Channel\Aggregate\ChannelShippingMethod\ChannelShippingMethodDefinition">
             <tag name="cicada.entity.definition"/>
         </service>
 
@@ -43,10 +27,6 @@
 
         <service id="Cicada\Core\System\Channel\Aggregate\ChannelTypeTranslation\ChannelTypeTranslationDefinition">
             <tag name="cicada.entity.definition"/>
-        </service>
-
-        <service id="Cicada\Core\System\Channel\Aggregate\ChannelAnalytics\ChannelAnalyticsDefinition">
-            <tag name="cicada.entity.definition" entity="channel_analytics" />
         </service>
 
         <service id="Cicada\Core\System\Channel\Context\ChannelContextPersister">
@@ -168,13 +148,7 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="Cicada\Core\System\Channel\Subscriber\ChannelAnalyticsLoader">
-            <argument type="service" id="channel_analytics.repository"/>
-
-            <tag name="kernel.event_listener" event="Cicada\Frontend\Event\FrontendRenderEvent" method="loadAnalytics" priority="2000" />
-        </service>
-
-        <service id="Cicada\Core\System\Channel\StoreApiCustomFieldMapper">
+        <service id="Cicada\Core\System\Channel\FrontendApiCustomFieldMapper">
             <argument type="service" id="Doctrine\DBAL\Connection"/>
             <tag name="kernel.reset" method="reset"/>
         </service>

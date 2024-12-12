@@ -2,7 +2,6 @@
 
 namespace Cicada\Core\Framework\Plugin;
 
-use Cicada\Core\Checkout\Payment\PaymentMethodDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\BlobField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\BoolField;
@@ -12,11 +11,9 @@ use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\CascadeDelete;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\Runtime;
-use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\SetNullOnDelete;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\WriteProtected;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\IdField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\JsonField;
-use Cicada\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\TranslatedField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\TranslationsAssociationField;
@@ -76,7 +73,6 @@ class PluginDefinition extends EntityDefinition
             new TranslatedField('customFields'),
 
             (new TranslationsAssociationField(PluginTranslationDefinition::class, 'plugin_id'))->addFlags(new Required(), new CascadeDelete()),
-            (new OneToManyAssociationField('paymentMethods', PaymentMethodDefinition::class, 'plugin_id', 'id'))->addFlags(new SetNullOnDelete()),
         ]);
     }
 }

@@ -13,12 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 #[Package('core')]
 class DefinitionInstanceRegistry
 {
-    /**
-     * @var ContainerInterface
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $container;
+    protected ContainerInterface $container;
 
     /**
      * @var array<string, string>

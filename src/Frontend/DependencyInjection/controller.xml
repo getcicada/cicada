@@ -14,16 +14,6 @@
             </call>
         </service>
 
-        <service id="Cicada\Frontend\Controller\CookieController">
-            <argument type="service" id="Cicada\Frontend\Framework\Cookie\CookieProviderInterface"/>
-            <argument type="service" id="Cicada\Core\System\SystemConfig\SystemConfigService"/>
-            <argument type="service" id="channel_analytics.repository"/>
-
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="Cicada\Frontend\Controller\CmsController">
             <argument type="service" id="Cicada\Core\Content\Cms\Channel\CmsRoute"/>
             <call method="setContainer">

@@ -2,7 +2,6 @@
 
 namespace Cicada\Core\Framework\Plugin;
 
-use Cicada\Core\Checkout\Payment\PaymentMethodCollection;
 use Cicada\Core\Framework\DataAbstractionLayer\Entity;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityCustomFieldsTrait;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityIdTrait;
@@ -158,12 +157,6 @@ class PluginEntity extends Entity
      */
     protected $translations;
 
-    /**
-     * @var PaymentMethodCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $paymentMethods;
 
     /**
      * @var array<string, array<string, list<string>|string>>
@@ -384,16 +377,6 @@ class PluginEntity extends Entity
     public function setTranslations(PluginTranslationCollection $translations): void
     {
         $this->translations = $translations;
-    }
-
-    public function getPaymentMethods(): ?PaymentMethodCollection
-    {
-        return $this->paymentMethods;
-    }
-
-    public function setPaymentMethods(PaymentMethodCollection $paymentMethods): void
-    {
-        $this->paymentMethods = $paymentMethods;
     }
 
     /**

@@ -2,17 +2,14 @@
 
 namespace Cicada\Core\System\CustomField;
 
-use Cicada\Core\Content\Product\Aggregate\ProductSearchConfigField\ProductSearchConfigFieldDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\BoolField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\FkField;
-use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\CascadeDelete;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\IdField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\JsonField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\ManyToOneAssociationField;
-use Cicada\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Cicada\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Cicada\Core\Framework\DataAbstractionLayer\FieldCollection;
 use Cicada\Core\Framework\Log\Package;
@@ -63,7 +60,6 @@ class CustomFieldDefinition extends EntityDefinition
             new BoolField('allow_member_write', 'allowMemberWrite'),
             new BoolField('allow_cart_expose', 'allowCartExpose'),
             new ManyToOneAssociationField('customFieldSet', 'set_id', CustomFieldSetDefinition::class, 'id', false),
-            (new OneToManyAssociationField('productSearchConfigFields', ProductSearchConfigFieldDefinition::class, 'custom_field_id', 'id'))->addFlags(new CascadeDelete()),
         ]);
     }
 }

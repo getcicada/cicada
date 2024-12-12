@@ -2,8 +2,6 @@
 
 namespace Cicada\Core\System\CustomField\Aggregate\CustomFieldSet;
 
-use Cicada\Core\Content\Product\ProductCollection;
-use Cicada\Core\Framework\App\AppEntity;
 use Cicada\Core\Framework\DataAbstractionLayer\Entity;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 use Cicada\Core\Framework\Log\Package;
@@ -64,12 +62,6 @@ class CustomFieldSetEntity extends Entity
      */
     protected $relations;
 
-    /**
-     * @var ProductCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $products;
 
     /**
      * @var string|null
@@ -78,12 +70,6 @@ class CustomFieldSetEntity extends Entity
      */
     protected $appId;
 
-    /**
-     * @var AppEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $app;
 
     public function getName(): string
     {
@@ -145,16 +131,6 @@ class CustomFieldSetEntity extends Entity
         $this->relations = $relations;
     }
 
-    public function getProducts(): ?ProductCollection
-    {
-        return $this->products;
-    }
-
-    public function setProducts(ProductCollection $products): void
-    {
-        $this->products = $products;
-    }
-
     public function isGlobal(): bool
     {
         return $this->global;
@@ -173,15 +149,5 @@ class CustomFieldSetEntity extends Entity
     public function setAppId(?string $appId): void
     {
         $this->appId = $appId;
-    }
-
-    public function getApp(): ?AppEntity
-    {
-        return $this->app;
-    }
-
-    public function setApp(?AppEntity $app): void
-    {
-        $this->app = $app;
     }
 }

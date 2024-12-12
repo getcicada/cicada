@@ -3,7 +3,6 @@
 namespace Cicada\Core\System\Integration;
 
 use Cicada\Core\Framework\Api\Acl\Role\AclRoleCollection;
-use Cicada\Core\Framework\App\AppEntity;
 use Cicada\Core\Framework\DataAbstractionLayer\Entity;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityCustomFieldsTrait;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityIdTrait;
@@ -49,13 +48,6 @@ class IntegrationEntity extends Entity
      * @deprecated tag:v6.7.0 - Will be natively typed
      */
     protected $lastUsageAt;
-
-    /**
-     * @var AppEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $app;
 
     /**
      * @var AclRoleCollection|null
@@ -104,16 +96,6 @@ class IntegrationEntity extends Entity
     public function setLastUsageAt(\DateTimeInterface $lastUsageAt): void
     {
         $this->lastUsageAt = $lastUsageAt;
-    }
-
-    public function getApp(): ?AppEntity
-    {
-        return $this->app;
-    }
-
-    public function setApp(?AppEntity $app): void
-    {
-        $this->app = $app;
     }
 
     public function getAclRoles(): ?AclRoleCollection

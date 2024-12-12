@@ -37,6 +37,7 @@ class System extends Bundle
         $loader->load('snippet.xml');
         $loader->load('integration.xml');
         $loader->load('channel.xml');
+        $loader->load('tag.xml');
         $container->addCompilerPass(new ChannelEntityCompilerPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 0);
         $container->addCompilerPass(new RedisNumberRangeIncrementerCompilerPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 0);
     }

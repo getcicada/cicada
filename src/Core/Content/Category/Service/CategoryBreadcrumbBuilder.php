@@ -103,7 +103,6 @@ class CategoryBreadcrumbBuilder
             $criteria->setIds($categoryIds);
         } else {
             $criteria->addFilter(new EqualsAnyFilter('productStream.id', $productStreamIds));
-            $criteria->addFilter(new EqualsFilter('productAssignmentType', CategoryDefinition::PRODUCT_ASSIGNMENT_TYPE_PRODUCT_STREAM));
         }
 
         $criteria->addFilter($this->getChannelFilter($context->getChannel()));
