@@ -13,7 +13,7 @@ use Cicada\Core\Maintenance\Staging\Event\SetupStagingEvent;
  * @phpstan-type DomainURL = array{id: string, url: string}
  */
 #[Package('core')]
-readonly class StagingSalesChannelHandler
+readonly class StagingChannelHandler
 {
     /**
      * @param DomainRewriteRule[] $rewrite

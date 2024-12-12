@@ -70,7 +70,7 @@ class StoreApiSeoResolver implements EventSubscriberInterface
             return;
         }
 
-        $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT);
+        $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
 
         if (!$context instanceof ChannelContext) {
             // This is likely the case for routes with the `auth_required` option set to `false`,

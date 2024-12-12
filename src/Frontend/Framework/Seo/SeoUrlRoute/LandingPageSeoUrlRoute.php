@@ -13,7 +13,7 @@ use Cicada\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\System\Channel\ChannelEntity;
 
-#[Package('frontend')]
+#[Package('content')]
 class LandingPageSeoUrlRoute implements SeoUrlRouteInterface
 {
     final public const ROUTE_NAME = 'frontend.landing.page';

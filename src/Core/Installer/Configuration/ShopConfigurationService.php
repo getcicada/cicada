@@ -44,17 +44,17 @@ class ShopConfigurationService
         $shopConfigurator->setDefaultLanguage($shop['locale']);
         $shopConfigurator->setDefaultCurrency($shop['currency']);
 
-        $this->deleteAllSalesChannelCurrencies($connection);
+        $this->deleteAllChannelCurrencies($connection);
 
-        $newSalesChannelId = Uuid::randomBytes();
-        $this->createSalesChannel($newSalesChannelId, $shop, $connection);
-        $this->createSalesChannelDomain($newSalesChannelId, $shop, $connection);
+        $newChannelId = Uuid::randomBytes();
+        $this->createChannel($newChannelId, $shop, $connection);
+        $this->createChannelDomain($newChannelId, $shop, $connection);
     }
 
     /**
      * @param Shop $shop
      */
-    private function createSalesChannel(string $newId, array $shop, Connection $connection): void
+    private function createChannel(string $newId, array $shop, Connection $connection): void
     {
         $typeId = Defaults::SALES_CHANNEL_TYPE_STOREFRONT;
 
@@ -68,7 +68,7 @@ class ShopConfigurationService
         $countryId = $this->getCountryId($shop['country'], $connection);
 
         $statement = $connection->prepare(
-            'INSERT INTO sales_channel (
+            'INSERT INTO channel (
                 id,
                 type_id, access_key, navigation_category_id, navigation_category_version_id,
                 language_id, currency_id, payment_method_id,
@@ -95,42 +95,42 @@ class ShopConfigurationService
         ]);
 
         $statement = $connection->prepare(
-            'INSERT INTO sales_channel_translation (sales_channel_id, language_id, `name`, created_at)
+            'INSERT INTO channel_translation (channel_id, language_id, `name`, created_at)
              VALUES (?, UNHEX(?), ?, ?)'
         );
         $statement->executeStatement([$newId, Defaults::LANGUAGE_SYSTEM, $shop['name'], (new \DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT)]);
 
         $statement = $connection->prepare(
-            'INSERT INTO sales_channel_language (sales_channel_id, language_id)
+            'INSERT INTO channel_language (channel_id, language_id)
              VALUES (?, UNHEX(?))'
         );
         $statement->executeStatement([$newId, Defaults::LANGUAGE_SYSTEM]);
 
         $statement = $connection->prepare(
-            'INSERT INTO sales_channel_currency (sales_channel_id, currency_id)
+            'INSERT INTO channel_currency (channel_id, currency_id)
              VALUES (?, ?)'
         );
         $statement->executeStatement([$newId, $currencyId]);
 
         $statement = $connection->prepare(
-            'INSERT INTO sales_channel_payment_method (sales_channel_id, payment_method_id)
+            'INSERT INTO channel_payment_method (channel_id, payment_method_id)
              VALUES (?, ?)'
         );
         $statement->executeStatement([$newId, $paymentMethod]);
 
         $statement = $connection->prepare(
-            'INSERT INTO sales_channel_shipping_method (sales_channel_id, shipping_method_id)
+            'INSERT INTO channel_shipping_method (channel_id, shipping_method_id)
              VALUES (?, ?)'
         );
         $statement->executeStatement([$newId, $shippingMethod]);
 
         $statement = $connection->prepare(
-            'INSERT INTO sales_channel_country (sales_channel_id, country_id)
+            'INSERT INTO channel_country (channel_id, country_id)
              VALUES (?, ?)'
         );
         $statement->executeStatement([$newId, $countryId]);
 
-        $this->addAdditionalCurrenciesToSalesChannel($shop, $newId, $connection);
+        $this->addAdditionalCurrenciesToChannel($shop, $newId, $connection);
         $this->removeUnwantedCurrencies($shop, $connection);
     }
 
@@ -143,7 +143,7 @@ class ShopConfigurationService
     /**
      * @param Shop $shop
      */
-    private function createSalesChannelDomain(string $newId, array $shop, Connection $connection): void
+    private function createChannelDomain(string $newId, array $shop, Connection $connection): void
     {
         $languageId = Uuid::fromHexToBytes(Defaults::LANGUAGE_SYSTEM);
         $snippetSetId = $this->getSnippetSet($shop['locale'], $connection)
@@ -151,15 +151,15 @@ class ShopConfigurationService
         $currencyId = $this->getCurrencyId($shop['currency'], $connection);
 
         $insertSql = <<<'SQL'
-INSERT INTO sales_channel_domain (id, sales_channel_id, language_id, url, currency_id, snippet_set_id, custom_fields, created_at, updated_at)
-VALUES (:id, :salesChannelId, :languageId, :url, :currencyId, :snippetSetId, NULL, :createdAt, null)
+INSERT INTO channel_domain (id, channel_id, language_id, url, currency_id, snippet_set_id, custom_fields, created_at, updated_at)
+VALUES (:id, :channelId, :languageId, :url, :currencyId, :snippetSetId, NULL, :createdAt, null)
 SQL;
 
-        $insertSalesChannel = $connection->prepare($insertSql);
+        $insertChannel = $connection->prepare($insertSql);
 
-        $insertSalesChannel->executeStatement([
+        $insertChannel->executeStatement([
             'id' => Uuid::randomBytes(),
-            'salesChannelId' => $newId,
+            'channelId' => $newId,
             'languageId' => $languageId,
             'url' => 'http://' . $shop['host'] . $shop['basePath'],
             'currencyId' => $currencyId,
@@ -167,9 +167,9 @@ SQL;
             'createdAt' => (new \DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
         ]);
 
-        $insertSalesChannel->executeStatement([
+        $insertChannel->executeStatement([
             'id' => Uuid::randomBytes(),
-            'salesChannelId' => $newId,
+            'channelId' => $newId,
             'languageId' => $languageId,
             'url' => 'https://' . $shop['host'] . $shop['basePath'],
             'currencyId' => $currencyId,
@@ -237,43 +237,43 @@ SQL;
     /**
      * get the id of the sales channel via the sales channel type id
      */
-    private function getIdOfSalesChannelViaTypeId(string $typeId, Connection $connection): string
+    private function getIdOfChannelViaTypeId(string $typeId, Connection $connection): string
     {
-        return $connection->fetchOne('SELECT id FROM sales_channel WHERE type_id = UNHEX(?)', [$typeId]);
+        return $connection->fetchOne('SELECT id FROM channel WHERE type_id = UNHEX(?)', [$typeId]);
     }
 
     /**
      * @param Shop $shop
      */
-    private function addAdditionalCurrenciesToSalesChannel(array $shop, string $salesChannelId, Connection $connection): void
+    private function addAdditionalCurrenciesToChannel(array $shop, string $channelId, Connection $connection): void
     {
-        $idOfHeadlessSalesChannel = $this->getIdOfSalesChannelViaTypeId(Defaults::SALES_CHANNEL_TYPE_API, $connection);
+        $idOfHeadlessChannel = $this->getIdOfChannelViaTypeId(Defaults::SALES_CHANNEL_TYPE_API, $connection);
 
         // set the default currency of the headless sales channel
-        $statement = $connection->prepare('UPDATE sales_channel SET currency_id = ? WHERE id = ?');
+        $statement = $connection->prepare('UPDATE channel SET currency_id = ? WHERE id = ?');
         $defaultCurrencyId = $this->getCurrencyId($shop['currency'], $connection);
-        $statement->executeStatement([$defaultCurrencyId, $idOfHeadlessSalesChannel]);
+        $statement->executeStatement([$defaultCurrencyId, $idOfHeadlessChannel]);
 
         // remove all currencies from the headless sales channel, except the default currency
-        $statement = $connection->prepare('DELETE FROM sales_channel_currency WHERE sales_channel_id = ? AND currency_id != UNHEX(?)');
-        $statement->executeStatement([$idOfHeadlessSalesChannel, $defaultCurrencyId]);
+        $statement = $connection->prepare('DELETE FROM channel_currency WHERE channel_id = ? AND currency_id != UNHEX(?)');
+        $statement->executeStatement([$idOfHeadlessChannel, $defaultCurrencyId]);
 
         if ($shop['additionalCurrencies'] === null) {
             return;
         }
 
-        $salesChannelsToBeEdited = [];
-        $salesChannelsToBeEdited[] = $idOfHeadlessSalesChannel;
-        $salesChannelsToBeEdited[] = $salesChannelId;
+        $channelsToBeEdited = [];
+        $channelsToBeEdited[] = $idOfHeadlessChannel;
+        $channelsToBeEdited[] = $channelId;
 
         // set the currencies of the headless sales channel to the ones from the default sales channel
-        foreach ($salesChannelsToBeEdited as $currentSalesChannelId) {
+        foreach ($channelsToBeEdited as $currentChannelId) {
             foreach ($shop['additionalCurrencies'] as $additionalCurrency) {
                 $currencyId = $this->getCurrencyId($additionalCurrency, $connection);
 
                 // add additional currencies
-                $statement = $connection->prepare('INSERT INTO sales_channel_currency (sales_channel_id, currency_id) VALUES (?, ?)');
-                $statement->executeStatement([$currentSalesChannelId, $currencyId]);
+                $statement = $connection->prepare('INSERT INTO channel_currency (channel_id, currency_id) VALUES (?, ?)');
+                $statement->executeStatement([$currentChannelId, $currencyId]);
             }
         }
     }
@@ -285,7 +285,7 @@ SQL;
     {
         // change default currency for dummy sales channel domain to the default currency to avoid foreign key constraints
         $connection->executeStatement(
-            'UPDATE sales_channel_domain SET currency_id = :currencyId',
+            'UPDATE channel_domain SET currency_id = :currencyId',
             ['currencyId' => $this->getCurrencyId($shop['currency'], $connection)]
         );
 
@@ -309,13 +309,13 @@ SQL;
         );
     }
 
-    private function deleteAllSalesChannelCurrencies(Connection $connection): void
+    private function deleteAllChannelCurrencies(Connection $connection): void
     {
-        $connection->executeStatement('DELETE FROM sales_channel_currency');
+        $connection->executeStatement('DELETE FROM channel_currency');
     }
 
     private function getCustomerGroupId(Connection $connection): string
     {
-        return $connection->fetchOne('SELECT customer_group_id FROM sales_channel');
+        return $connection->fetchOne('SELECT customer_group_id FROM channel');
     }
 }

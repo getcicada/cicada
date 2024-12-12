@@ -58,7 +58,7 @@ class SeoUrlUpdater
         $languageChains = $this->fetchLanguageChains($context);
 
         $criteria = new Criteria();
-        $criteria->addFilter(new NandFilter([new EqualsFilter('typeId', Defaults::CHANNEL_TYPE_API)]));
+        $criteria->addFilter(new NandFilter([new EqualsFilter('typeId', Defaults::SALES_CHANNEL_TYPE_API)]));
 
         $channels = $this->channelRepository->search($criteria, $context)->getEntities();
 
@@ -100,7 +100,7 @@ class SeoUrlUpdater
         $parameters = [];
 
         $query .= ' AND channel.type_id != :apiTypeId';
-        $parameters['apiTypeId'] = Uuid::fromHexToBytes(Defaults::CHANNEL_TYPE_API);
+        $parameters['apiTypeId'] = Uuid::fromHexToBytes(Defaults::SALES_CHANNEL_TYPE_API);
 
         $domains = $this->connection->fetchAllAssociative($query, $parameters);
 

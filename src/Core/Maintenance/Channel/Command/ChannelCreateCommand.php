@@ -26,7 +26,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ChannelCreateCommand extends Command
 {
     public function __construct(
-        private readonly ChannelCreator $salesChannelCreator
+        private readonly ChannelCreator $channelCreator
     ) {
         parent::__construct();
     }
@@ -55,7 +55,7 @@ class ChannelCreateCommand extends Command
         $io = new CicadaStyle($input, $output);
 
         try {
-            $accessKey = $this->salesChannelCreator->createChannel(
+            $accessKey = $this->channelCreator->createChannel(
                 $id,
                 $input->getOption('name') ?? 'Headless',
                 $typeId ?? $this->getTypeId(),

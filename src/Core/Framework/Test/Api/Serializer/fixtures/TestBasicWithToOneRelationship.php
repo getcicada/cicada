@@ -364,7 +364,7 @@ class TestBasicWithToOneRelationship extends SerializationFixture
      *
      * @return array<string, mixed>
      */
-    protected function removeProtectedSalesChannelJsonApiData(array $fixtures): array
+    protected function removeProtectedChannelJsonApiData(array $fixtures): array
     {
         unset(
             $fixtures['data']['attributes']['userId'],
@@ -401,7 +401,7 @@ class TestBasicWithToOneRelationship extends SerializationFixture
      *
      * @return array<string, mixed>
      */
-    protected function removeProtectedSalesChannelJsonData(array $fixtures): array
+    protected function removeProtectedChannelJsonData(array $fixtures): array
     {
         unset(
             $fixtures['userId'],

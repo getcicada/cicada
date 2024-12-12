@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
  * @experimental stableVersion:v6.7.0 feature:BREADCRUMB_STORE_API
  */
 #[Route(defaults: ['_routeScope' => ['store-api']])]
-#[Package('inventory')]
+#[Package('content')]
 class BreadcrumbRoute extends AbstractBreadcrumbRoute
 {
     /**

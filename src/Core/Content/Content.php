@@ -26,5 +26,8 @@ class Content extends Bundle
         $loader->load('media_path.xml');
         $loader->load('landing_page.xml');
         $loader->load('cms.xml');
+        $loader->load('sitemap.xml');
+        $loader->load('category.xml');
+        $loader->load('blog.xml');
     }
 }

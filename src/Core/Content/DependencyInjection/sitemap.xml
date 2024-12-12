@@ -2,7 +2,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="Cicada\Core\Content\Sitemap\Service\SitemapExporter">
             <argument type="tagged_iterator" tag="cicada.sitemap_url_provider"/>
@@ -69,10 +69,10 @@
             <tag name="cicada.sitemap_url_provider"/>
         </service>
 
-        <service id="Cicada\Core\Content\Sitemap\Provider\ProductUrlProvider">
+        <service id="Cicada\Core\Content\Sitemap\Provider\BlogUrlProvider">
             <argument type="service" id="Cicada\Core\Content\Sitemap\Service\ConfigHandler"/>
             <argument type="service" id="Doctrine\DBAL\Connection"/>
-            <argument type="service" id="Cicada\Core\Content\Product\ProductDefinition"/>
+            <argument type="service" id="Cicada\Core\Content\Blog\BlogDefinition"/>
             <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\Dbal\Common\IteratorFactory"/>
             <argument type="service" id="router"/>
             <argument type="service" id="Cicada\Core\System\SystemConfig\SystemConfigService"/>

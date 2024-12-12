@@ -156,7 +156,7 @@ class SeoActionController extends AbstractController
             throw SeoException::channelNotFound($channelId);
         }
 
-        if ($channel->getTypeId() === Defaults::CHANNEL_TYPE_API) {
+        if ($channel->getTypeId() === Defaults::SALES_CHANNEL_TYPE_API) {
             return new Response('', Response::HTTP_NO_CONTENT);
         }
 
@@ -213,7 +213,7 @@ class SeoActionController extends AbstractController
                 throw SeoException::channelNotFound((string) $channelId);
             }
 
-            if ($channelEntity->getTypeId() === Defaults::CHANNEL_TYPE_API) {
+            if ($channelEntity->getTypeId() === Defaults::SALES_CHANNEL_TYPE_API) {
                 continue;
             }
 
@@ -303,7 +303,7 @@ class SeoActionController extends AbstractController
             /** @var ChannelEntity|null $channel */
             $channel = $this->channelRepository
                 ->search(
-                    (new Criteria())->addFilter(new EqualsFilter('typeId', Defaults::CHANNEL_TYPE_WEB))->setLimit(1),
+                    (new Criteria())->addFilter(new EqualsFilter('typeId', Defaults::SALES_CHANNEL_TYPE_STOREFRONT))->setLimit(1),
                     $context
                 )
                 ->first();

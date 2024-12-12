@@ -9,7 +9,7 @@ use Cicada\Core\System\Channel\StoreApiResponse;
 /**
  * @experimental stableVersion:v6.7.0 feature:BREADCRUMB_STORE_API
  */
-#[Package('inventory')]
+#[Package('content')]
 class BreadcrumbRouteResponse extends StoreApiResponse
 {
     /**
