@@ -211,6 +211,8 @@
       "@framework:schema:dump",
       "@npm:admin run convert-entity-schema"
     ],
+    "npm:frontend": "@npm:frontend:bin npm",
+    "npm:frontend:bin": "export PROJECT_ROOT=\"$PWD\"; cd src/Frontend/Resources/app/frontend; export PATH=\"$PWD/node_modules/.bin/:$PATH\"; \"$PROJECT_ROOT\"/bin/exec-with-env ",
     "npm:admin": "@npm:admin:bin npm",
     "npm:admin:bin": "export PROJECT_ROOT=\"$PWD\"; cd src/Administration/Resources/app/administration; export PATH=\"$PWD/node_modules/.bin/:$PATH\"; \"$PROJECT_ROOT\"/bin/exec-with-env ",
     "ecs": "php-cs-fixer fix --dry-run --diff",
