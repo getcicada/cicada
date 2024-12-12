@@ -9,7 +9,6 @@ use Cicada\Core\Framework\Api\Util\AccessKeyHelper;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\Framework\Uuid\Uuid;
 use Cicada\Core\Installer\Controller\ShopConfigurationController;
-use Cicada\Core\Maintenance\System\Service\ShopConfigurator;
 
 /**
  * @internal
@@ -56,16 +55,12 @@ class ShopConfigurationService
      */
     private function createChannel(string $newId, array $shop, Connection $connection): void
     {
-        $typeId = Defaults::SALES_CHANNEL_TYPE_STOREFRONT;
+        $typeId = Defaults::CHANNEL_TYPE_WEB;
 
         $paymentMethod = $this->getFirstActivePaymentMethodId($connection);
         $shippingMethod = $this->getFirstActiveShippingMethodId($connection);
 
         $languageId = $this->getLanguageId($shop['locale'], $connection);
-
-        $currencyId = $this->getCurrencyId($shop['currency'], $connection);
-
-        $countryId = $this->getCountryId($shop['country'], $connection);
 
         $statement = $connection->prepare(
             'INSERT INTO channel (

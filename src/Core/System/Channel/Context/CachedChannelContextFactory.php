@@ -37,10 +37,6 @@ class CachedChannelContextFactory extends AbstractChannelContextFactory
     {
         $name = self::buildName($channelId);
 
-        if (!$this->isCacheable($options)) {
-            return $this->getDecorated()->create($token, $channelId, $options);
-        }
-
         ksort($options);
 
         $key = implode('-', [$name, Hasher::hash($options)]);
@@ -82,13 +78,4 @@ class CachedChannelContextFactory extends AbstractChannelContextFactory
         return 'context-factory-' . $channelId;
     }
 
-    /**
-     * @param array<string, mixed> $options
-     */
-    private function isCacheable(array $options): bool
-    {
-        return !isset($options[ChannelContextService::Member_ID])
-            && !isset($options[ChannelContextService::BILLING_ADDRESS_ID])
-            && !isset($options[ChannelContextService::SHIPPING_ADDRESS_ID]);
-    }
 }

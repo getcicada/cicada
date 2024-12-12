@@ -35,7 +35,7 @@ class BaseContextFactory extends AbstractBaseContextFactory
         $context = $this->getContext($channelId, $options);
 
         $criteria = new Criteria([$channelId]);
-        $criteria->setTitle('base-context-factory::sales-channel');
+        $criteria->setTitle('base-context-factory::channel');
         $criteria->addAssociation('currency');
         $criteria->addAssociation('domains');
 
@@ -44,15 +44,8 @@ class BaseContextFactory extends AbstractBaseContextFactory
         if (!$channel instanceof ChannelEntity) {
             throw ChannelException::channelNotFound($channelId);
         }
-
-        $groupId = $channel->getMemberGroupId();
-
-        $criteria = new Criteria([$channel->getMemberGroupId()]);
-        $criteria->setTitle('base-context-factory::member-group');
-
         $context = new Context(
             $context->getSource(),
-            [],
             $context->getLanguageIdChain(),
             $context->getVersionId(),
             true,
@@ -111,7 +104,6 @@ class BaseContextFactory extends AbstractBaseContextFactory
 
         return new Context(
             $origin,
-            [],
             $languageChain,
             $versionId,
             true

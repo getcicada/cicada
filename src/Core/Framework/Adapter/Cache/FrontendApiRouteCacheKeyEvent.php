@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\EventDispatcher\Event;
 
 #[Package('core')]
-class StoreApiRouteCacheKeyEvent extends Event
+class FrontendApiRouteCacheKeyEvent extends Event
 {
     private bool $disableCaching = false;
 

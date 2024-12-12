@@ -96,7 +96,6 @@ class UserRecoveryService
                 $channel->getId(),
                 Uuid::randomHex(),
                 $channel->getLanguageId(),
-                $channel->getCurrencyId(),
                 null,
                 $context,
                 null,

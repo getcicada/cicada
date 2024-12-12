@@ -2,10 +2,10 @@
 
 namespace Cicada\Core\System\Language\Event;
 
-use Cicada\Core\Framework\Adapter\Cache\StoreApiRouteCacheTagsEvent;
+use Cicada\Core\Framework\Adapter\Cache\FrontendApiRouteCacheTagsEvent;
 use Cicada\Core\Framework\Log\Package;
 
 #[Package('frontend')]
-class LanguageRouteCacheTagsEvent extends StoreApiRouteCacheTagsEvent
+class LanguageRouteCacheTagsEvent extends FrontendApiRouteCacheTagsEvent
 {
 }

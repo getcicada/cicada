@@ -30,54 +30,11 @@ class ChannelCollection extends EntityCollection
     /**
      * @return array<string>
      */
-    public function getCurrencyIds(): array
-    {
-        return $this->fmap(fn (ChannelEntity $channel) => $channel->getCurrencyId());
-    }
-
-    public function filterByCurrencyId(string $id): ChannelCollection
-    {
-        return $this->filter(fn (ChannelEntity $channel) => $channel->getCurrencyId() === $id);
-    }
-
-    /**
-     * @return array<string>
-     */
     public function getPaymentMethodIds(): array
     {
         return $this->fmap(fn (ChannelEntity $channel) => $channel->getPaymentMethodId());
     }
 
-    public function filterByPaymentMethodId(string $id): ChannelCollection
-    {
-        return $this->filter(fn (ChannelEntity $channel) => $channel->getPaymentMethodId() === $id);
-    }
-
-    /**
-     * @return array<string>
-     */
-    public function getShippingMethodIds(): array
-    {
-        return $this->fmap(fn (ChannelEntity $channel) => $channel->getShippingMethodId());
-    }
-
-    public function filterByShippingMethodId(string $id): ChannelCollection
-    {
-        return $this->filter(fn (ChannelEntity $channel) => $channel->getShippingMethodId() === $id);
-    }
-
-    /**
-     * @return array<string>
-     */
-    public function getCountryIds(): array
-    {
-        return $this->fmap(fn (ChannelEntity $channel) => $channel->getCountryId());
-    }
-
-    public function filterByCountryId(string $id): ChannelCollection
-    {
-        return $this->filter(fn (ChannelEntity $channel) => $channel->getCountryId() === $id);
-    }
 
     /**
      * @return array<string>
@@ -96,13 +53,6 @@ class ChannelCollection extends EntityCollection
     {
         return new LanguageCollection(
             $this->fmap(fn (ChannelEntity $channel) => $channel->getLanguage())
-        );
-    }
-
-    public function getCurrencies(): CurrencyCollection
-    {
-        return new CurrencyCollection(
-            $this->fmap(fn (ChannelEntity $channel) => $channel->getCurrency())
         );
     }
 

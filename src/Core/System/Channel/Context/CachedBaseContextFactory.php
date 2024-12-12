@@ -41,14 +41,9 @@ class CachedBaseContextFactory extends AbstractBaseContextFactory
         ksort($options);
 
         $keys = \array_intersect_key($options, [
-            ChannelContextService::CURRENCY_ID => true,
             ChannelContextService::LANGUAGE_ID => true,
             ChannelContextService::DOMAIN_ID => true,
-            ChannelContextService::PAYMENT_METHOD_ID => true,
-            ChannelContextService::SHIPPING_METHOD_ID => true,
             ChannelContextService::VERSION_ID => true,
-            ChannelContextService::COUNTRY_ID => true,
-            ChannelContextService::COUNTRY_STATE_ID => true,
         ]);
 
         $key = implode('-', [$name, Hasher::hash($keys)]);

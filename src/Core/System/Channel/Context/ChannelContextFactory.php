@@ -35,7 +35,6 @@ class ChannelContextFactory extends AbstractChannelContextFactory
 
         $context = new Context(
             $base->getContext()->getSource(),
-            [],
             $base->getContext()->getLanguageIdChain(),
             $base->getContext()->getVersionId(),
             true,

@@ -16,10 +16,6 @@ class ChannelContextService implements ChannelContextServiceInterface
 {
     final public const LANGUAGE_ID = 'languageId';
 
-    final public const MEMBER_ID = 'memberId';
-
-    final public const MEMBER_GROUP_ID = 'memberGroupId';
-
     final public const VERSION_ID = 'version-id';
 
     final public const PERMISSIONS = 'permissions';
@@ -42,7 +38,7 @@ class ChannelContextService implements ChannelContextServiceInterface
 
     public function get(ChannelContextServiceParameters $parameters): ChannelContext
     {
-        return Profiler::trace('sales-channel-context', function () use ($parameters) {
+        return Profiler::trace('channel-context', function () use ($parameters) {
             $token = $parameters->getToken();
 
             $session = $this->contextPersister->load($token, $parameters->getChannelId());
@@ -61,11 +57,6 @@ class ChannelContextService implements ChannelContextServiceInterface
             if ($parameters->getOriginalContext() !== null) {
                 $session[self::ORIGINAL_CONTEXT] = $parameters->getOriginalContext();
             }
-
-            if ($parameters->getMemberId() !== null) {
-                $session[self::MEMBER_ID] = $parameters->getMemberId();
-            }
-
             if ($parameters->getImitatingUserId() !== null) {
                 $session[self::IMITATING_USER_ID] = $parameters->getImitatingUserId();
             }

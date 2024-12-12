@@ -38,9 +38,6 @@ class EntityCacheKeyGenerator
             $context->getDomainId(),
             $context->getLanguageIdChain(),
             $context->getVersionId(),
-            $context->getCurrencyId(),
-            $context->getTaxState(),
-            $context->getItemRounding(),
             $ruleIds,
         ]);
     }

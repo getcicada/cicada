@@ -78,11 +78,6 @@ class CacheResponseSubscriber implements EventSubscriberInterface
 
         $route = $request->attributes->get('_route');
 
-        // We need to allow it on login, otherwise the state is wrong
-        if (!($route === 'frontend.account.login' || $request->getMethod() === Request::METHOD_GET)) {
-            return;
-        }
-
         if ($request->cookies->has(HttpCacheKeyGenerator::CONTEXT_CACHE_COOKIE)) {
             $response->headers->removeCookie(HttpCacheKeyGenerator::CONTEXT_CACHE_COOKIE);
             $response->headers->clearCookie(HttpCacheKeyGenerator::CONTEXT_CACHE_COOKIE);
@@ -96,10 +91,6 @@ class CacheResponseSubscriber implements EventSubscriberInterface
 
         if ($cache === true) {
             $cache = [];
-        }
-
-        if ($this->hasInvalidationState($cache['states'] ?? [], $states)) {
-            return;
         }
 
         $maxAge = $cache['maxAge'] ?? $this->defaultTtl;

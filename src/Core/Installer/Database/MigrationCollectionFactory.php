@@ -46,31 +46,31 @@ class MigrationCollectionFactory
     {
         if (file_exists($this->projectDir . '/platform/src/Core/schema.sql')) {
             $coreBasePath = $this->projectDir . '/platform/src/Core';
-            $storefrontBasePath = $this->projectDir . '/platform/src/Storefront';
+            $frontendBasePath = $this->projectDir . '/platform/src/Frontend';
             $adminBasePath = $this->projectDir . '/platform/src/Administration';
         } elseif (file_exists($this->projectDir . '/src/Core/schema.sql')) {
             $coreBasePath = $this->projectDir . '/src/Core';
-            $storefrontBasePath = $this->projectDir . '/src/Storefront';
+            $frontendBasePath = $this->projectDir . '/src/Frontend';
             $adminBasePath = $this->projectDir . '/src/Administration';
         } elseif (file_exists($this->projectDir . '/vendor/cicada/platform/src/Core/schema.sql')) {
             $coreBasePath = $this->projectDir . '/vendor/cicada/platform/src/Core';
-            $storefrontBasePath = $this->projectDir . '/vendor/cicada/platform/src/Storefront';
+            $frontendBasePath = $this->projectDir . '/vendor/cicada/platform/src/Frontend';
             $adminBasePath = $this->projectDir . '/vendor/cicada/platform/src/Administration';
         } else {
             $coreBasePath = $this->projectDir . '/vendor/cicada/core';
-            $storefrontBasePath = $this->projectDir . '/vendor/cicada/storefront';
+            $frontendBasePath = $this->projectDir . '/vendor/cicada/frontend';
             $adminBasePath = $this->projectDir . '/vendor/cicada/administration';
         }
 
-        $hasStorefrontMigrations = is_dir($storefrontBasePath);
+        $hasFrontendMigrations = is_dir($frontendBasePath);
         $hasAdminMigrations = is_dir($adminBasePath);
 
         $source = new MigrationSource('core.' . $version, [
             \sprintf('%s/Migration/%s', $coreBasePath, $version) => \sprintf('Cicada\\Core\\Migration\\%s', $version),
         ]);
 
-        if ($hasStorefrontMigrations) {
-            $source->addDirectory(\sprintf('%s/Migration/%s', $storefrontBasePath, $version), \sprintf('Cicada\\Storefront\\Migration\\%s', $version));
+        if ($hasFrontendMigrations) {
+            $source->addDirectory(\sprintf('%s/Migration/%s', $frontendBasePath, $version), \sprintf('Cicada\\Frontend\\Migration\\%s', $version));
         }
 
         if ($hasAdminMigrations) {

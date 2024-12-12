@@ -47,7 +47,6 @@ use Symfony\Component\Validator\Constraints\Type;
 #[Package('core')]
 class ChannelProxyController extends AbstractController
 {
-    private const Member_ID = ChannelContextService::MEMBER_ID;
 
     private const SALES_CHANNEL_ID = 'channelId';
 

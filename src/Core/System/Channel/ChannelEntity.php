@@ -2,25 +2,10 @@
 
 namespace Cicada\Core\System\Channel;
 
-use Cicada\Frontend\Member\Aggregate\MemberGroup\MemberGroupCollection;
-use Cicada\Frontend\Member\Aggregate\MemberGroup\MemberGroupEntity;
-use Cicada\Frontend\Member\Aggregate\MemberWishlist\MemberWishlistCollection;
-use Cicada\Frontend\Member\MemberCollection;
-use Cicada\Core\Checkout\Document\Aggregate\DocumentBaseConfig\DocumentBaseConfigDefinition;
-use Cicada\Core\Checkout\Order\OrderCollection;
-use Cicada\Core\Checkout\Payment\PaymentMethodCollection;
-use Cicada\Core\Checkout\Payment\PaymentMethodEntity;
-use Cicada\Core\Checkout\Promotion\Aggregate\PromotionChannel\PromotionChannelCollection;
-use Cicada\Core\Checkout\Shipping\ShippingMethodCollection;
-use Cicada\Core\Checkout\Shipping\ShippingMethodEntity;
+
 use Cicada\Core\Content\Category\CategoryEntity;
 use Cicada\Core\Content\Cms\CmsPageEntity;
 use Cicada\Core\Content\LandingPage\LandingPageCollection;
-use Cicada\Core\Content\MailTemplate\Aggregate\MailHeaderFooter\MailHeaderFooterEntity;
-use Cicada\Core\Content\Newsletter\Aggregate\NewsletterRecipient\NewsletterRecipientCollection;
-use Cicada\Core\Content\Product\Aggregate\ProductReview\ProductReviewCollection;
-use Cicada\Core\Content\Product\Aggregate\ProductVisibility\ProductVisibilityCollection;
-use Cicada\Core\Content\ProductExport\ProductExportCollection;
 use Cicada\Core\Content\Seo\MainCategory\MainCategoryCollection;
 use Cicada\Core\Content\Seo\SeoUrl\SeoUrlCollection;
 use Cicada\Core\Content\Seo\SeoUrlTemplate\SeoUrlTemplateCollection;
@@ -28,14 +13,9 @@ use Cicada\Core\Framework\DataAbstractionLayer\Entity;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityCustomFieldsTrait;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 use Cicada\Core\Framework\Log\Package;
-use Cicada\Core\System\Country\CountryCollection;
-use Cicada\Core\System\Country\CountryEntity;
-use Cicada\Core\System\Currency\CurrencyCollection;
-use Cicada\Core\System\Currency\CurrencyEntity;
 use Cicada\Core\System\Language\LanguageCollection;
 use Cicada\Core\System\Language\LanguageEntity;
 use Cicada\Core\System\NumberRange\Aggregate\NumberRangeChannel\NumberRangeChannelCollection;
-use Cicada\Core\System\Channel\Aggregate\ChannelAnalytics\ChannelAnalyticsEntity;
 use Cicada\Core\System\Channel\Aggregate\ChannelDomain\ChannelDomainCollection;
 use Cicada\Core\System\Channel\Aggregate\ChannelDomain\ChannelDomainEntity;
 use Cicada\Core\System\Channel\Aggregate\ChannelTranslation\ChannelTranslationCollection;
@@ -224,13 +204,6 @@ class ChannelEntity extends Entity
     protected $accessKey;
 
     /**
-     * @var CurrencyCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $currencies;
-
-    /**
      * @var LanguageCollection|null
      *
      * @deprecated tag:v6.7.0 - Will be natively typed
@@ -266,25 +239,11 @@ class ChannelEntity extends Entity
     protected $maintenanceIpWhitelist;
 
     /**
-     * @var string
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $taxCalculationType;
-
-    /**
      * @var ChannelTypeEntity|null
      *
      * @deprecated tag:v6.7.0 - Will be natively typed
      */
     protected $type;
-
-    /**
-     * @var CurrencyEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $currency;
 
     /**
      * @var LanguageEntity|null
@@ -397,27 +356,6 @@ class ChannelEntity extends Entity
     protected $analyticsId;
 
     /**
-     * @var ChannelAnalyticsEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $analytics;
-
-    /**
-     * @var MemberCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $boundMembers;
-
-    /**
-     * @var MemberWishlistCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $wishlists;
-
-    /**
      * @var LandingPageCollection|null
      *
      * @deprecated tag:v6.7.0 - Will be natively typed
@@ -433,46 +371,6 @@ class ChannelEntity extends Entity
     public function setLanguageId(string $languageId): void
     {
         $this->languageId = $languageId;
-    }
-
-    public function getCurrencyId(): string
-    {
-        return $this->currencyId;
-    }
-
-    public function setCurrencyId(string $currencyId): void
-    {
-        $this->currencyId = $currencyId;
-    }
-
-    public function getPaymentMethodId(): string
-    {
-        return $this->paymentMethodId;
-    }
-
-    public function setPaymentMethodId(string $paymentMethodId): void
-    {
-        $this->paymentMethodId = $paymentMethodId;
-    }
-
-    public function getShippingMethodId(): string
-    {
-        return $this->shippingMethodId;
-    }
-
-    public function setShippingMethodId(string $shippingMethodId): void
-    {
-        $this->shippingMethodId = $shippingMethodId;
-    }
-
-    public function getCountryId(): string
-    {
-        return $this->countryId;
-    }
-
-    public function setCountryId(string $countryId): void
-    {
-        $this->countryId = $countryId;
     }
 
     public function getName(): ?string
@@ -744,16 +642,6 @@ class ChannelEntity extends Entity
         $this->homeKeywords = $homeKeywords;
     }
 
-    public function getMemberGroupId(): string
-    {
-        return $this->memberGroupId;
-    }
-
-    public function setMemberGroupId(string $memberGroupId): void
-    {
-        $this->memberGroupId = $memberGroupId;
-    }
-
     public function getNumberRangeChannels(): ?NumberRangeChannelCollection
     {
         return $this->numberRangeChannels;
@@ -883,16 +771,6 @@ class ChannelEntity extends Entity
     public function setAnalyticsId(?string $analyticsId): void
     {
         $this->analyticsId = $analyticsId;
-    }
-
-    public function getAnalytics(): ?ChannelAnalyticsEntity
-    {
-        return $this->analytics;
-    }
-
-    public function setAnalytics(?ChannelAnalyticsEntity $analytics): void
-    {
-        $this->analytics = $analytics;
     }
 
     public function getLandingPages(): ?LandingPageCollection

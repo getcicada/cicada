@@ -4,10 +4,10 @@ namespace Cicada\Core\Content\Category\Channel;
 
 use Cicada\Core\Content\Category\CategoryEntity;
 use Cicada\Core\Framework\Log\Package;
-use Cicada\Core\System\Channel\StoreApiResponse;
+use Cicada\Core\System\Channel\FrontendApiResponse;
 
 #[Package('content')]
-class CategoryRouteResponse extends StoreApiResponse
+class CategoryRouteResponse extends FrontendApiResponse
 {
     /**
      * @var CategoryEntity

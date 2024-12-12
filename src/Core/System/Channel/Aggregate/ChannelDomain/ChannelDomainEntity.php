@@ -2,12 +2,10 @@
 
 namespace Cicada\Core\System\Channel\Aggregate\ChannelDomain;
 
-use Cicada\Core\Content\ProductExport\ProductExportCollection;
 use Cicada\Core\Framework\DataAbstractionLayer\Entity;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityCustomFieldsTrait;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 use Cicada\Core\Framework\Log\Package;
-use Cicada\Core\System\Currency\CurrencyEntity;
 use Cicada\Core\System\Language\LanguageEntity;
 use Cicada\Core\System\Channel\ChannelEntity;
 use Cicada\Core\System\Snippet\Aggregate\SnippetSet\SnippetSetEntity;
@@ -24,20 +22,6 @@ class ChannelDomainEntity extends Entity
      * @deprecated tag:v6.7.0 - Will be natively typed
      */
     protected $url;
-
-    /**
-     * @var string|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $currencyId;
-
-    /**
-     * @var CurrencyEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $currency;
 
     /**
      * @var string|null
@@ -81,12 +65,6 @@ class ChannelDomainEntity extends Entity
      */
     protected $language;
 
-    /**
-     * @var ProductExportCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $productExports;
 
     /**
      * @var ChannelEntity|null
@@ -151,27 +129,7 @@ class ChannelDomainEntity extends Entity
     {
         $this->language = $language;
     }
-
-    public function getCurrencyId(): ?string
-    {
-        return $this->currencyId;
-    }
-
-    public function setCurrencyId(?string $currencyId): void
-    {
-        $this->currencyId = $currencyId;
-    }
-
-    public function getCurrency(): ?CurrencyEntity
-    {
-        return $this->currency;
-    }
-
-    public function setCurrency(?CurrencyEntity $currency): void
-    {
-        $this->currency = $currency;
-    }
-
+    
     public function getSnippetSetId(): ?string
     {
         return $this->snippetSetId;
@@ -191,17 +149,6 @@ class ChannelDomainEntity extends Entity
     {
         $this->snippetSet = $snippetSet;
     }
-
-    public function getProductExports(): ?ProductExportCollection
-    {
-        return $this->productExports;
-    }
-
-    public function setProductExports(ProductExportCollection $productExports): void
-    {
-        $this->productExports = $productExports;
-    }
-
     public function isHreflangUseOnlyLocale(): bool
     {
         return $this->hreflangUseOnlyLocale;

@@ -2,10 +2,10 @@
 
 namespace Cicada\Core\Content\Sitemap\Event;
 
-use Cicada\Core\Framework\Adapter\Cache\StoreApiRouteCacheKeyEvent;
+use Cicada\Core\Framework\Adapter\Cache\FrontendApiRouteCacheKeyEvent;
 use Cicada\Core\Framework\Log\Package;
 
 #[Package('services-settings')]
-class SitemapRouteCacheKeyEvent extends StoreApiRouteCacheKeyEvent
+class SitemapRouteCacheKeyEvent extends FrontendApiRouteCacheKeyEvent
 {
 }

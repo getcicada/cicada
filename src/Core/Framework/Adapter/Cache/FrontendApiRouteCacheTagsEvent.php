@@ -5,17 +5,17 @@ namespace Cicada\Core\Framework\Adapter\Cache;
 use Cicada\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\System\Channel\ChannelContext;
-use Cicada\Core\System\Channel\StoreApiResponse;
+use Cicada\Core\System\Channel\FrontendApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\EventDispatcher\Event;
 
 #[Package('core')]
-class StoreApiRouteCacheTagsEvent extends Event
+class FrontendApiRouteCacheTagsEvent extends Event
 {
     public function __construct(
         protected array $tags,
         protected Request $request,
-        private readonly StoreApiResponse $response,
+        private readonly FrontendApiResponse $response,
         protected ChannelContext $context,
         protected ?Criteria $criteria
     ) {
@@ -56,7 +56,7 @@ class StoreApiRouteCacheTagsEvent extends Event
         return $this->context->getChannelId();
     }
 
-    public function getResponse(): StoreApiResponse
+    public function getResponse(): FrontendApiResponse
     {
         return $this->response;
     }

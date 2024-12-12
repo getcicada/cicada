@@ -2,7 +2,6 @@
 
 namespace Cicada\Core\System\Channel;
 
-use Cicada\Frontend\Member\Aggregate\MemberGroup\MemberGroupEntity;
 use Cicada\Core\Framework\Context;
 use Cicada\Core\Framework\Log\Package;
 /**
@@ -14,13 +13,7 @@ class BaseContext
     public function __construct(
         protected Context $context,
         protected ChannelEntity $channel,
-        protected MemberGroupEntity $currentMemberGroup,
     ) {
-    }
-
-    public function getCurrentMemberGroup(): MemberGroupEntity
-    {
-        return $this->currentMemberGroup;
     }
 
     public function getChannel(): ChannelEntity

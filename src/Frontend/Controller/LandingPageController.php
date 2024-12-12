@@ -4,7 +4,6 @@ namespace Cicada\Frontend\Controller;
 
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\System\Channel\ChannelContext;
-use Cicada\Frontend\Page\LandingPage\LandingPageLoadedHook;
 use Cicada\Frontend\Page\LandingPage\LandingPageLoader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

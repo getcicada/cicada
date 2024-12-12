@@ -89,7 +89,6 @@ class ChannelDefinition extends EntityDefinition
             (new FkField('hreflang_default_domain_id', 'hreflangDefaultDomainId', ChannelDomainDefinition::class))->addFlags(new ApiAware()),
             (new TranslatedField('name'))->addFlags(new ApiAware()),
             (new StringField('short_name', 'shortName'))->addFlags(new ApiAware()),
-            (new StringField('tax_calculation_type', 'taxCalculationType'))->addFlags(new ApiAware()),
             (new StringField('access_key', 'accessKey'))->addFlags(new Required()),
             (new JsonField('configuration', 'configuration'))->addFlags(new ApiAware()),
             (new BoolField('active', 'active'))->addFlags(new ApiAware()),

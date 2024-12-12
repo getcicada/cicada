@@ -73,8 +73,6 @@ class ExtensionStoreDataController extends AbstractController
 
         return new Context(
             $context->getSource(),
-            $context->getRuleIds(),
-            $context->getCurrencyId(),
             [$languageId, Defaults::LANGUAGE_SYSTEM]
         );
     }

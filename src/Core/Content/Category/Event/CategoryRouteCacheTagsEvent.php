@@ -2,15 +2,15 @@
 
 namespace Cicada\Core\Content\Category\Event;
 
-use Cicada\Core\Framework\Adapter\Cache\StoreApiRouteCacheTagsEvent;
+use Cicada\Core\Framework\Adapter\Cache\FrontendApiRouteCacheTagsEvent;
 use Cicada\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\System\Channel\ChannelContext;
-use Cicada\Core\System\Channel\StoreApiResponse;
+use Cicada\Core\System\Channel\FrontendApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 #[Package('content')]
-class CategoryRouteCacheTagsEvent extends StoreApiRouteCacheTagsEvent
+class CategoryRouteCacheTagsEvent extends FrontendApiRouteCacheTagsEvent
 {
     /**
      * @param array<string> $tags
@@ -19,7 +19,7 @@ class CategoryRouteCacheTagsEvent extends StoreApiRouteCacheTagsEvent
         protected string $navigationId,
         array $tags,
         Request $request,
-        StoreApiResponse $response,
+        FrontendApiResponse $response,
         ChannelContext $context,
         ?Criteria $criteria
     ) {

@@ -55,11 +55,11 @@ SHOPWARE_ADMIN_ES_ENABLED=0
 SHOPWARE_ADMIN_ES_REFRESH_INDICES=0
 ###< cicada/elasticsearch ###
 
-###> cicada/storefront ###
+###> cicada/frontend ###
 STOREFRONT_PROXY_URL=http://localhost
 SHOPWARE_HTTP_CACHE_ENABLED=1
 SHOPWARE_HTTP_DEFAULT_TTL=7200
-###< cicada/storefront ###
+###< cicada/frontend ###
 EOT;
 
     public function __construct(

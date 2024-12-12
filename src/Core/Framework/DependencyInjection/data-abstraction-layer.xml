@@ -125,23 +125,6 @@
             <argument type="tagged_iterator" tag="cicada.bulk.entity.extension"/>
         </service>
 
-        <service id="Cicada\Core\Framework\DataAbstractionLayer\Facade\RepositoryFacadeHookFactory" public="true">
-            <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
-            <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\Facade\AppContextCreator"/>
-            <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\Search\RequestCriteriaBuilder"/>
-            <argument type="service" id="Cicada\Core\Framework\Api\Acl\AclCriteriaValidator"/>
-        </service>
-
-        <service id="Cicada\Core\Framework\DataAbstractionLayer\Facade\RepositoryWriterFacadeHookFactory" public="true">
-            <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
-            <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\Facade\AppContextCreator"/>
-            <argument type="service" id="Cicada\Core\Framework\Api\Sync\SyncService"/>
-        </service>
-
-        <service id="Cicada\Core\Framework\DataAbstractionLayer\Facade\AppContextCreator">
-            <argument type="service" id="Doctrine\DBAL\Connection"/>
-        </service>
-
         <!-- EntityDefinition[] -->
         <service class="Cicada\Core\Framework\DataAbstractionLayer\Dbal\EntityReader" id="Cicada\Core\Framework\DataAbstractionLayer\Read\EntityReaderInterface" public="true">
             <argument type="service" id="Doctrine\DBAL\Connection"/>

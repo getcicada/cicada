@@ -296,12 +296,6 @@ abstract class FrontendController extends AbstractController
     {
         return $this->container->get(TemplateFinder::class);
     }
-
-    protected function hook(Hook $hook): void
-    {
-        $this->container->get(ScriptExecutor::class)->execute($hook);
-    }
-
     protected function getSystemConfigService(): SystemConfigService
     {
         return $this->container->get(SystemConfigService::class);

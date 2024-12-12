@@ -2,14 +2,14 @@
 
 namespace Cicada\Core\Content\Category\Event;
 
-use Cicada\Core\Framework\Adapter\Cache\StoreApiRouteCacheKeyEvent;
+use Cicada\Core\Framework\Adapter\Cache\FrontendApiRouteCacheKeyEvent;
 use Cicada\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\System\Channel\ChannelContext;
 use Symfony\Component\HttpFoundation\Request;
 
 #[Package('content')]
-class CategoryRouteCacheKeyEvent extends StoreApiRouteCacheKeyEvent
+class CategoryRouteCacheKeyEvent extends FrontendApiRouteCacheKeyEvent
 {
     /**
      * @param array<mixed> $parts

@@ -1,5 +1,5 @@
 /**
- * @package storefront
+ * @package frontend
  */
 const chalk = require('chalk');
 
@@ -65,12 +65,12 @@ const pluginEntries = (() => {
     const pluginDefinition = JSON.parse(fs.readFileSync(pluginFile, 'utf8'));
 
     return Object.entries(pluginDefinition)
-        .filter(([, definition]) => definition.technicalName !== 'storefront' && !!definition.storefront && !!definition.storefront.entryFilePath && !process.env.hasOwnProperty('SKIP_' + definition.technicalName.toUpperCase().replace(/-/g, '_')))
+        .filter(([, definition]) => definition.technicalName !== 'frontend' && !!definition.frontend && !!definition.frontend.entryFilePath && !process.env.hasOwnProperty('SKIP_' + definition.technicalName.toUpperCase().replace(/-/g, '_')))
         .map(([name, definition]) => {
             console.log(chalk.bgGreenBright.black(`# Plugin "${name}": Injected successfully`));
 
             const technicalName = definition.technicalName || name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-            const htmlFilePath = path.resolve(process.env.PROJECT_ROOT, definition.basePath, definition.storefront.path, '..', 'index.html');
+            const htmlFilePath = path.resolve(process.env.PROJECT_ROOT, definition.basePath, definition.frontend.path, '..', 'index.html');
             const hasHtmlFile = fs.existsSync(htmlFilePath);
 
             if (isHotMode && useExtensionTwigWatch && definition.views?.length > 0) {
@@ -84,11 +84,11 @@ const pluginEntries = (() => {
                 technicalName: technicalName,
                 technicalFolderName: technicalName.replace(/(-)/g, '').toLowerCase(),
                 basePath: path.resolve(process.env.PROJECT_ROOT, definition.basePath),
-                path: path.resolve(process.env.PROJECT_ROOT, definition.basePath, definition.storefront.path),
-                filePath: path.resolve(process.env.PROJECT_ROOT, definition.basePath, definition.storefront.entryFilePath),
+                path: path.resolve(process.env.PROJECT_ROOT, definition.basePath, definition.frontend.path),
+                filePath: path.resolve(process.env.PROJECT_ROOT, definition.basePath, definition.frontend.entryFilePath),
                 isTheme: definition.isTheme,
                 hasHtmlFile,
-                webpackConfig: definition.storefront.webpack ? path.resolve(process.env.PROJECT_ROOT, definition.basePath, definition.storefront.webpack) : null,
+                webpackConfig: definition.frontend.webpack ? path.resolve(process.env.PROJECT_ROOT, definition.basePath, definition.frontend.webpack) : null,
             };
         });
 })();
@@ -222,7 +222,7 @@ const coreConfig = {
             })(),
         ],
     },
-    name: 'shopware-6-storefront',
+    name: 'cicada-frontend',
     optimization: {
         moduleIds: 'deterministic',
         chunkIds: 'named', // named is only used in development mode
@@ -246,8 +246,8 @@ const coreConfig = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: './storefront/[name].js',
-        chunkFilename: isHotMode ? './storefront/[name].js' : './storefront/[name].[chunkhash:6].js',
+        filename: './frontend/[name].js',
+        chunkFilename: isHotMode ? './frontend/[name].js' : './frontend/[name].[chunkhash:6].js',
         clean: (isHotMode ? false : {
             keep: /assets\//,
         }),
@@ -283,7 +283,7 @@ const coreConfig = {
     resolve: {
         extensions: [ '.ts', '.tsx', '.js', '.jsx', '.json', '.less', '.sass', '.scss', '.twig' ],
         modules: [
-            // statically add the storefront node_modules folder, so sw plugins can resolve it
+            // statically add the frontend node_modules folder, so sw plugins can resolve it
             path.resolve(__dirname, 'node_modules'),
         ],
         alias: {
@@ -341,8 +341,8 @@ const pluginConfigs = pluginEntries.map((plugin) => {
                 [plugin.technicalName]: plugin.filePath,
             },
             output: {
-                // In dev mode use same path as the core storefront to be able to access all files in multi-compiler-mode
-                path: isHotMode ? path.resolve(__dirname, 'dist') : path.resolve(plugin.path, '../dist/storefront'),
+                // In dev mode use same path as the core frontend to be able to access all files in multi-compiler-mode
+                path: isHotMode ? path.resolve(__dirname, 'dist') : path.resolve(plugin.path, '../dist/frontend'),
                 filename: isHotMode ? `./${plugin.technicalName}/[name].js` : `./js/${plugin.technicalName}/[name].js`,
                 chunkFilename:
                     isHotMode ? `./${plugin.technicalName}/[name].js` :
@@ -494,11 +494,11 @@ const mergedCoreConfig = merge([
             return {};
         })(),
         entry: {
-            storefront: `${path.resolve('src')}/main.js`,
+            frontend: `${path.resolve('src')}/main.js`,
         },
         plugins: [
             new WebpackBar({
-                name: 'Shopware 6 Storefront',
+                name: 'Cicada frontend',
                 color: '#118cff',
             }),
         ],

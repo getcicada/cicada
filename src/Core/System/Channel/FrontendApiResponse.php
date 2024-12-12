@@ -13,7 +13,12 @@ class FrontendApiResponse extends Response
     // allows the cache key finder to get access of all returned data to build the cache tags
     use VariablesAccessTrait;
 
-    protected Struct $object;
+    /**
+     * @var Struct
+     *
+     * @deprecated tag:v6.7.0 - Will be natively typed
+     */
+    protected $object;
 
     public function __construct(Struct $object)
     {

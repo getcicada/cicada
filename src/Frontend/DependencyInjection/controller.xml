@@ -13,7 +13,13 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+        <service id="Cicada\Frontend\Controller\NavigationController">
+            <argument type="service" id="Cicada\Frontend\Page\Navigation\NavigationPageLoader"/>
 
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
         <service id="Cicada\Frontend\Controller\CmsController">
             <argument type="service" id="Cicada\Core\Content\Cms\Channel\CmsRoute"/>
             <call method="setContainer">

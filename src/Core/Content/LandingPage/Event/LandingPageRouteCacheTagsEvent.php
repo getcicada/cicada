@@ -2,7 +2,7 @@
 
 namespace Cicada\Core\Content\LandingPage\Event;
 
-use Cicada\Core\Framework\Adapter\Cache\StoreApiRouteCacheTagsEvent;
+use Cicada\Core\Framework\Adapter\Cache\FrontendApiRouteCacheTagsEvent;
 use Cicada\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\System\Channel\ChannelContext;
@@ -10,7 +10,7 @@ use Cicada\Core\System\Channel\StoreApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 #[Package('frontend')]
-class LandingPageRouteCacheTagsEvent extends StoreApiRouteCacheTagsEvent
+class LandingPageRouteCacheTagsEvent extends FrontendApiRouteCacheTagsEvent
 {
     public function __construct(
         protected string $landingPageId,
