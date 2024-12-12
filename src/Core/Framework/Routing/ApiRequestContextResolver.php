@@ -11,7 +11,6 @@ use Cicada\Core\Framework\Api\Context\SystemSource;
 use Cicada\Core\Framework\Api\Exception\MissingPrivilegeException;
 use Cicada\Core\Framework\Api\Util\AccessKeyHelper;
 use Cicada\Core\Framework\Context;
-use Cicada\Core\Framework\DataAbstractionLayer\Pricing\CashRoundingConfig;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\Framework\Uuid\Uuid;
 use Cicada\Core\PlatformRequest;
@@ -46,7 +45,6 @@ class ApiRequestContextResolver implements RequestContextResolverInterface
 
         $context = new Context(
             $this->resolveContextSource($request),
-            [],
             $languageIdChain,
             $params['versionId'] ?? Defaults::LIVE_VERSION,
             $params['considerInheritance'],
@@ -237,15 +235,6 @@ class ApiRequestContextResolver implements RequestContextResolverInterface
     {
         $source = new AdminApiSource($userId, $integrationId);
 
-        // Use the permissions associated to that app, if the request is made by an integration associated to an app
-        $appPermissions = $this->fetchPermissionsIntegrationByApp($integrationId);
-        if ($appPermissions !== null) {
-            $source->setIsAdmin(false);
-            $source->setPermissions($appPermissions);
-
-            return $source;
-        }
-
         if ($userId !== null) {
             $source->setPermissions($this->fetchPermissions($userId));
             $source->setIsAdmin($this->isAdmin($userId));
@@ -300,48 +289,6 @@ class ApiRequestContextResolver implements RequestContextResolverInterface
         }
 
         return array_unique(array_filter($list));
-    }
-
-    private function getCashRounding(string $currencyId): CashRoundingConfig
-    {
-        $rounding = $this->connection->fetchAssociative(
-            'SELECT item_rounding FROM currency WHERE id = :id',
-            ['id' => Uuid::fromHexToBytes($currencyId)]
-        );
-        if ($rounding === false) {
-            throw new \RuntimeException(\sprintf('No cash rounding for currency "%s" found', $currencyId));
-        }
-
-        $rounding = json_decode((string) $rounding['item_rounding'], true, 512, \JSON_THROW_ON_ERROR);
-
-        return new CashRoundingConfig(
-            (int) $rounding['decimals'],
-            (float) $rounding['interval'],
-            (bool) $rounding['roundForNet']
-        );
-    }
-
-    /**
-     * @return string[]|null
-     */
-    private function fetchPermissionsIntegrationByApp(?string $integrationId): ?array
-    {
-        if (!$integrationId) {
-            return null;
-        }
-
-        $privileges = $this->connection->fetchOne('
-            SELECT `acl_role`.`privileges`
-            FROM `acl_role`
-            INNER JOIN `app` ON `app`.`acl_role_id` = `acl_role`.`id`
-            WHERE `app`.`integration_id` = :integrationId
-        ', ['integrationId' => Uuid::fromHexToBytes($integrationId)]);
-
-        if ($privileges === false) {
-            return null;
-        }
-
-        return json_decode((string) $privileges, true, 512, \JSON_THROW_ON_ERROR);
     }
 
     /**

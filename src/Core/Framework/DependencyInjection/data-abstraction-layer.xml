@@ -96,18 +96,6 @@
 
         <service id="Cicada\Core\Framework\DataAbstractionLayer\Search\Term\EntityScoreQueryBuilder"/>
 
-        <service id="Cicada\Core\Content\Product\SearchKeyword\ProductSearchTermInterpreter">
-            <argument type="service" id="Doctrine\DBAL\Connection"/>
-            <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\Search\Term\Tokenizer"/>
-            <argument type="service" id="logger"/>
-            <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\Search\Term\Filter\TokenFilter"/>
-            <argument type="service" id="Cicada\Core\Content\Product\SearchKeyword\KeywordLoader"/>
-        </service>
-
-        <service id="Cicada\Core\Content\Product\SearchKeyword\KeywordLoader">
-            <argument type="service" id="Doctrine\DBAL\Connection"/>
-        </service>
-
         <service id="api.request_criteria_builder" class="Cicada\Core\Framework\DataAbstractionLayer\Search\RequestCriteriaBuilder">
             <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\Search\Parser\AggregationParser"/>
             <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\Search\ApiCriteriaValidator"/>
@@ -255,12 +243,6 @@
         <service id="Cicada\Core\Framework\DataAbstractionLayer\Dbal\FieldResolver\TranslationFieldResolver">
             <argument type="service" id="Doctrine\DBAL\Connection"/>
             <tag name="cicada.field_resolver" priority="-50"/>
-        </service>
-
-        <service id="Cicada\Core\Framework\DataAbstractionLayer\Dbal\FieldAccessorBuilder\PriceFieldAccessorBuilder">
-            <argument type="service" id="Doctrine\DBAL\Connection"/>
-
-            <tag name="cicada.field_accessor_builder" priority="-100"/>
         </service>
 
         <service id="Cicada\Core\Framework\DataAbstractionLayer\Dbal\FieldAccessorBuilder\JsonFieldAccessorBuilder">

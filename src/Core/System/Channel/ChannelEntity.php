@@ -294,62 +294,6 @@ class ChannelEntity extends Entity
     protected $language;
 
     /**
-     * @var PaymentMethodEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $paymentMethod;
-
-    /**
-     * @var ShippingMethodEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $shippingMethod;
-
-    /**
-     * @var CountryEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $country;
-
-    /**
-     * @var OrderCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $orders;
-
-    /**
-     * @var MemberCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $members;
-
-    /**
-     * @var CountryCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $countries;
-
-    /**
-     * @var PaymentMethodCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $paymentMethods;
-
-    /**
-     * @var ShippingMethodCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $shippingMethods;
-
-    /**
      * @var ChannelTranslationCollection|null
      *
      * @deprecated tag:v6.7.0 - Will be natively typed
@@ -391,19 +335,6 @@ class ChannelEntity extends Entity
      */
     protected $serviceCategory;
 
-    /**
-     * @var ProductVisibilityCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $productVisibilities;
-
-    /**
-     * @var string|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $mailHeaderFooterId;
 
     /**
      * @var NumberRangeChannelCollection|null
@@ -412,54 +343,8 @@ class ChannelEntity extends Entity
      */
     protected $numberRangeChannels;
 
-    /**
-     * @var MailHeaderFooterEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $mailHeaderFooter;
 
-    /**
-     * @var string
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $memberGroupId;
 
-    /**
-     * @var MemberGroupEntity|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $memberGroup;
-
-    /**
-     * @var NewsletterRecipientCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $newsletterRecipients;
-
-    /**
-     * @var PromotionChannelCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $promotionChannels;
-
-    /**
-     * @var DocumentBaseConfigDefinition|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $documentBaseConfigChannels;
-
-    /**
-     * @var ProductReviewCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $productReviews;
 
     /**
      * @var SeoUrlCollection|null
@@ -482,19 +367,6 @@ class ChannelEntity extends Entity
      */
     protected $mainCategories;
 
-    /**
-     * @var array<string>|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $paymentMethodIds;
-
-    /**
-     * @var ProductExportCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $productExports;
 
     /**
      * @var bool
@@ -532,13 +404,6 @@ class ChannelEntity extends Entity
     protected $analytics;
 
     /**
-     * @var MemberGroupCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $memberGroupsRegistrations;
-
-    /**
      * @var MemberCollection|null
      *
      * @deprecated tag:v6.7.0 - Will be natively typed
@@ -559,25 +424,6 @@ class ChannelEntity extends Entity
      */
     protected $landingPages;
 
-    public function getMailHeaderFooter(): ?MailHeaderFooterEntity
-    {
-        return $this->mailHeaderFooter;
-    }
-
-    public function setMailHeaderFooter(?MailHeaderFooterEntity $mailHeaderFooter): void
-    {
-        $this->mailHeaderFooter = $mailHeaderFooter;
-    }
-
-    public function getMailHeaderFooterId(): ?string
-    {
-        return $this->mailHeaderFooterId;
-    }
-
-    public function setMailHeaderFooterId(string $mailHeaderFooterId): void
-    {
-        $this->mailHeaderFooterId = $mailHeaderFooterId;
-    }
 
     public function getLanguageId(): string
     {
@@ -659,15 +505,6 @@ class ChannelEntity extends Entity
         $this->accessKey = $accessKey;
     }
 
-    public function getCurrencies(): ?CurrencyCollection
-    {
-        return $this->currencies;
-    }
-
-    public function setCurrencies(CurrencyCollection $currencies): void
-    {
-        $this->currencies = $currencies;
-    }
 
     public function getLanguages(): ?LanguageCollection
     {
@@ -751,56 +588,6 @@ class ChannelEntity extends Entity
         $this->language = $language;
     }
 
-    public function getPaymentMethod(): ?PaymentMethodEntity
-    {
-        return $this->paymentMethod;
-    }
-
-    public function setPaymentMethod(PaymentMethodEntity $paymentMethod): void
-    {
-        $this->paymentMethod = $paymentMethod;
-    }
-
-    public function getShippingMethod(): ?ShippingMethodEntity
-    {
-        return $this->shippingMethod;
-    }
-
-    public function setShippingMethod(ShippingMethodEntity $shippingMethod): void
-    {
-        $this->shippingMethod = $shippingMethod;
-    }
-
-    public function getCountry(): ?CountryEntity
-    {
-        return $this->country;
-    }
-
-    public function setCountry(CountryEntity $country): void
-    {
-        $this->country = $country;
-    }
-
-    public function getOrders(): ?OrderCollection
-    {
-        return $this->orders;
-    }
-
-    public function setOrders(OrderCollection $orders): void
-    {
-        $this->orders = $orders;
-    }
-
-    public function getMembers(): ?MemberCollection
-    {
-        return $this->members;
-    }
-
-    public function setMembers(MemberCollection $members): void
-    {
-        $this->members = $members;
-    }
-
     public function getTypeId(): string
     {
         return $this->typeId;
@@ -821,16 +608,6 @@ class ChannelEntity extends Entity
         $this->type = $type;
     }
 
-    public function getCountries(): ?CountryCollection
-    {
-        return $this->countries;
-    }
-
-    public function setCountries(CountryCollection $countries): void
-    {
-        $this->countries = $countries;
-    }
-
     public function getTranslations(): ?ChannelTranslationCollection
     {
         return $this->translations;
@@ -839,26 +616,6 @@ class ChannelEntity extends Entity
     public function setTranslations(ChannelTranslationCollection $translations): void
     {
         $this->translations = $translations;
-    }
-
-    public function getPaymentMethods(): ?PaymentMethodCollection
-    {
-        return $this->paymentMethods;
-    }
-
-    public function setPaymentMethods(PaymentMethodCollection $paymentMethods): void
-    {
-        $this->paymentMethods = $paymentMethods;
-    }
-
-    public function getShippingMethods(): ?ShippingMethodCollection
-    {
-        return $this->shippingMethods;
-    }
-
-    public function setShippingMethods(ShippingMethodCollection $shippingMethods): void
-    {
-        $this->shippingMethods = $shippingMethods;
     }
 
     public function getDomains(): ?ChannelDomainCollection
@@ -987,16 +744,6 @@ class ChannelEntity extends Entity
         $this->homeKeywords = $homeKeywords;
     }
 
-    public function getProductVisibilities(): ?ProductVisibilityCollection
-    {
-        return $this->productVisibilities;
-    }
-
-    public function setProductVisibilities(ProductVisibilityCollection $productVisibilities): void
-    {
-        $this->productVisibilities = $productVisibilities;
-    }
-
     public function getMemberGroupId(): string
     {
         return $this->memberGroupId;
@@ -1005,36 +752,6 @@ class ChannelEntity extends Entity
     public function setMemberGroupId(string $memberGroupId): void
     {
         $this->memberGroupId = $memberGroupId;
-    }
-
-    public function getMemberGroup(): ?MemberGroupEntity
-    {
-        return $this->memberGroup;
-    }
-
-    public function setMemberGroup(MemberGroupEntity $memberGroup): void
-    {
-        $this->memberGroup = $memberGroup;
-    }
-
-    public function getNewsletterRecipients(): ?NewsletterRecipientCollection
-    {
-        return $this->newsletterRecipients;
-    }
-
-    public function setNewsletterRecipients(NewsletterRecipientCollection $newsletterRecipients): void
-    {
-        $this->newsletterRecipients = $newsletterRecipients;
-    }
-
-    public function getPromotionChannels(): ?PromotionChannelCollection
-    {
-        return $this->promotionChannels;
-    }
-
-    public function setPromotionChannels(PromotionChannelCollection $promotionChannels): void
-    {
-        $this->promotionChannels = $promotionChannels;
     }
 
     public function getNumberRangeChannels(): ?NumberRangeChannelCollection
@@ -1087,26 +804,6 @@ class ChannelEntity extends Entity
         $this->serviceCategory = $serviceCategory;
     }
 
-    public function getDocumentBaseConfigChannels(): ?DocumentBaseConfigDefinition
-    {
-        return $this->documentBaseConfigChannels;
-    }
-
-    public function setDocumentBaseConfigChannels(DocumentBaseConfigDefinition $documentBaseConfigChannels): void
-    {
-        $this->documentBaseConfigChannels = $documentBaseConfigChannels;
-    }
-
-    public function getProductReviews(): ?ProductReviewCollection
-    {
-        return $this->productReviews;
-    }
-
-    public function setProductReviews(ProductReviewCollection $productReviews): void
-    {
-        $this->productReviews = $productReviews;
-    }
-
     public function getSeoUrls(): ?SeoUrlCollection
     {
         return $this->seoUrls;
@@ -1137,31 +834,6 @@ class ChannelEntity extends Entity
         $this->mainCategories = $mainCategories;
     }
 
-    /**
-     * @return array<string>|null
-     */
-    public function getPaymentMethodIds(): ?array
-    {
-        return $this->paymentMethodIds;
-    }
-
-    /**
-     * @param array<string> $paymentMethodIds
-     */
-    public function setPaymentMethodIds(array $paymentMethodIds): void
-    {
-        $this->paymentMethodIds = $paymentMethodIds;
-    }
-
-    public function getProductExports(): ?ProductExportCollection
-    {
-        return $this->productExports;
-    }
-
-    public function setProductExports(ProductExportCollection $productExports): void
-    {
-        $this->productExports = $productExports;
-    }
 
     public function getNavigationCategoryDepth(): int
     {
@@ -1221,46 +893,6 @@ class ChannelEntity extends Entity
     public function setAnalytics(?ChannelAnalyticsEntity $analytics): void
     {
         $this->analytics = $analytics;
-    }
-
-    public function getTaxCalculationType(): string
-    {
-        return $this->taxCalculationType;
-    }
-
-    public function setTaxCalculationType(string $taxCalculationType): void
-    {
-        $this->taxCalculationType = $taxCalculationType;
-    }
-
-    public function getMemberGroupsRegistrations(): ?MemberGroupCollection
-    {
-        return $this->memberGroupsRegistrations;
-    }
-
-    public function setMemberGroupsRegistrations(MemberGroupCollection $memberGroupsRegistrations): void
-    {
-        $this->memberGroupsRegistrations = $memberGroupsRegistrations;
-    }
-
-    public function getBoundMembers(): ?MemberCollection
-    {
-        return $this->boundMembers;
-    }
-
-    public function setBoundMembers(MemberCollection $boundMembers): void
-    {
-        $this->boundMembers = $boundMembers;
-    }
-
-    public function getWishlists(): ?MemberWishlistCollection
-    {
-        return $this->wishlists;
-    }
-
-    public function setWishlists(MemberWishlistCollection $wishlists): void
-    {
-        $this->wishlists = $wishlists;
     }
 
     public function getLandingPages(): ?LandingPageCollection

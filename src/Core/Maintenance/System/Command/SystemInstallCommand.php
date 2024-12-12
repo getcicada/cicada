@@ -42,6 +42,8 @@ class SystemInstallCommand extends Command
             ->addOption('drop-database', null, InputOption::VALUE_NONE, 'Drop existing database')
             ->addOption('basic-setup', null, InputOption::VALUE_NONE, 'Create frontend channel and admin user')
             ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force install even if install.lock exists')
+            ->addOption('frontend-name', null, InputOption::VALUE_REQUIRED, 'The name of your frontend')
+            ->addOption('frontend-locale', null, InputOption::VALUE_REQUIRED, 'Default language locale of the frontend')
             ->addOption('no-assign-theme', null, InputOption::VALUE_NONE, 'Do not assign the default theme')
             ->addOption('skip-assets-install', null, InputOption::VALUE_NONE, 'Skips installing of assets')
         ;
@@ -108,7 +110,7 @@ class SystemInstallCommand extends Command
                 'command' => 'user:create',
                 'username' => 'admin',
                 '--admin' => true,
-                '--password' => 'cicada',
+                '--password' => '123456',
             ];
 
             if ($application->has('channel:create:frontend')) {

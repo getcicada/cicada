@@ -244,40 +244,6 @@ class MediaEntity extends Entity
 
     protected ?string $path = null;
 
-    /**
-     * @var DocumentBaseConfigCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $documentBaseConfigs;
-
-    /**
-     * @var ShippingMethodCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $shippingMethods;
-
-    /**
-     * @var PaymentMethodCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $paymentMethods;
-
-    /**
-     * @var ProductConfiguratorSettingCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $productConfiguratorSettings;
-
-    /**
-     * @var OrderLineItemCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $orderLineItems;
 
     /**
      * @var CmsBlockCollection|null
@@ -300,28 +266,6 @@ class MediaEntity extends Entity
      */
     protected $cmsPages;
 
-    /**
-     * @var DocumentCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $documents;
-
-    /**
-     * @var AppPaymentMethodCollection|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
-    protected $appPaymentMethods;
-
-    /**
-     * @var EntityCollection<AppShippingMethodEntity>|null
-     */
-    protected ?EntityCollection $appShippingMethods = null;
-
-    protected ?ProductDownloadCollection $productDownloads = null;
-
-    protected ?OrderLineItemDownloadCollection $orderLineItemDownloads = null;
 
     /**
      * @experimental stableVersion:v6.7.0 feature:SPATIAL_BASES
@@ -465,26 +409,6 @@ class MediaEntity extends Entity
         $this->categories = $categories;
     }
 
-    public function getProductManufacturers(): ?ProductManufacturerCollection
-    {
-        return $this->productManufacturers;
-    }
-
-    public function setProductManufacturers(ProductManufacturerCollection $productManufacturers): void
-    {
-        $this->productManufacturers = $productManufacturers;
-    }
-
-    public function getProductMedia(): ?ProductMediaCollection
-    {
-        return $this->productMedia;
-    }
-
-    public function setProductMedia(ProductMediaCollection $productMedia): void
-    {
-        $this->productMedia = $productMedia;
-    }
-
     public function getAvatarUsers(): ?UserCollection
     {
         return $this->avatarUsers;
@@ -561,15 +485,6 @@ class MediaEntity extends Entity
         $this->mediaFolder = $mediaFolder;
     }
 
-    public function getPropertyGroupOptions(): ?PropertyGroupOptionCollection
-    {
-        return $this->propertyGroupOptions;
-    }
-
-    public function setPropertyGroupOptions(PropertyGroupOptionCollection $propertyGroupOptions): void
-    {
-        $this->propertyGroupOptions = $propertyGroupOptions;
-    }
 
     public function getMetaDataRaw(): ?string
     {
@@ -599,15 +514,6 @@ class MediaEntity extends Entity
         $this->mediaTypeRaw = $mediaTypeRaw;
     }
 
-    public function getMailTemplateMedia(): ?MailTemplateMediaCollection
-    {
-        return $this->mailTemplateMedia;
-    }
-
-    public function setMailTemplateMedia(MailTemplateMediaCollection $mailTemplateMedia): void
-    {
-        $this->mailTemplateMedia = $mailTemplateMedia;
-    }
 
     public function getTags(): ?TagCollection
     {
@@ -637,36 +543,6 @@ class MediaEntity extends Entity
         $this->thumbnailsRo = $thumbnailsRo;
     }
 
-    public function getDocumentBaseConfigs(): ?DocumentBaseConfigCollection
-    {
-        return $this->documentBaseConfigs;
-    }
-
-    public function setDocumentBaseConfigs(DocumentBaseConfigCollection $documentBaseConfigs): void
-    {
-        $this->documentBaseConfigs = $documentBaseConfigs;
-    }
-
-    public function getShippingMethods(): ?ShippingMethodCollection
-    {
-        return $this->shippingMethods;
-    }
-
-    public function setShippingMethods(ShippingMethodCollection $shippingMethods): void
-    {
-        $this->shippingMethods = $shippingMethods;
-    }
-
-    public function getPaymentMethods(): ?PaymentMethodCollection
-    {
-        return $this->paymentMethods;
-    }
-
-    public function setPaymentMethods(PaymentMethodCollection $paymentMethods): void
-    {
-        $this->paymentMethods = $paymentMethods;
-    }
-
     /**
      * @return array<string, mixed>
      */
@@ -677,26 +553,6 @@ class MediaEntity extends Entity
         $data['hasFile'] = $this->hasFile();
 
         return $data;
-    }
-
-    public function getProductConfiguratorSettings(): ?ProductConfiguratorSettingCollection
-    {
-        return $this->productConfiguratorSettings;
-    }
-
-    public function setProductConfiguratorSettings(ProductConfiguratorSettingCollection $productConfiguratorSettings): void
-    {
-        $this->productConfiguratorSettings = $productConfiguratorSettings;
-    }
-
-    public function getOrderLineItems(): ?OrderLineItemCollection
-    {
-        return $this->orderLineItems;
-    }
-
-    public function setOrderLineItems(OrderLineItemCollection $orderLineItems): void
-    {
-        $this->orderLineItems = $orderLineItems;
     }
 
     public function getCmsBlocks(): ?CmsBlockCollection
@@ -737,62 +593,6 @@ class MediaEntity extends Entity
     public function setPrivate(bool $private): void
     {
         $this->private = $private;
-    }
-
-    public function getDocuments(): ?DocumentCollection
-    {
-        return $this->documents;
-    }
-
-    public function setDocuments(DocumentCollection $documents): void
-    {
-        $this->documents = $documents;
-    }
-
-    public function getAppPaymentMethods(): ?AppPaymentMethodCollection
-    {
-        return $this->appPaymentMethods;
-    }
-
-    public function setAppPaymentMethods(AppPaymentMethodCollection $appPaymentMethods): void
-    {
-        $this->appPaymentMethods = $appPaymentMethods;
-    }
-
-    /**
-     * @return EntityCollection<AppShippingMethodEntity>|null
-     */
-    public function getAppShippingMethods(): ?EntityCollection
-    {
-        return $this->appShippingMethods;
-    }
-
-    /**
-     * @param EntityCollection<AppShippingMethodEntity> $appShippingMethods
-     */
-    public function setAppShippingMethods(EntityCollection $appShippingMethods): void
-    {
-        $this->appShippingMethods = $appShippingMethods;
-    }
-
-    public function getProductDownloads(): ?ProductDownloadCollection
-    {
-        return $this->productDownloads;
-    }
-
-    public function setProductDownloads(ProductDownloadCollection $productDownloads): void
-    {
-        $this->productDownloads = $productDownloads;
-    }
-
-    public function getOrderLineItemDownloads(): ?OrderLineItemDownloadCollection
-    {
-        return $this->orderLineItemDownloads;
-    }
-
-    public function setOrderLineItemDownloads(OrderLineItemDownloadCollection $orderLineItemDownloads): void
-    {
-        $this->orderLineItemDownloads = $orderLineItemDownloads;
     }
 
     public function hasPath(): bool

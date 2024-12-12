@@ -82,6 +82,7 @@ class Framework extends Bundle
         $loader->load('flag.xml');
         $loader->load('seo.xml');
         $loader->load('filesystem.xml');
+        $loader->load('hydrator.xml');
         if ($container->getParameter('kernel.environment') === 'test') {
             $loader->load('services_test.xml');
         }

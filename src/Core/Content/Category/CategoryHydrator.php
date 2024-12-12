@@ -59,9 +59,7 @@ class CategoryHydrator extends EntityHydrator
         if (isset($row[$root . '.cmsPageId'])) {
             $entity->cmsPageId = Uuid::fromBytesToHex($row[$root . '.cmsPageId']);
         }
-        if (isset($row[$root . '.productStreamId'])) {
-            $entity->productStreamId = Uuid::fromBytesToHex($row[$root . '.productStreamId']);
-        }
+
         if (isset($row[$root . '.createdAt'])) {
             $entity->createdAt = new \DateTimeImmutable($row[$root . '.createdAt']);
         }
@@ -69,19 +67,12 @@ class CategoryHydrator extends EntityHydrator
             $entity->updatedAt = new \DateTimeImmutable($row[$root . '.updatedAt']);
         }
 
-        if (isset($row[$root . '.customEntityTypeId'])) {
-            $entity->customEntityTypeId = Uuid::fromBytesToHex($row[$root . '.customEntityTypeId']);
-        }
-
         $entity->media = $this->manyToOne($row, $root, $definition->getField('media'), $context);
         $entity->cmsPage = $this->manyToOne($row, $root, $definition->getField('cmsPage'), $context);
-        $entity->productStream = $this->manyToOne($row, $root, $definition->getField('productStream'), $context);
 
         $this->translate($definition, $entity, $row, $root, $context, $definition->getTranslatedFields());
         $this->hydrateFields($definition, $entity, $root, $row, $context, $definition->getExtensionFields());
         $this->customFields($definition, $row, $root, $entity, $definition->getField('customFields'), $context);
-        $this->manyToMany($row, $root, $entity, $definition->getField('products'));
-        $this->manyToMany($row, $root, $entity, $definition->getField('nestedProducts'));
         $this->manyToMany($row, $root, $entity, $definition->getField('tags'));
 
         return $entity;

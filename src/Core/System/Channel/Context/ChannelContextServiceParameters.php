@@ -35,13 +35,6 @@ class ChannelContextServiceParameters extends Struct
      *
      * @deprecated tag:v6.7.0 - Will be natively typed
      */
-    protected $currencyId;
-
-    /**
-     * @var string|null
-     *
-     * @deprecated tag:v6.7.0 - Will be natively typed
-     */
     protected $domainId;
 
     /**
@@ -55,16 +48,13 @@ class ChannelContextServiceParameters extends Struct
         string $channelId,
         string $token,
         ?string $languageId = null,
-        ?string $currencyId = null,
         ?string $domainId = null,
         ?Context $originalContext = null,
-        protected ?string $memberId = null,
         protected ?string $imitatingUserId = null
     ) {
         $this->channelId = $channelId;
         $this->token = $token;
         $this->languageId = $languageId;
-        $this->currencyId = $currencyId;
         $this->domainId = $domainId;
         $this->originalContext = $originalContext;
     }
@@ -84,11 +74,6 @@ class ChannelContextServiceParameters extends Struct
         return $this->languageId;
     }
 
-    public function getCurrencyId(): ?string
-    {
-        return $this->currencyId;
-    }
-
     public function getDomainId(): ?string
     {
         return $this->domainId;
@@ -97,11 +82,6 @@ class ChannelContextServiceParameters extends Struct
     public function getOriginalContext(): ?Context
     {
         return $this->originalContext;
-    }
-
-    public function getMemberId(): ?string
-    {
-        return $this->memberId;
     }
 
     public function getImitatingUserId(): ?string

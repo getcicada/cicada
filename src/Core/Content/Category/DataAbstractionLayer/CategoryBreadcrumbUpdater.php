@@ -67,8 +67,6 @@ class CategoryBreadcrumbUpdater
         foreach ($languages as $language) {
             $context = new Context(
                 new SystemSource(),
-                [],
-                Defaults::CURRENCY,
                 array_filter([$language->getId(), $language->getParentId(), Defaults::LANGUAGE_SYSTEM]),
                 Defaults::LIVE_VERSION
             );

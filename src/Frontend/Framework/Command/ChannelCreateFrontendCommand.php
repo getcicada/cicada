@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @final
  */
 #[AsCommand(
-    name: 'sales-channel:create:frontend',
+    name: 'channel:create:frontend',
     description: 'Creates a new frontend sales channel',
 )]
 #[Package('frontend')]
@@ -62,8 +62,7 @@ class ChannelCreateFrontendCommand extends ChannelCreateCommand
                 [
                     'url' => $input->getOption('url'),
                     'languageId' => $input->getOption('languageId'),
-                    'snippetSetId' => $snippetSet,
-                    'currencyId' => $input->getOption('currencyId'),
+                    'snippetSetId' => $snippetSet
                 ],
             ],
             'navigationCategoryDepth' => 3,
@@ -88,7 +87,7 @@ class ChannelCreateFrontendCommand extends ChannelCreateCommand
 
     private function getSnippetSetId(?string $isoCode = null): ?string
     {
-        $isoCode = $isoCode ?: 'en-GB';
+        $isoCode = $isoCode ?: 'zh-CN';
         $isoCode = str_replace('_', '-', $isoCode);
         $criteria = (new Criteria())
             ->setLimit(1)

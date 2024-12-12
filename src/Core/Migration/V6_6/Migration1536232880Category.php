@@ -29,12 +29,11 @@ class Migration1536232880Category extends MigrationStep
               `parent_id` binary(16) DEFAULT NULL,
               `parent_version_id` binary(16) DEFAULT NULL,
               `media_id` binary(16) DEFAULT NULL,
-              `cms_page_id` binary(16) DEFAULT NULL,
-              `cms_page_version_id` binary(16) NOT NULL DEFAULT 0x0FA91CE3E96A4BC2BE4BD9CE752C3425,
               `assignment_type` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT "blog",
               `path` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
               `after_category_id` binary(16) DEFAULT NULL,
               `after_category_version_id` binary(16) DEFAULT NULL,
+              `display_nested_products` TINYINT(1) unsigned NOT NULL DEFAULT 1,
               `level` int unsigned NOT NULL DEFAULT "1",
               `active` tinyint(1) NOT NULL DEFAULT "1",
               `child_count` int unsigned NOT NULL DEFAULT "0",
@@ -48,9 +47,7 @@ class Migration1536232880Category extends MigrationStep
               KEY `fk.category.media_id` (`media_id`),
               KEY `fk.category.parent_id` (`parent_id`,`parent_version_id`),
               KEY `fk.category.after_category_id` (`after_category_id`,`after_category_version_id`),
-              KEY `fk.category.cms_page_id` (`cms_page_id`,`cms_page_version_id`),
               CONSTRAINT `fk.category.after_category_id` FOREIGN KEY (`after_category_id`, `after_category_version_id`) REFERENCES `category` (`id`, `version_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-              CONSTRAINT `fk.category.cms_page_id` FOREIGN KEY (`cms_page_id`, `cms_page_version_id`) REFERENCES `cms_page` (`id`, `version_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
               CONSTRAINT `fk.category.media_id` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
               CONSTRAINT `fk.category.parent_id` FOREIGN KEY (`parent_id`, `parent_version_id`) REFERENCES `category` (`id`, `version_id`) ON DELETE CASCADE ON UPDATE CASCADE
             ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

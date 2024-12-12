@@ -41,11 +41,9 @@ class Context extends Struct
 
     /**
      * @param array<string> $languageIdChain
-     * @param array<string> $ruleIds
      */
     public function __construct(
         protected ContextSource $source,
-        protected array $ruleIds = [],
         array $languageIdChain = [Defaults::LANGUAGE_SYSTEM],
         protected string $versionId = Defaults::LIVE_VERSION,
         protected bool $considerInheritance = false,

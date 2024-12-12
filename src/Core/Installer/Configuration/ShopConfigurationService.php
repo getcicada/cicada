@@ -247,7 +247,7 @@ SQL;
      */
     private function addAdditionalCurrenciesToChannel(array $shop, string $channelId, Connection $connection): void
     {
-        $idOfHeadlessChannel = $this->getIdOfChannelViaTypeId(Defaults::SALES_CHANNEL_TYPE_API, $connection);
+        $idOfHeadlessChannel = $this->getIdOfChannelViaTypeId(Defaults::CHANNEL_TYPE_API, $connection);
 
         // set the default currency of the headless sales channel
         $statement = $connection->prepare('UPDATE channel SET currency_id = ? WHERE id = ?');

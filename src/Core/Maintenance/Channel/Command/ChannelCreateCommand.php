@@ -7,6 +7,7 @@ use Cicada\Core\Framework\Adapter\Console\CicadaStyle;
 use Cicada\Core\Framework\DataAbstractionLayer\Write\WriteException;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\Framework\Uuid\Uuid;
+use Cicada\Core\Framework\Validation\WriteConstraintViolationException;
 use Cicada\Core\Maintenance\Channel\Service\ChannelCreator;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -37,12 +38,7 @@ class ChannelCreateCommand extends Command
             ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Id for the sales channel', Uuid::randomHex())
             ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Name for the application')
             ->addOption('languageId', null, InputOption::VALUE_REQUIRED, 'Default language', Defaults::LANGUAGE_SYSTEM)
-            ->addOption('currencyId', null, InputOption::VALUE_REQUIRED, 'Default currency', Defaults::CURRENCY)
-            ->addOption('paymentMethodId', null, InputOption::VALUE_REQUIRED, 'Default payment method')
-            ->addOption('shippingMethodId', null, InputOption::VALUE_REQUIRED, 'Default shipping method')
-            ->addOption('countryId', null, InputOption::VALUE_REQUIRED, 'Default country')
             ->addOption('typeId', null, InputOption::VALUE_OPTIONAL, 'Sales channel type id')
-            ->addOption('customerGroupId', null, InputOption::VALUE_REQUIRED, 'Default customer group')
             ->addOption('navigationCategoryId', null, InputOption::VALUE_REQUIRED, 'Default Navigation Category')
         ;
     }
@@ -60,21 +56,12 @@ class ChannelCreateCommand extends Command
                 $input->getOption('name') ?? 'Headless',
                 $typeId ?? $this->getTypeId(),
                 $input->getOption('languageId'),
-                $input->getOption('currencyId'),
-                $input->getOption('paymentMethodId'),
-                $input->getOption('shippingMethodId'),
-                $input->getOption('countryId'),
-                $input->getOption('customerGroupId'),
                 $input->getOption('navigationCategoryId'),
-                null,
-                null,
-                null,
-                null,
                 null,
                 $this->getChannelConfiguration($input, $output)
             );
 
-            $io->success('Sales channel has been created successfully.');
+            $io->success('Channel has been created successfully.');
         } catch (WriteException $exception) {
             $io->error('Something went wrong.');
 

@@ -99,7 +99,6 @@ class ChannelDefinition extends EntityDefinition
             (new TranslatedField('customFields'))->addFlags(new ApiAware()),
             (new TranslationsAssociationField(ChannelTranslationDefinition::class, 'channel_id'))->addFlags(new Required()),
             new ManyToManyAssociationField('languages', LanguageDefinition::class, ChannelLanguageDefinition::class, 'channel_id', 'language_id'),
-            new ManyToManyIdField('payment_method_ids', 'paymentMethodIds', 'paymentMethods'),
             new ManyToOneAssociationField('type', 'type_id', ChannelTypeDefinition::class, 'id', false),
             (new ManyToOneAssociationField('language', 'language_id', LanguageDefinition::class, 'id', false))->addFlags(new ApiAware()),
             new FkField('home_cms_page_id', 'homeCmsPageId', CmsPageDefinition::class),

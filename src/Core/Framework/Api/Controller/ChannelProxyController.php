@@ -222,18 +222,15 @@ class ChannelProxyController extends AbstractController
     {
         $contextToken = $this->getContextToken($request);
 
-        $channelContext = $this->contextService->get(
+        return $this->contextService->get(
             new ChannelContextServiceParameters(
                 $channelId,
                 $contextToken,
                 $request->headers->get(PlatformRequest::HEADER_LANGUAGE_ID),
-                $request->attributes->get(ChannelRequest::ATTRIBUTE_DOMAIN_CURRENCY_ID),
                 null,
                 $originalContext
             )
         );
-
-        return $channelContext;
     }
 
     private function updateMemberToContext(string $memberId, ChannelContext $context): void

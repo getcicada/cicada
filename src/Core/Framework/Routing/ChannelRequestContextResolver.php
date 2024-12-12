@@ -58,7 +58,6 @@ class ChannelRequestContextResolver implements RequestContextResolverInterface
             (string) $request->attributes->get(PlatformRequest::ATTRIBUTE_CHANNEL_ID),
             $usedContextToken,
             $request->headers->get(PlatformRequest::HEADER_LANGUAGE_ID),
-            $request->attributes->get(ChannelRequest::ATTRIBUTE_DOMAIN_CURRENCY_ID),
             $request->attributes->get(ChannelRequest::ATTRIBUTE_DOMAIN_ID),
             $request->attributes->get(PlatformRequest::ATTRIBUTE_CONTEXT_OBJECT),
             null,
@@ -96,10 +95,9 @@ class ChannelRequestContextResolver implements RequestContextResolverInterface
         );
 
         $language = $request->headers->get(PlatformRequest::HEADER_LANGUAGE_ID);
-        $currencyId = $request->attributes->get(ChannelRequest::ATTRIBUTE_DOMAIN_CURRENCY_ID);
 
         $context = $this->contextService
-            ->get(new ChannelContextServiceParameters($channelId, $contextToken, $language, $currencyId));
+            ->get(new ChannelContextServiceParameters($channelId, $contextToken, $language));
 
         $request->attributes->set(PlatformRequest::ATTRIBUTE_CONTEXT_OBJECT, $context->getContext());
         $request->attributes->set(PlatformRequest::ATTRIBUTE_CHANNEL_CONTEXT_OBJECT, $context);

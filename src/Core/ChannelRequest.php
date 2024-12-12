@@ -23,7 +23,6 @@ final class ChannelRequest
     public const ATTRIBUTE_DOMAIN_ID = 'sw-domain-id';
     public const ATTRIBUTE_DOMAIN_LOCALE = '_locale';
     public const ATTRIBUTE_DOMAIN_SNIPPET_SET_ID = 'sw-snippet-set-id';
-    public const ATTRIBUTE_DOMAIN_CURRENCY_ID = 'sw-currency-id';
 
     public const ATTRIBUTE_CANONICAL_LINK = 'sw-canonical-link';
 

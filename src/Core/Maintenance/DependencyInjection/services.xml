@@ -34,6 +34,7 @@
         <service id="Cicada\Core\Maintenance\Channel\Service\ChannelCreator" public="true">
             <argument type="service" id="Cicada\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
             <argument type="service" id="channel.repository"/>
+            <argument type="service" id="category.repository"/>
         </service>
         <service id="Cicada\Core\Maintenance\System\Command\SystemIsInstalledCommand">
             <argument type="service" id="Doctrine\DBAL\Connection"/>

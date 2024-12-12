@@ -8,7 +8,10 @@ use Cicada\Core\Framework\Context;
 use Cicada\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry;
 use Cicada\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Cicada\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Cicada\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+use Cicada\Core\Framework\DataAbstractionLayer\Search\Sorting\FieldSorting;
 use Cicada\Core\Framework\Log\Package;
+use Cicada\Core\Maintenance\MaintenanceException;
 
 /**
  * @internal
@@ -22,6 +25,8 @@ class ChannelCreator
     public function __construct(
         private readonly DefinitionInstanceRegistry $definitionRegistry,
         private readonly EntityRepository $channelRepository,
+        private readonly EntityRepository $categoryRepository
+
     ) {
     }
 
@@ -46,6 +51,8 @@ class ChannelCreator
             'name' => $name,
             'typeId' => $typeId,
             'accessKey' => AccessKeyHelper::generateAccessKey('channel'),
+            'navigationCategoryId' => $navigationCategoryId ?? $this->getRootCategoryId($context),
+
             // default selection
             'languageId' => $languageId,
             // available mappings
@@ -58,7 +65,20 @@ class ChannelCreator
 
         return $data['accessKey'];
     }
+    private function getRootCategoryId(Context $context): string
+    {
+        $criteria = new Criteria();
+        $criteria->setLimit(1);
+        $criteria->addFilter(new EqualsFilter('category.parentId', null));
+        $criteria->addSorting(new FieldSorting('category.createdAt', FieldSorting::ASCENDING));
 
+        $categoryId = $this->categoryRepository->searchIds($criteria, $context)->firstId();
+        if (!\is_string($categoryId)) {
+            throw MaintenanceException::couldNotGetId('root category');
+        }
+
+        return $categoryId;
+    }
     /**
      * @return array<array{id: string}>
      */

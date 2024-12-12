@@ -194,7 +194,6 @@ class NotFoundSubscriber implements EventSubscriberInterface, ResetInterface
                 $channelId,
                 Uuid::randomHex(),
                 $request->headers->get(PlatformRequest::HEADER_LANGUAGE_ID),
-                $request->attributes->get(ChannelRequest::ATTRIBUTE_DOMAIN_CURRENCY_ID),
                 $request->attributes->get(ChannelRequest::ATTRIBUTE_DOMAIN_ID)
             )
         );
