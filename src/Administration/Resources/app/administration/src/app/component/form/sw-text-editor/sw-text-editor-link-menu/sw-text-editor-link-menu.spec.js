@@ -44,10 +44,10 @@ const linkDataProvider = [
     },
     {
         buttonConfig: {
-            value: 'mailto:test@shopware.com',
+            value: 'mailto:test@cicada.com',
             type: 'email',
         },
-        value: 'test@shopware.com',
+        value: 'test@cicada.com',
         type: 'email',
         prefix: 'mailto:',
         selector: '.sw-field--email input',

@@ -14,7 +14,7 @@
         },
         "parent": "sw-catalogue",
         "position": "50",
-        "source": "https:\/\/shopware.apps\/module1"
+        "source": "https:\/\/cicada.apps\/module1"
       },
       {
         "name": "noPosition",
@@ -23,11 +23,11 @@
           "en-GB": "Module without position"
         },
         "parent": "sw.second.top.level",
-        "source": "https:\/\/shopware.apps\/"
+        "source": "https:\/\/cicada.apps\/"
       }
     ],
     "mainModule": {
-         "source": "https://shopware.apps/login"
+         "source": "https://cicada.apps/login"
     }
   },
   {
@@ -44,7 +44,7 @@
           "en-GB": "Default module"
         },
         "parent": "app-testAppB-structure",
-        "source": "https:\/\/shopware.apps\/",
+        "source": "https:\/\/cicada.apps\/",
         "position": 50
       },
       {

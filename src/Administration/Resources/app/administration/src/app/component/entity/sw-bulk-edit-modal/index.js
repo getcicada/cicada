@@ -99,7 +99,7 @@ Component.register('sw-bulk-edit-modal', {
             this.$emit('modal-close');
 
             if (this.itemCount > 0) {
-                Cicada.State.commit('shopwareApps/setSelectedIds', Object.keys(this.bulkEditSelection));
+                Cicada.State.commit('cicadaApps/setSelectedIds', Object.keys(this.bulkEditSelection));
                 this.$emit('edit-items');
             }
         },

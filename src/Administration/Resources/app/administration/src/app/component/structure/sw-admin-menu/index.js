@@ -271,7 +271,7 @@ The admin menu only supports up to three levels of nesting.`,
 
         refreshApps() {
             return this.appModulesService.fetchAppModules().then((modules) => {
-                return Cicada.State.commit('shopwareApps/setApps', modules);
+                return Cicada.State.commit('cicadaApps/setApps', modules);
             });
         },
 

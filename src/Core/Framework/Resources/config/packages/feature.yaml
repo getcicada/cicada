@@ -10,7 +10,7 @@ cicada:
         major: true
         toggleable: false
       - name: v6.7.0.0
-        default: true
+        default: false
         major: true
         toggleable: false
       - name: DISABLE_VUE_COMPAT

@@ -3,12 +3,12 @@ const { Application } = Cicada;
 /**
  * @package admin
  *
- * @module core/service/shopware-updates-listener
+ * @module core/service/cicada-updates-listener
  */
 
 /**
  *
- * @memberOf module:core/service/shopware-updates-listener
+ * @memberOf module:core/service/cicada-updates-listener
  * @method addCicadaUpdatesListener
  * @param loginService
  * @param serviceContainer
@@ -36,18 +36,18 @@ export default function addCicadaUpdatesListener(loginService, serviceContainer)
     function createUpdatesAvailableNotification(response) {
         const cancelLabel = getApplicationRootReference().$tc('global.default.cancel');
         const updateLabel = getApplicationRootReference().$tc(
-            'global.notification-center.shopware-updates-listener.updateNow',
+            'global.notification-center.cicada-updates-listener.updateNow',
         );
 
         const notification = {
             title: getApplicationRootReference().$t(
-                'global.notification-center.shopware-updates-listener.updatesAvailableTitle',
+                'global.notification-center.cicada-updates-listener.updatesAvailableTitle',
                 {
                     version: response.version,
                 },
             ),
             message: getApplicationRootReference().$t(
-                'global.notification-center.shopware-updates-listener.updatesAvailableMessage',
+                'global.notification-center.cicada-updates-listener.updatesAvailableMessage',
                 {
                     version: response.version,
                 },
@@ -58,7 +58,7 @@ export default function addCicadaUpdatesListener(loginService, serviceContainer)
             actions: [
                 {
                     label: updateLabel,
-                    route: { name: 'sw.settings.shopware.updates.wizard' },
+                    route: { name: 'sw.settings.cicada.updates.wizard' },
                 },
                 {
                     label: cancelLabel,

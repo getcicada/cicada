@@ -143,7 +143,7 @@ describe('core/factory/http.factory.js', () => {
         };
 
         mock.onGet('/test').reply((request) => {
-            expect(request.headers['shopware-admin-active-route']).toBe('sw-dashboard-index');
+            expect(request.headers['cicada-admin-active-route']).toBe('sw-dashboard-index');
 
             return [
                 200,

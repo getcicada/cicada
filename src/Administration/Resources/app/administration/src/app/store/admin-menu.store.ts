@@ -69,10 +69,10 @@ const adminMenuStore = Cicada.Store.register({
         appModuleNavigation() {
             const menuService = Cicada.Service('menuService') as MenuService;
             // eslint-disable-next-line no-warning-comments
-            // TODO: Change this when `shopwareApps` store is converted to Pinia
-            const shopwareAppsState = Cicada.State.get('shopwareApps') as { apps: AppModuleDefinition[] };
+            // TODO: Change this when `cicadaApps` store is converted to Pinia
+            const cicadaAppsState = Cicada.State.get('cicadaApps') as { apps: AppModuleDefinition[] };
 
-            return menuService?.getNavigationFromApps(shopwareAppsState.apps);
+            return menuService?.getNavigationFromApps(cicadaAppsState.apps);
         },
     },
 });

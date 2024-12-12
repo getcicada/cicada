@@ -27,8 +27,8 @@ const linkDataProvider = [
         placeholder: 'sw-text-editor-toolbar.link.placeholderPhoneNumber',
     },
     {
-        URL: 'mailto:test@shopware.com',
-        value: 'test@shopware.com',
+        URL: 'mailto:test@cicada.com',
+        value: 'test@cicada.com',
         type: 'email',
         prefix: 'mailto:',
         selector: '.sw-email-field',

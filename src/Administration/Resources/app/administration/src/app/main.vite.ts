@@ -32,7 +32,7 @@ import LicenseViolationsService from 'src/app/service/license-violations.service
 import ShortcutService from 'src/app/service/shortcut.service';
 import LocaleToLanguageService from 'src/app/service/locale-to-language.service';
 import addPluginUpdatesListener from 'src/core/service/plugin-updates-listener.service';
-import addCicadaUpdatesListener from 'src/core/service/shopware-updates-listener.service';
+import addCicadaUpdatesListener from 'src/core/service/cicada-updates-listener.service';
 import addCustomerGroupRegistrationListener from 'src/core/service/customer-group-registration-listener.service';
 import LocaleHelperService from 'src/app/service/locale-helper.service';
 import FilterService from 'src/app/service/filter.service';
@@ -215,7 +215,7 @@ Application.addServiceProvider('feature', () => {
         const appCmsBlocksService = container.appCmsBlocks;
         return new AppCmsService(appCmsBlocksService, adapter);
     })
-    .addServiceProvider('shopwareDiscountCampaignService', () => {
+    .addServiceProvider('cicadaDiscountCampaignService', () => {
         return new CicadaDiscountCampaignService();
     })
     .addServiceProvider('searchRankingService', () => {

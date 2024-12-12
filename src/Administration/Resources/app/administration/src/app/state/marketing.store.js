@@ -64,7 +64,7 @@ export default {
 
     getters: {
         getActiveCampaign(state) {
-            if (Cicada.Service('shopwareDiscountCampaignService')?.isDiscountCampaignActive(state.campaign)) {
+            if (Cicada.Service('cicadaDiscountCampaignService')?.isDiscountCampaignActive(state.campaign)) {
                 return state.campaign;
             }
 

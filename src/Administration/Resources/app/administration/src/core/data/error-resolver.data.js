@@ -32,14 +32,14 @@ export default class ErrorResolver {
 
     handleDeleteError(errors) {
         errors.forEach(({ error, entityName, id }) => {
-            const shopwareError = new this.CicadaError(error);
+            const cicadaError = new this.CicadaError(error);
             Cicada.State.dispatch('error/addSystemError', {
-                error: shopwareError,
+                error: cicadaError,
             });
 
             Cicada.State.dispatch('error/addApiError', {
                 expression: `${entityName}.${id}`,
-                error: shopwareError,
+                error: cicadaError,
             });
         });
     }

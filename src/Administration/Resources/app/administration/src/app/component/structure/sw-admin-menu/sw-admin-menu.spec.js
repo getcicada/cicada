@@ -139,7 +139,7 @@ describe('src/app/component/structure/sw-admin-menu', () => {
         Cicada.State.get('settingsItems').settingsGroups.shop = [];
         Cicada.State.get('settingsItems').settingsGroups.system = [];
 
-        Cicada.State.commit('shopwareApps/setApps', []);
+        Cicada.State.commit('cicadaApps/setApps', []);
 
         wrapper = await createWrapper();
         await flushPromises();
@@ -360,7 +360,7 @@ describe('src/app/component/structure/sw-admin-menu', () => {
 
     describe('app menu entries', () => {
         it('renders apps under there parent navigation entry', async () => {
-            Cicada.State.commit('shopwareApps/setApps', testApps);
+            Cicada.State.commit('cicadaApps/setApps', testApps);
             await flushPromises();
 
             const topLevelEntries = wrapper.findAll('.navigation-list-item__level-1');
@@ -380,7 +380,7 @@ describe('src/app/component/structure/sw-admin-menu', () => {
         });
 
         it('renders app structure elements and their children', async () => {
-            Cicada.State.commit('shopwareApps/setApps', testApps);
+            Cicada.State.commit('cicadaApps/setApps', testApps);
             await flushPromises();
 
             const topLevelEntries = wrapper.findAll('.navigation-list-item__level-1');

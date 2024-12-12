@@ -12,7 +12,7 @@ export interface CicadaAppsState {
     selectedIds: string[];
 }
 
-const shopwareApps: Module<CicadaAppsState, VuexRootState> = {
+const cicadaApps: Module<CicadaAppsState, VuexRootState> = {
     namespaced: true,
 
     state() {
@@ -34,4 +34,4 @@ const shopwareApps: Module<CicadaAppsState, VuexRootState> = {
 };
 
 // eslint-disable-next-line sw-deprecation-rules/private-feature-declarations
-export default shopwareApps;
+export default cicadaApps;

@@ -190,9 +190,9 @@ describe('components/form/sw-url-field', () => {
     });
 
     it('properly detects SSL', async () => {
-        const SSL_URL = 'https://shopware.com';
-        const NON_SSL_URL = 'http://shopware.com';
-        const URL_WITHOUT_PROTOCOL = 'shopware.com';
+        const SSL_URL = 'https://cicada.com';
+        const NON_SSL_URL = 'http://cicada.com';
+        const URL_WITHOUT_PROTOCOL = 'cicada.com';
 
         const wrapper = await createWrapper();
 
@@ -202,10 +202,10 @@ describe('components/form/sw-url-field', () => {
     });
 
     it('removes any protocol', async () => {
-        const HTTP_URL = 'http://shopware.com';
-        const HTTPS_URL = 'https://shopware.com';
-        const FILE_URL = 'file://shopware.com';
-        const EXPECTED_URL = 'shopware.com';
+        const HTTP_URL = 'http://cicada.com';
+        const HTTPS_URL = 'https://cicada.com';
+        const FILE_URL = 'file://cicada.com';
+        const EXPECTED_URL = 'cicada.com';
 
         const wrapper = await createWrapper();
         await flushPromises();
@@ -221,8 +221,8 @@ describe('components/form/sw-url-field', () => {
     });
 
     it('allows empty values', async () => {
-        const INITIAL_URL = 'https://shopware.com';
-        const URL_WITHOUT_PROTOCOL = 'shopware.com';
+        const INITIAL_URL = 'https://cicada.com';
+        const URL_WITHOUT_PROTOCOL = 'cicada.com';
         const EXPECTED_URL = '';
 
         const wrapper = await createWrapper();
@@ -244,7 +244,7 @@ describe('components/form/sw-url-field', () => {
     it('should evaluate ssl protocol correctly at start', async () => {
         const wrapper = await createWrapper({
             props: {
-                value: 'http://shopware.com',
+                value: 'http://cicada.com',
             },
         });
         await flushPromises();
@@ -255,19 +255,19 @@ describe('components/form/sw-url-field', () => {
     it('should update empty values', async () => {
         const wrapper = await createWrapper({
             props: {
-                value: 'https://shopware.com',
+                value: 'https://cicada.com',
             },
         });
         await flushPromises();
 
         const input = wrapper.find('input');
-        expect(input.element.value).toBe('shopware.com');
+        expect(input.element.value).toBe('cicada.com');
 
         await input.setValue('');
         await input.trigger('blur');
         expect(wrapper.vm.currentUrlValue).toBe('');
         expect(wrapper.emitted('update:value')).toStrictEqual([
-            ['https://shopware.com'],
+            ['https://cicada.com'],
             [''],
         ]);
     });

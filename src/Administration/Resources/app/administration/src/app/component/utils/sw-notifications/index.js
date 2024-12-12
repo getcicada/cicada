@@ -78,7 +78,7 @@ Component.register('sw-notifications', {
         },
 
         handleAction(action, notification) {
-            // Allow external links for example to the shopware account or store
+            // Allow external links for example to the cicada account or store
             if (Cicada.Utils.string.isUrl(action.route)) {
                 window.open(action.route);
                 return;

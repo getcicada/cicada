@@ -5,7 +5,7 @@ jest.useFakeTimers('modern');
 
 describe('src/app/state/marketing.store', () => {
     beforeAll(() => {
-        Cicada.Service().register('shopwareDiscountCampaignService', () => {
+        Cicada.Service().register('cicadaDiscountCampaignService', () => {
             return new CicadaDiscountCampaignService();
         });
     });

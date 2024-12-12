@@ -25,9 +25,9 @@ describe('src/app/filter/asset.filter.ts', () => {
     });
 
     it('should use the assetsPath from the Context API', () => {
-        Cicada.Context.api.assetsPath = 'https://www.shopware.com/';
+        Cicada.Context.api.assetsPath = 'https://www.cicada.com/';
         const result = assetFilter('/test.jpg');
 
-        expect(result).toBe('https://www.shopware.com/test.jpg');
+        expect(result).toBe('https://www.cicada.com/test.jpg');
     });
 });

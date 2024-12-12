@@ -30,7 +30,7 @@ describe('src/app/init-pre/state.init.ts', () => {
         expect(Cicada.State.get('context')).toBeDefined();
         expect(Cicada.State.get('error')).toBeDefined();
         expect(Cicada.State.get('settingsItems')).toBeDefined();
-        expect(Cicada.State.get('shopwareApps')).toBeDefined();
+        expect(Cicada.State.get('cicadaApps')).toBeDefined();
         expect(Cicada.State.get('extensionEntryRoutes')).toBeDefined();
         expect(Cicada.State.get('marketing')).toBeDefined();
         expect(Cicada.State.get('extensionComponentSections')).toBeDefined();

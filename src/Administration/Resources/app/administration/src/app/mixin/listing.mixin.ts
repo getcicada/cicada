@@ -145,7 +145,7 @@ export default Cicada.Mixin.register(
             },
 
             selection() {
-                Cicada.State.commit('shopwareApps/setSelectedIds', Object.keys(this.selection));
+                Cicada.State.commit('cicadaApps/setSelectedIds', Object.keys(this.selection));
             },
 
             term(newValue) {

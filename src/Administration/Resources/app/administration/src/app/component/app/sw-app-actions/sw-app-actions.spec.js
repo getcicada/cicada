@@ -104,7 +104,7 @@ describe('sw-app-actions', () => {
     });
 
     beforeEach(async () => {
-        Cicada.State.commit('shopwareApps/setSelectedIds', [
+        Cicada.State.commit('cicadaApps/setSelectedIds', [
             Cicada.Utils.createId(),
         ]);
     });
@@ -215,12 +215,12 @@ describe('sw-app-actions', () => {
         expect(runActionsMock.mock.calls).toHaveLength(2);
         expect(runActionsMock.mock.calls[0]).toEqual([
             actionButtonData[0].id,
-            { ids: Cicada.State.get('shopwareApps').selectedIds },
+            { ids: Cicada.State.get('cicadaApps').selectedIds },
         ]);
 
         expect(runActionsMock.mock.calls[1]).toEqual([
             actionButtonData[1].id,
-            { ids: Cicada.State.get('shopwareApps').selectedIds },
+            { ids: Cicada.State.get('cicadaApps').selectedIds },
         ]);
     });
 

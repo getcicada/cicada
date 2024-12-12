@@ -22,7 +22,7 @@ class FirstRunWizardApiService extends ApiService {
     }
 
     /**
-     * Check shopwareId
+     * Check cicadaId
      *
      * @param {Object} [payload = {}]
      * @param {Object} [additionalParams = {}]

@@ -28,7 +28,7 @@ describe('src/app/service/entity-validation.service.js', () => {
         );
     });
 
-    it('should create a required shopware error with the right error code and source pointer', () => {
+    it('should create a required cicada error with the right error code and source pointer', () => {
         const fieldPointer = '/0/name';
         const error = EntityValidationService.createRequiredError(fieldPointer);
 

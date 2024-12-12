@@ -94,7 +94,7 @@ describe('core/service/login.service.js', () => {
             refresh_token: 'rEfReSh_ToKeN',
         });
 
-        const auth = await loginService.loginByUsername('admin', 'shopware');
+        const auth = await loginService.loginByUsername('admin', 'cicada');
 
         expect(auth).toEqual({
             expiry: Date.now() + 600 * 1000,
@@ -121,7 +121,7 @@ describe('core/service/login.service.js', () => {
             refresh_token: 'rEfReSh_ToKeN',
         });
 
-        await loginService.loginByUsername('admin', 'shopware');
+        await loginService.loginByUsername('admin', 'cicada');
 
         clientMock.onPost('/oauth/token').reply(200, {
             token_type: 'Bearer',
@@ -144,7 +144,7 @@ describe('core/service/login.service.js', () => {
             refresh_token: 'rEfReSh_ToKeN',
         });
 
-        await loginService.loginByUsername('admin', 'shopware');
+        await loginService.loginByUsername('admin', 'cicada');
 
         clientMock.onPost('/oauth/token').reply(200, {
             token_type: 'Bearer',
@@ -173,7 +173,7 @@ describe('core/service/login.service.js', () => {
             refresh_token: 'rEfReSh_ToKeN',
         });
 
-        await loginService.loginByUsername('admin', 'shopware');
+        await loginService.loginByUsername('admin', 'cicada');
 
         const authLoggedIn = loginService.getBearerAuthentication();
         expect(authLoggedIn).toEqual({
@@ -206,7 +206,7 @@ describe('core/service/login.service.js', () => {
             refresh_token: 'rEfReSh_ToKeN',
         });
 
-        await loginService.loginByUsername('admin', 'shopware');
+        await loginService.loginByUsername('admin', 'cicada');
 
         expect(loginService.isLoggedIn()).toBeTruthy();
     });
@@ -221,7 +221,7 @@ describe('core/service/login.service.js', () => {
             refresh_token: 'rEfReSh_ToKeN',
         });
 
-        await loginService.loginByUsername('admin', 'shopware');
+        await loginService.loginByUsername('admin', 'cicada');
 
         expect(loginService.getToken()).toBe('aCcEsS_tOkEn');
     });
@@ -252,7 +252,7 @@ describe('core/service/login.service.js', () => {
 
         expect(tokenChangedListener).not.toHaveBeenCalled();
 
-        await loginService.loginByUsername('admin', 'shopware');
+        await loginService.loginByUsername('admin', 'cicada');
 
         expect(tokenChangedListener).toHaveBeenCalled();
 
@@ -332,7 +332,7 @@ describe('core/service/login.service.js', () => {
             refresh_token: 'rEfReSh_ToKeN_first',
         });
 
-        await loginService.loginByUsername('admin', 'shopware');
+        await loginService.loginByUsername('admin', 'cicada');
 
         expect(clientMock.history.post[0]).toBeDefined();
         expect(clientMock.history.post[1]).toBeUndefined();
@@ -354,7 +354,7 @@ describe('core/service/login.service.js', () => {
             refresh_token: 'rEfReSh_ToKeN',
         });
 
-        await loginService.loginByUsername('admin', 'shopware');
+        await loginService.loginByUsername('admin', 'cicada');
 
         clientMock.onPost('/oauth/token').reply(200, {
             token_type: 'Bearer',
@@ -393,7 +393,7 @@ describe('core/service/login.service.js', () => {
             refresh_token: 'rEfReSh_ToKeN_first',
         });
 
-        await loginService.loginByUsername('admin', 'shopware');
+        await loginService.loginByUsername('admin', 'cicada');
 
         expect(clientMock.history.post[0]).toBeDefined();
         expect(clientMock.history.post[1]).toBeUndefined();

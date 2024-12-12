@@ -59,7 +59,7 @@ describe('src/app/init/context.init.ts', () => {
         });
     });
 
-    it('should handle shopware version', async () => {
+    it('should handle cicada version', async () => {
         await getCicadaVersion().then((version) => {
             expect(version).toEqual(expect.any(String));
         });

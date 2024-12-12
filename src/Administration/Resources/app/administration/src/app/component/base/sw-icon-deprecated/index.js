@@ -158,7 +158,7 @@ Component.register('sw-icon-deprecated', {
          * This throws an exception if the import is not found. Catch this in an override to add custom icons;
          * or override and do custom logic based on the `variant`, `iconName` or `iconFullName`.
          *
-         * Loosely based on an idea from https://shopwarecommunity.slack.com/archives/C04P3QBG8S2/p1683098652206189
+         * Loosely based on an idea from https://cicadacommunity.slack.com/archives/C04P3QBG8S2/p1683098652206189
          *
          * @return Promise for possible override fallback logic
          */

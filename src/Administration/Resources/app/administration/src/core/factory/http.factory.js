@@ -379,7 +379,7 @@ function tracingInterceptor(client) {
             const currentRoute = Cicada?.Application?.view?.router?.history?.current?.name;
 
             if (currentRoute) {
-                config.headers['shopware-admin-active-route'] = currentRoute;
+                config.headers['cicada-admin-active-route'] = currentRoute;
             }
 
             return config;

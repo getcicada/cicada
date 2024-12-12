@@ -263,7 +263,21 @@
     "format:admin:fix": "@npm:admin run format:fix",
     "eslint:frontend": "@npm:frontend run lint:js",
     "eslint:frontend:fix": "@npm:frontend run lint:js:fix",
-    "framework:schema:dump": "@php bin/console -e prod framework:schema -s 'entity-schema' src/Administration/Resources/app/administration/test/_mocks_/entity-schema.json"
+    "framework:schema:dump": "@php bin/console -e prod framework:schema -s 'entity-schema' src/Administration/Resources/app/administration/test/_mocks_/entity-schema.json",
+    "watch:admin": [
+      "Composer\\Config::disableProcessTimeout",
+      "@php bin/console feature:dump",
+      "@php bin/console bundle:dump",
+      "@admin:generate-entity-schema-types",
+      "@npm:admin run dev"
+    ],
+    "watch:frontend": [
+      "Composer\\Config::disableProcessTimeout",
+      "@php bin/console bundle:dump",
+      "@php bin/console feature:dump",
+      "@php bin/console theme:dump",
+      "@npm:frontend run hot-proxy"
+    ]
   },
   "autoload": {
     "psr-4": {

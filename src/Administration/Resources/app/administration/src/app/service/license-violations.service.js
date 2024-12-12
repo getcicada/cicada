@@ -167,7 +167,7 @@ export default function createLicenseViolationsService(storeService) {
     }
 
     async function forceDeletePlugin(extension) {
-        const shopwareExtensionService = Cicada.Service('shopwareExtensionService');
+        const cicadaExtensionService = Cicada.Service('cicadaExtensionService');
         const cacheService = Cicada.Service('cacheApiService');
 
         try {
@@ -175,15 +175,15 @@ export default function createLicenseViolationsService(storeService) {
             const isInstalled = extension.installedAt !== null;
 
             if (isActive) {
-                await shopwareExtensionService.deactivateExtension(extension.name, extension.type);
+                await cicadaExtensionService.deactivateExtension(extension.name, extension.type);
                 await cacheService.clear();
             }
 
             if (isInstalled) {
-                await shopwareExtensionService.uninstallExtension(extension.name, extension.type);
+                await cicadaExtensionService.uninstallExtension(extension.name, extension.type);
             }
 
-            await shopwareExtensionService.removeExtension(extension.name, extension.type);
+            await cicadaExtensionService.removeExtension(extension.name, extension.type);
 
             return true;
         } catch (error) {

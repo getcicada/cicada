@@ -84,7 +84,7 @@ Component.register('sw-app-actions', {
         },
 
         params() {
-            return Cicada.State.get('shopwareApps').selectedIds;
+            return Cicada.State.get('cicadaApps').selectedIds;
         },
 
         userConfigRepository() {

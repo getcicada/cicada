@@ -15,21 +15,21 @@ const DEFAULT_CURRENCY = 'b7d2554b0ce847cd82f3ac9bd1c0dfca';
 
 function mockContext() {
     return {
-        apiPath: 'http://shopware.local/api',
-        apiResourcePath: 'http://shopware.local/api/v2',
-        assetsPath: 'http://shopware.local/bundles/',
+        apiPath: 'http://cicada.local/api',
+        apiResourcePath: 'http://cicada.local/api/v2',
+        assetsPath: 'http://cicada.local/bundles/',
         basePath: '',
-        host: 'shopware.local',
+        host: 'cicada.local',
         inheritance: false,
-        installationPath: 'http://shopware.local',
+        installationPath: 'http://cicada.local',
         languageId: '2fbb5fe2e29a4d70aa5854ce7ce3e20b',
         currencyId: '7924299acc9641bfb8237a06e5aa0fa4',
         liveVersionId: '0fa91ce3e96a4bc2be4bd9ce752c3425',
         pathInfo: '/admin',
         port: 80,
         scheme: 'http',
-        schemeAndHttpHost: 'http://shopware.local',
-        uri: 'http://shopware.local/admin',
+        schemeAndHttpHost: 'http://cicada.local',
+        uri: 'http://cicada.local/admin',
         authToken: {
             access: 'BwP_OL47uNW6k8iQzChh6SxE31XaleO_l4unyLNmFco',
         },

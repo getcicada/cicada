@@ -74,7 +74,7 @@ Cicada.Component.register('sw-iframe-renderer', {
                             'sw-version',
                             'sw-context-language',
                             'sw-user-language',
-                            'shopware-shop-signature',
+                            'cicada-shop-signature',
                         ].includes(key);
                     }),
                 );
