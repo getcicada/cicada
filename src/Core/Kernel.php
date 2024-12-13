@@ -154,38 +154,12 @@ class Kernel extends HttpKernel
         }
 
         try {
+            // initialize plugins before bootin
             $this->pluginLoader->initializePlugins($this->getProjectDir());
         } catch (DBALException $e) {
             if (\defined('\STDERR')) {
                 fwrite(\STDERR, 'Warning: Failed to load plugins. Message: ' . $e->getMessage() . \PHP_EOL);
             }
-        }
-
-        // init bundles
-        $this->initializeBundles();
-
-        // init container
-        $this->initializeContainer();
-
-        // Taken from \Symfony\Component\HttpKernel\Kernel::preBoot()
-        /** @var ContainerInterface $container */
-        $container = $this->container;
-
-        if ($container->hasParameter('kernel.trusted_hosts') && $trustedHosts = $container->getParameter('kernel.trusted_hosts')) {
-            Request::setTrustedHosts($trustedHosts);
-        }
-
-        if ($container->hasParameter('kernel.trusted_proxies') && $container->hasParameter('kernel.trusted_headers') && $trustedProxies = $container->getParameter('kernel.trusted_proxies')) {
-            \assert(\is_string($trustedProxies) || \is_array($trustedProxies));
-            $trustedHeaderSet = $container->getParameter('kernel.trusted_headers');
-            \assert(\is_int($trustedHeaderSet));
-            /** @phpstan-ignore argument.type (verifying bitmask of $trustedHeaderSet is no easy task) */
-            Request::setTrustedProxies(\is_array($trustedProxies) ? $trustedProxies : array_map('trim', explode(',', $trustedProxies)), $trustedHeaderSet);
-        }
-
-        foreach ($this->getBundles() as $bundle) {
-            $bundle->setContainer($this->container);
-            $bundle->boot();
         }
 
         $this->initializeDatabaseConnectionVariables();
@@ -199,7 +173,7 @@ class Kernel extends HttpKernel
             return self::$connection;
         }
 
-        self::$connection = \Cicada\Core\Framework\Adapter\Database\MySQLFactory::create();
+        self::$connection = MySQLFactory::create();
 
         return self::$connection;
     }
