@@ -39,6 +39,10 @@ export const login = () => {
             eager: true,
         });
 
+        // import login dependencies
+        const dependencies = Object.values(context);
+
+        context = import.meta.glob('./sw-inactivity-login/index!(*.spec).{j,t}s', { eager: true });
         dependencies.push(...Object.values(context));
 
         return dependencies;
@@ -49,6 +53,7 @@ export const login = () => {
     // import login dependencies
     const dependencies = context.keys().map((key) => context(key).default);
 
+    context = require.context('./sw-inactivity-login', true, /\.\/index\.[jt]s/);
     dependencies.push(context.keys().map((key) => context(key).default));
 
     return dependencies;

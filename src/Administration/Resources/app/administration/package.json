@@ -4,10 +4,6 @@
   "description": "Cicada administration",
   "main": "./src/core/cicada.js",
   "types": "./types/index.d.ts",
-  "browserslist": [
-    "last 2 versions",
-    "safari >= 7"
-  ],
   "scripts": {
     "build": "ADMIN_VITE=$(jq -r '.ADMIN_VITE' \"$PROJECT_ROOT/var/config_js_features.json\") && [ \"$ADMIN_VITE\" = true ] && npm run vite build || mode=production node --no-deprecation ./node_modules/webpack/bin/webpack.js --config webpack.config.js",
     "code-mods": "node code-mods.js",
@@ -52,6 +48,10 @@
     "webpack": "mode=development webpack-dev-server",
     "webpack:inspect": "mode=development node --inspect ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
   },
+  "browserslist": [
+    "last 2 versions",
+    "safari >= 7"
+  ],
   "dependencies": {
     "@cicada-ag/meteor-admin-sdk": "5.6.1",
     "@cicada-ag/meteor-component-library": "4.0.0",

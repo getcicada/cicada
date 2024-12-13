@@ -16,6 +16,7 @@ import type { AxiosInstance } from 'axios';
 import type { CicadaClass } from 'src/core/cicada';
 import type RepositoryFactory from 'src/core/data/repository-factory.data';
 import type ExtensionSdkService from 'src/core/service/api/extension-sdk.service';
+import type CartStoreService from 'src/core/service/api/cart-store-api.api.service';
 import type CustomSnippetApiService from 'src/core/service/api/custom-snippet.api.service';
 import type LocaleFactory from 'src/core/factory/locale.factory';
 import type UserActivityService from 'src/app/service/user-activity.service';
@@ -44,6 +45,8 @@ import type StoreApiService from './core/service/api/store.api.service';
 import type CicadaDiscountCampaignService from './app/service/discount-campaign.service';
 import type AppModulesService from './core/service/api/app-modules.service';
 import type { CicadaExtensionsState } from './module/sw-extension/store/extensions.store';
+import type { PaymentOverviewCardState } from './module/sw-settings-payment/state/overview-cards.store';
+import type { SwOrderState } from './module/sw-order/state/order.store';
 import type AclService from './app/service/acl.service';
 import type { CicadaAppsState } from './app/state/cicada-apps.store';
 import type EntityValidationService from './app/service/entity-validation.service';
@@ -63,6 +66,7 @@ import type RuleConditionService from './app/service/rule-condition.service';
 import type SystemConfigApiService from './core/service/api/system-config.api.service';
 import type { UsageDataApiService } from './core/service/api/usage-data.api.service';
 import type ConfigApiService from './core/service/api/config.api.service';
+import type ImportExportService from './module/sw-import-export/service/importExport.service';
 import type WorkerNotificationFactory from './core/factory/worker-notification.factory';
 import type NotificationMixin from './app/mixin/notification.mixin';
 import type ValidationMixin from './app/mixin/validation.mixin';
@@ -74,6 +78,7 @@ import type RemoveApiErrorMixin from './app/mixin/remove-api-error.mixin';
 import type PositionMixin from './app/mixin/position.mixin';
 import type PlaceholderMixin from './app/mixin/placeholder.mixin';
 import type ListingMixin from './app/mixin/listing.mixin';
+import type CartNotificationMixin from './module/sw-order/mixin/cart-notification.mixin';
 import type SwExtensionErrorMixin from './module/sw-extension/mixin/sw-extension-error.mixin';
 import type CmsElementMixin from './module/sw-cms/mixin/sw-cms-element.mixin';
 import type CmsStateMixin from './module/sw-cms/mixin/sw-cms-state.mixin';
@@ -173,7 +178,7 @@ declare global {
     /**
      * Define global container for the bottle.js containers
      */
-        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface ServiceContainer extends SubContainer<'service'> {
         loginService: LoginService;
         feature: FeatureService;
@@ -200,6 +205,8 @@ declare global {
         localeHelper: $TSFixMe;
         filterService: $TSFixMe;
         mediaDefaultFolderService: $TSFixMe;
+        appAclService: $TSFixMe;
+        appCmsService: $TSFixMe;
         entityHydrator: $TSFixMe;
         entityFactory: $TSFixMe;
         userService: UserApiService;
@@ -218,12 +225,14 @@ declare global {
         recentlySearchService: $TSFixMe;
         extensionSdkService: ExtensionSdkService;
         appModulesService: AppModulesService;
+        cartStoreService: CartStoreService;
         customSnippetApiService: CustomSnippetApiService;
         userActivityService: UserActivityService;
         filterFactory: FilterFactoryData;
         systemConfigApiService: SystemConfigApiService;
         usageDataService: UsageDataApiService;
         configService: ConfigApiService;
+        importExport: ImportExportService;
         fileValidationService: FileValidationService;
     }
 
@@ -238,6 +247,7 @@ declare global {
         position: typeof PositionMixin;
         placeholder: typeof PlaceholderMixin;
         listing: typeof ListingMixin;
+        'cart-notification': typeof CartNotificationMixin;
         'sw-extension-error': typeof SwExtensionErrorMixin;
         'cms-element': typeof CmsElementMixin;
         'cms-state': typeof CmsStateMixin;
@@ -306,12 +316,14 @@ declare global {
      * Define global state for the Vuex store
      * @deprecated tag:v6.8.0 - Will be removed use PiniaRootState instead
      */
-        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface VuexRootState {
         context: ContextState;
         extensions: ExtensionsState;
         tabs: TabsState;
         extensionComponentSections: ExtensionComponentSectionsState;
+        paymentOverviewCardState: PaymentOverviewCardState;
+        swOrder: SwOrderState;
         session: {
             currentUser: EntitySchema.Entities['user'];
             userPending: boolean;
@@ -436,9 +448,9 @@ declare module 'vue' {
             [key: string]:
                 | string
                 | {
-                active: boolean | ((this: App) => boolean);
-                method: string;
-            };
+                      active: boolean | ((this: App) => boolean);
+                      method: string;
+                  };
         };
 
         extensionApiDevtoolInformation?: {

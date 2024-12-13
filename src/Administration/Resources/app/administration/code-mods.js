@@ -22,7 +22,7 @@ const optionDefinitions = [
     },
     {
         description: 'Cicada root. Default ../../../../../',
-        name: 'shopware-root',
+        name: 'cicada-root',
         alias: 'r',
         type: String,
     },
@@ -51,16 +51,16 @@ const optionDefinitions = [
 const sections = [
     {
         header: 'Cicada Admin code mods',
-        content: 'Run shopware code mods in your plugin!',
+        content: 'Run cicada code mods in your plugin!',
     },
     {
         header: 'Synopsis',
         content: [
-            '{bold Run as npm script inside <shopwareRoot>/src/Administration/Resources/app/administration}:',
+            '{bold Run as npm script inside <cicadaRoot>/src/Administration/Resources/app/administration}:',
             '$ npm run code-mods -- [{bold --fix}] {bold --plugin-name} {underline SwagExamplePlugin}',
             '$ npm run code-mods -- {bold --help}',
             '',
-            '{bold Run as composer script inside <shopwareRoot>}:',
+            '{bold Run as composer script inside <cicadaRoot>}:',
             '$ composer run admin:code-mods -- [{bold --fix}] {bold --plugin-name} {underline SwagExamplePlugin}',
             '$ composer run admin:code-mods -- {bold --help}',
         ],
@@ -88,8 +88,8 @@ const sections = [
     }
 
     let customPluginsPath = path.resolve('../../../../../custom/plugins');
-    if (options['shopware-root']) {
-        let optionsRoot = options['shopware-root'];
+    if (options['cicada-root']) {
+        let optionsRoot = options['cicada-root'];
 
         // remove trailing slash
         optionsRoot = optionsRoot.replace(/\/$/, '');

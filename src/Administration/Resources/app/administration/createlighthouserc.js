@@ -53,7 +53,7 @@ async function login(browser) {
     const loginButton = await page.$('button.sw-login__login-action');
 
     await usernameInput.type('admin');
-    await passwordInput.type('shopware');
+    await passwordInput.type('cicada');
     await loginButton.click();
 
     await page.waitForNavigation();

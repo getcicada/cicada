@@ -40,12 +40,12 @@ index ef8cd0e..e63eb51 100644
      if (callee.type === 'MemberExpression') {
        const calleeObject = skipTSAsExpression(callee.object)
  
-+      /* Shopware Patch Part 1 */
++      /* Cicada Patch Part 1 */
 +      if (calleeObject.type === 'MemberExpression') {
 +          if (
 +              calleeObject &&
 +              calleeObject.object &&
-+              calleeObject.object.name === 'Shopware' &&
++              calleeObject.object.name === 'Cicada' &&
 +              calleeObject.property &&
 +              calleeObject.property.name === 'Component'
 +          ) {
@@ -57,7 +57,7 @@ index ef8cd0e..e63eb51 100644
 +              return maybeFullVueComponentForVue2 ? propName : null;
 +          }
 +      }
-+      /* end of Shopware Patch Part 1 */
++      /* end of Cicada Patch Part 1 */
 +
        if (calleeObject.type === 'Identifier') {
          const propName = getStaticPropertyName(callee)
@@ -66,7 +66,7 @@ index ef8cd0e..e63eb51 100644
              : null
          }
  
-+        /* Shopware Patch Part 2 */
++        /* Cicada Patch Part 2 */
 +        if (calleeObject.name === 'Component') {
 +            const maybeFullVueComponentForVue2 =
 +                propName &&
@@ -74,7 +74,7 @@ index ef8cd0e..e63eb51 100644
 +                isObjectArgument(parent)
 +            return maybeFullVueComponentForVue2 ? propName : null;
 +        }
-+        /* end of Shopware Patch Part 2 */
++        /* end of Cicada Patch Part 2 */
 +
          // for Vue.js 3.x
          // app.component('xxx', {}) || app.mixin({})

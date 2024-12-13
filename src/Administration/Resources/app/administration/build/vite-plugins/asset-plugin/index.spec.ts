@@ -16,7 +16,7 @@ describe('build/vite-plugins/asset-plugin', () => {
 
         // Identify plugin by name
         expect(plugin).toHaveProperty('name');
-        expect(plugin.name).toBe('shopware-serve-multiple-static');
+        expect(plugin.name).toBe('cicada-serve-multiple-static');
 
         // Check if the plugin has a configureServer method
         expect(plugin).toHaveProperty('configureServer');
@@ -62,7 +62,7 @@ describe('build/vite-plugins/asset-plugin', () => {
 
         // Identify plugin by name
         expect(plugin).toHaveProperty('name');
-        expect(plugin.name).toBe('shopware-copy-static-assets');
+        expect(plugin.name).toBe('cicada-copy-static-assets');
 
         // Check if the plugin has a closeBundle method
         expect(plugin).toHaveProperty('closeBundle');

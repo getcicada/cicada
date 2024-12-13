@@ -96,7 +96,6 @@
 
         <service id="Cicada\Administration\Snippet\SnippetFinder">
             <argument type="service" id="kernel" />
-            <argument type="service" id="Doctrine\DBAL\Connection"/>
         </service>
 
         <service id="Cicada\Administration\Snippet\CachedSnippetFinder" decorates="Cicada\Administration\Snippet\SnippetFinder">

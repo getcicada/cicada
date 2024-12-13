@@ -10,7 +10,7 @@ const isHTMLFile = /\.html$/;
 const isHTMLRawFile = /\.html\?raw$/;
 
 export default () => ({
-    name: 'shopware-twigjs-plugin',
+    name: 'cicada-twigjs-plugin',
 
     async transform(fileContent, id) {
         if (id.endsWith('src/Administration/Resources/app/administration/index.html')) {

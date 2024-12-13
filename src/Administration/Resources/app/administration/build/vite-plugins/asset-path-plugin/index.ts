@@ -5,7 +5,7 @@
  */
 export default function assetPathPlugin() {
     return {
-        name: 'shopware-asset-path-plugin',
+        name: 'cicada-asset-path-plugin',
         renderChunk(code) {
             // The code is minified afterward, so we can look for the none minified version directly
             // This code could change with every minor version of vite but there is no way around this.

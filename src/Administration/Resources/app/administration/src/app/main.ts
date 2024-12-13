@@ -192,6 +192,18 @@ Application.addServiceProvider('feature', () => {
     .addServiceProvider('mediaDefaultFolderService', () => {
         return MediaDefaultFolderService();
     })
+    .addServiceProvider('appAclService', () => {
+        return new AppAclService({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            privileges: Cicada.Service('privileges'),
+            appRepository: Cicada.Service('repositoryFactory').create('app'),
+        });
+    })
+    .addServiceProvider('appCmsService', (container: $TSFixMe) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
+        const appCmsBlocksService = container.appCmsBlocks;
+        return new AppCmsService(appCmsBlocksService, adapter);
+    })
     .addServiceProvider('cicadaDiscountCampaignService', () => {
         return new CicadaDiscountCampaignService();
     })

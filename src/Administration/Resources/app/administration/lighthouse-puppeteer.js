@@ -23,7 +23,7 @@ async function login(browser) {
 
     if (usernameInput) {
         await usernameInput.type('admin');
-        await passwordInput.type('shopware');
+        await passwordInput.type('cicada');
         await loginButton.click();
     }
 
