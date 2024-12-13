@@ -45,8 +45,6 @@ import type StoreApiService from './core/service/api/store.api.service';
 import type CicadaDiscountCampaignService from './app/service/discount-campaign.service';
 import type AppModulesService from './core/service/api/app-modules.service';
 import type { CicadaExtensionsState } from './module/sw-extension/store/extensions.store';
-import type { PaymentOverviewCardState } from './module/sw-settings-payment/state/overview-cards.store';
-import type { SwOrderState } from './module/sw-order/state/order.store';
 import type AclService from './app/service/acl.service';
 import type { CicadaAppsState } from './app/state/cicada-apps.store';
 import type EntityValidationService from './app/service/entity-validation.service';
