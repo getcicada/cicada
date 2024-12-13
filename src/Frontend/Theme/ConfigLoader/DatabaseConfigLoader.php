@@ -13,7 +13,6 @@ use Cicada\Core\Framework\Uuid\Uuid;
 use Cicada\Frontend\Theme\Exception\ThemeException;
 use Cicada\Frontend\Theme\FrontendPluginConfiguration\FrontendPluginConfiguration;
 use Cicada\Frontend\Theme\FrontendPluginRegistry;
-use Cicada\Frontend\Theme\FrontendPluginRegistryInterface;
 use Cicada\Frontend\Theme\ThemeCollection;
 use Cicada\Frontend\Theme\ThemeConfigField;
 use Cicada\Frontend\Theme\ThemeEntity;
@@ -29,7 +28,7 @@ class DatabaseConfigLoader extends AbstractConfigLoader
      */
     public function __construct(
         private readonly EntityRepository $themeRepository,
-        private readonly FrontendPluginRegistryInterface $extensionRegistry,
+        private readonly FrontendPluginRegistry $extensionRegistry,
         private readonly EntityRepository $mediaRepository,
         private readonly string $baseTheme = FrontendPluginRegistry::BASE_THEME_NAME
     ) {

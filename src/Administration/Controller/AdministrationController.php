@@ -47,6 +47,7 @@ class AdministrationController extends AbstractController
         private readonly DefinitionInstanceRegistry $definitionInstanceRegistry,
         ParameterBagInterface $params,
         private readonly FilesystemOperator $fileSystem,
+        private readonly string $refreshTokenTtl = 'P1W',
     ) {
 
     }
@@ -55,7 +56,8 @@ class AdministrationController extends AbstractController
     public function index(Request $request, Context $context): Response
     {
         $template = $this->finder->find('@Administration/administration/index.html.twig');
-        
+        $refreshTokenInterval = new \DateInterval($this->refreshTokenTtl);
+        $refreshTokenTtl = $refreshTokenInterval->s + $refreshTokenInterval->i * 60 + $refreshTokenInterval->h * 3600 + $refreshTokenInterval->d * 86400;
         return $this->render($template, [
             'features' => Feature::getAll(),
             'systemLanguageId' => Defaults::LANGUAGE_SYSTEM,
@@ -65,6 +67,7 @@ class AdministrationController extends AbstractController
             'firstRunWizard' => $this->firstRunWizardService->frwShouldRun(),
             'apiVersion' => $this->getLatestApiVersion(),
             'cspNonce' => $request->attributes->get(PlatformRequest::ATTRIBUTE_CSP_NONCE),
+            'refreshTokenTtl' => $refreshTokenTtl * 1000,
         ]);
     }
 

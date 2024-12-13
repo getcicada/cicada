@@ -15,9 +15,13 @@ class AdministrationControllerTest extends TestCase
     use AdminFunctionalTestBehaviour;
 
     private Connection $connection;
+
+    private string $refreshTokenTtl;
+
     protected function setup(): void
     {
         $this->connection = static::getContainer()->get(Connection::class);
+        $this->refreshTokenTtl = 'P1W';
     }
 
     public function testSnippetRoute(): void

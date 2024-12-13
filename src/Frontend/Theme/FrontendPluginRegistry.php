@@ -8,9 +8,11 @@ use Cicada\Frontend\Theme\FrontendPluginConfiguration\AbstractFrontendPluginConf
 use Cicada\Frontend\Theme\FrontendPluginConfiguration\FrontendPluginConfigurationCollection;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\Service\ResetInterface;
-
+/**
+ * @internal
+ */
 #[Package('frontend')]
-class FrontendPluginRegistry implements FrontendPluginRegistryInterface, ResetInterface
+class FrontendPluginRegistry implements ResetInterface
 {
     final public const BASE_THEME_NAME = 'Frontend';
 

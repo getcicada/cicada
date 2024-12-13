@@ -12,7 +12,7 @@ class ThemeInheritanceBuilder implements ThemeInheritanceBuilderInterface
     /**
      * @internal
      */
-    public function __construct(private readonly FrontendPluginRegistryInterface $themeRegistry)
+    public function __construct(private readonly FrontendPluginRegistry $themeRegistry)
     {
     }
 
