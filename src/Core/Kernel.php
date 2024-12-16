@@ -324,7 +324,7 @@ class Kernel extends HttpKernel
 
     protected function initializeDatabaseConnectionVariables(): void
     {
-        $cicadaSkipConnectionVariables = EnvironmentHelper::getVariable('SHOPWARE_SKIP_CONNECTION_VARIABLES', false);
+        $cicadaSkipConnectionVariables = EnvironmentHelper::getVariable('CICADA_SKIP_CONNECTION_VARIABLES', false);
 
         if ($cicadaSkipConnectionVariables) {
             return;
@@ -339,7 +339,7 @@ class Kernel extends HttpKernel
             /**
              * @deprecated tag:v6.7.0 - remove if clause and enforce timezone setting
              */
-            $timeZoneSupportEnabled = (bool) EnvironmentHelper::getVariable('SHOPWARE_DBAL_TIMEZONE_SUPPORT_ENABLED', Feature::isActive('v6.7.0.0'));
+            $timeZoneSupportEnabled = (bool) EnvironmentHelper::getVariable('CICADA_DBAL_TIMEZONE_SUPPORT_ENABLED', Feature::isActive('v6.7.0.0'));
             if ($timeZoneSupportEnabled) {
                 $connectionVariables[] = 'SET @@session.time_zone = "+00:00"';
             }

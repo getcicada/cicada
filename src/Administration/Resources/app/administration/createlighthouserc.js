@@ -16,7 +16,7 @@ const LH_PORT = process.env.LH_PORT ?? 8041;
 const LH_URL = process.env.LH_URL;
 const LH_TOKEN = process.env.LH_ADMIN_TOKEN;
 
-console.log('cache:', process.env.SHOPWARE_HTTP_CACHE_ENABLED);
+console.log('cache:', process.env.CICADA_HTTP_CACHE_ENABLED);
 
 let testCases;
 

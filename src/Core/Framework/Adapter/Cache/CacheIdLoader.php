@@ -25,7 +25,7 @@ class CacheIdLoader
 
     public function load(): string
     {
-        $cacheId = EnvironmentHelper::getVariable('SHOPWARE_CACHE_ID');
+        $cacheId = EnvironmentHelper::getVariable('CICADA_CACHE_ID');
         if ($cacheId) {
             return (string) $cacheId;
         }

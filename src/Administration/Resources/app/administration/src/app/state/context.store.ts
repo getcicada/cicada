@@ -42,7 +42,6 @@ interface ContextState {
         firstRunWizard: null | boolean;
         systemCurrencyISOCode: null | string;
         systemCurrencyId: null | string;
-        disableExtensions: boolean;
     };
     api: {
         apiPath: null | string;
@@ -84,7 +83,6 @@ const ContextStore: Module<ContextState, VuexRootState> = {
             firstRunWizard: null,
             systemCurrencyId: null,
             systemCurrencyISOCode: null,
-            disableExtensions: false,
         },
         api: {
             apiPath: null,

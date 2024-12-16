@@ -5,6 +5,7 @@ namespace Cicada\Frontend\Theme;
 use Cicada\Core\Framework\Bundle;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Frontend\Theme\FrontendPluginConfiguration\AbstractFrontendPluginConfigurationFactory;
+use Cicada\Frontend\Theme\FrontendPluginConfiguration\FrontendPluginConfiguration;
 use Cicada\Frontend\Theme\FrontendPluginConfiguration\FrontendPluginConfigurationCollection;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\Service\ResetInterface;
@@ -27,6 +28,11 @@ class FrontendPluginRegistry implements ResetInterface
     ) {
     }
 
+    /**
+     * This method loads and parses all theme.json files from all plugins and apps
+     * especially for apps where the source can be stored remotely this is expensive and therefore
+     * should be used when really all configurations are needed, e.g. during theme compile
+     */
     public function getConfigurations(): FrontendPluginConfigurationCollection
     {
         if ($this->pluginConfigurations) {
@@ -38,6 +44,18 @@ class FrontendPluginRegistry implements ResetInterface
         $this->addPluginConfigs();
 
         return $this->pluginConfigurations ?? new FrontendPluginConfigurationCollection();
+    }
+
+    /**
+     * used to fetch one particular config without loading and parsing all else
+     */
+    public function getByTechnicalName(string $technicalName): ?FrontendPluginConfiguration
+    {
+        if ($this->pluginConfigurations) {
+            return $this->pluginConfigurations->getByTechnicalName($technicalName);
+        }
+
+        return $this->getPluginConfigByTechnicalName($technicalName);
     }
 
     public function reset(): void
@@ -56,5 +74,22 @@ class FrontendPluginRegistry implements ResetInterface
 
             $this->pluginConfigurations === null ?: $this->pluginConfigurations->add($config);
         }
+    }
+
+    private function getPluginConfigByTechnicalName(string $technicalName): ?FrontendPluginConfiguration
+    {
+        foreach ($this->kernel->getBundles() as $bundle) {
+            if (!$bundle instanceof Bundle) {
+                continue;
+            }
+
+            if ($bundle->getName() !== $technicalName) {
+                continue;
+            }
+
+            return $this->pluginConfigurationFactory->createFromBundle($bundle);
+        }
+
+        return null;
     }
 }

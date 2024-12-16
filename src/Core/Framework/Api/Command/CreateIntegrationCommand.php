@@ -48,8 +48,8 @@ class CreateIntegrationCommand extends Command
             ],
         ], Context::createCLIContext());
 
-        $output->writeln('SHOPWARE_ACCESS_KEY_ID=' . $id);
-        $output->writeln('SHOPWARE_SECRET_ACCESS_KEY=' . $secret);
+        $output->writeln('CICADA_ACCESS_KEY_ID=' . $id);
+        $output->writeln('CICADA_SECRET_ACCESS_KEY=' . $secret);
 
         return self::SUCCESS;
     }

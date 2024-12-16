@@ -93,7 +93,6 @@ Cicada.Module.register('sw-extension', {
     version: '1.0.0',
     targetVersion: '1.0.0',
     entity: 'extension',
-    display: !Cicada.Context.app.disableExtensions,
 
     searchMatcher: (regex, labelType, manifest) => {
         const match = labelType.toLowerCase().match(regex);

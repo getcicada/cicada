@@ -24,8 +24,8 @@ class StoreRequestOptionsProvider extends AbstractStoreRequestOptionsProvider
     final public const CONFIG_KEY_STORE_LICENSE_DOMAIN = 'core.store.licenseHost';
     final public const CONFIG_KEY_STORE_SHOP_SECRET = 'core.store.shopSecret';
 
-    private const SHOPWARE_PLATFORM_TOKEN_HEADER = 'X-Cicada-Platform-Token';
-    private const SHOPWARE_SHOP_SECRET_HEADER = 'X-Cicada-Shop-Secret';
+    private const CICADA_PLATFORM_TOKEN_HEADER = 'X-Cicada-Platform-Token';
+    private const CICADA_SHOP_SECRET_HEADER = 'X-Cicada-Shop-Secret';
 
     public function __construct(
         private readonly EntityRepository $userRepository,
@@ -41,8 +41,8 @@ class StoreRequestOptionsProvider extends AbstractStoreRequestOptionsProvider
     public function getAuthenticationHeader(Context $context): array
     {
         return array_filter([
-            self::SHOPWARE_PLATFORM_TOKEN_HEADER => $this->getUserStoreToken($context),
-            self::SHOPWARE_SHOP_SECRET_HEADER => $this->systemConfigService->getString(self::CONFIG_KEY_STORE_SHOP_SECRET),
+            self::CICADA_PLATFORM_TOKEN_HEADER => $this->getUserStoreToken($context),
+            self::CICADA_SHOP_SECRET_HEADER => $this->systemConfigService->getString(self::CONFIG_KEY_STORE_SHOP_SECRET),
         ]);
     }
 

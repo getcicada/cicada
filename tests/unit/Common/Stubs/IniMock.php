@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Shopware\Tests\Unit\Common\Stubs;
+namespace Cicada\Tests\Unit\Common\Stubs;
 
 /**
  * @internal

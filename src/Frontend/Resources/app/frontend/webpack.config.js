@@ -52,7 +52,7 @@ try {
     hostName = undefined;
 }
 
-const useExtensionTwigWatch = process.env.SHOPWARE_STOREFRONT_SKIP_EXTENSION_TWIG_WATCH !== '1';
+const useExtensionTwigWatch = process.env.CICADA_STOREFRONT_SKIP_EXTENSION_TWIG_WATCH !== '1';
 let watchFilePaths = isHotMode ? [`${themeFiles.basePath}/**/*.twig`] : [];
 
 const pluginEntries = (() => {

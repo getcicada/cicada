@@ -672,13 +672,6 @@ export default class Repository<EntityName extends keyof EntitySchema.Entities> 
             };
         }
 
-        if (context.currencyId) {
-            headers = {
-                'sw-currency-id': context.currencyId,
-                ...headers,
-            };
-        }
-
         if (context.versionId) {
             headers = {
                 'sw-version-id': context.versionId,

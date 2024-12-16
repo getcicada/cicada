@@ -19,7 +19,7 @@ class PluginException extends HttpException
     public const CANNOT_CREATE_TEMPORARY_DIRECTORY = 'FRAMEWORK__PLUGIN_CANNOT_CREATE_TEMPORARY_DIRECTORY';
     public const PROJECT_DIR_IS_NOT_A_STRING = 'FRAMEWORK__PROJECT_DIR_IS_NOT_A_STRING';
 
-    public const CANNOT_DELETE_SHOPWARE_MIGRATIONS = 'FRAMEWORK__PLUGIN_CANNOT_DELETE_SHOPWARE_MIGRATIONS';
+    public const CANNOT_DELETE_CICADA_MIGRATIONS = 'FRAMEWORK__PLUGIN_CANNOT_DELETE_CICADA_MIGRATIONS';
 
     /**
      * @internal will be removed once store extensions are installed over composer
@@ -105,7 +105,7 @@ class PluginException extends HttpException
     {
         return new self(
             Response::HTTP_INTERNAL_SERVER_ERROR,
-            self::CANNOT_DELETE_SHOPWARE_MIGRATIONS,
+            self::CANNOT_DELETE_CICADA_MIGRATIONS,
             'Deleting Cicada migrations is not allowed'
         );
     }

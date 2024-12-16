@@ -38,6 +38,12 @@ Component.register('sw-base-field', {
             required: false,
             default: null,
         },
+        
+        hint: {
+            type: String,
+            required: false,
+            default: null,
+        },
 
         isInvalid: {
             type: Boolean,

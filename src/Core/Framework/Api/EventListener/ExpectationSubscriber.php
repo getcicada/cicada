@@ -22,11 +22,10 @@ use Symfony\Component\HttpKernel\KernelEvents;
 #[Package('core')]
 class ExpectationSubscriber implements EventSubscriberInterface
 {
-    private const SHOPWARE_CORE_PACKAGES = [
+    private const CICADA_CORE_PACKAGES = [
         'cicada/platform',
         'cicada/core',
         'cicada/administration',
-        'cicada/elasticsearch',
         'cicada/frontend',
     ];
 
@@ -107,7 +106,7 @@ class ExpectationSubscriber implements EventSubscriberInterface
                     continue;
                 }
 
-                if (\in_array($name, self::SHOPWARE_CORE_PACKAGES, true)) {
+                if (\in_array($name, self::CICADA_CORE_PACKAGES, true)) {
                     $installedVersion = $this->cicadaVersion;
                 }
             }

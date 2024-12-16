@@ -37,7 +37,7 @@ Component.extend('sw-multi-tag-ip-select', 'sw-multi-tag-select', {
             type: String,
             required: false,
             default() {
-                return 'SHOPWARE_INVALID_IP';
+                return 'CICADA_INVALID_IP';
             },
         },
     },

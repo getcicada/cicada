@@ -20,8 +20,6 @@ import EntityMappingService from 'src/core/service/entity-mapping.service';
 import JsonApiParser from 'src/core/service/jsonapi-parser.service';
 import ValidationService from 'src/core/service/validation.service';
 import TimezoneService from 'src/core/service/timezone.service';
-import RuleConditionService from 'src/app/service/rule-condition.service';
-import ProductStreamConditionService from 'src/app/service/product-stream-condition.service';
 import StateStyleService from 'src/app/service/state-style.service';
 import CustomFieldService from 'src/app/service/custom-field.service';
 import ExtensionHelperService from 'src/app/service/extension-helper.service';
@@ -32,20 +30,16 @@ import ShortcutService from 'src/app/service/shortcut.service';
 import LocaleToLanguageService from 'src/app/service/locale-to-language.service';
 import addPluginUpdatesListener from 'src/core/service/plugin-updates-listener.service';
 import addCicadaUpdatesListener from 'src/core/service/cicada-updates-listener.service';
-import addCustomerGroupRegistrationListener from 'src/core/service/customer-group-registration-listener.service';
 import LocaleHelperService from 'src/app/service/locale-helper.service';
 import FilterService from 'src/app/service/filter.service';
 import AppCmsService from 'src/app/service/app-cms.service';
 import MediaDefaultFolderService from 'src/app/service/media-default-folder.service';
-import AppAclService from 'src/app/service/app-acl.service';
 import CicadaDiscountCampaignService from 'src/app/service/discount-campaign.service';
 import SearchRankingService from 'src/app/service/search-ranking.service';
 import SearchPreferencesService from 'src/app/service/search-preferences.service';
 import RecentlySearchService from 'src/app/service/recently-search.service';
 import UserActivityService from 'src/app/service/user-activity.service';
 import EntityValidationService from 'src/app/service/entity-validation.service';
-import CustomEntityDefinitionService from 'src/app/service/custom-entity-definition.service';
-import addUsageDataConsentListener from 'src/core/service/usage-data-consent-listener.service';
 import FileValidationService from 'src/app/service/file-validation.service';
 
 /** Import Feature */
@@ -96,9 +90,6 @@ Object.entries(allInitializers).forEach(
 Application.addServiceProvider('feature', () => {
     return new FeatureService(Feature);
 })
-    .addServiceProvider('customEntityDefinitionService', () => {
-        return new CustomEntityDefinitionService();
-    })
     .addServiceProvider('menuService', () => {
         return new MenuService(factoryContainer.module);
     })
@@ -116,8 +107,6 @@ Application.addServiceProvider('feature', () => {
 
         addPluginUpdatesListener(loginService, serviceContainer);
         addCicadaUpdatesListener(loginService, serviceContainer);
-        addCustomerGroupRegistrationListener(loginService);
-        addUsageDataConsentListener(loginService, serviceContainer);
 
         return loginService;
     })
@@ -137,12 +126,6 @@ Application.addServiceProvider('feature', () => {
     })
     .addServiceProvider('timezoneService', () => {
         return new TimezoneService();
-    })
-    .addServiceProvider('ruleConditionDataProviderService', () => {
-        return new RuleConditionService();
-    })
-    .addServiceProvider('productStreamConditionService', () => {
-        return new ProductStreamConditionService();
     })
     .addServiceProvider('customFieldDataProviderService', () => {
         return new CustomFieldService();
@@ -192,13 +175,6 @@ Application.addServiceProvider('feature', () => {
     })
     .addServiceProvider('mediaDefaultFolderService', () => {
         return MediaDefaultFolderService();
-    })
-    .addServiceProvider('appAclService', () => {
-        return new AppAclService({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            privileges: Cicada.Service('privileges'),
-            appRepository: Cicada.Service('repositoryFactory').create('app'),
-        });
     })
     .addServiceProvider('appCmsService', (container: $TSFixMe) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment

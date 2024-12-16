@@ -86,10 +86,6 @@ class EntityTemplateLoader implements LoaderInterface, EventSubscriberInterface,
      */
     private function findDatabaseTemplate(string $name): ?array
     {
-        if (EnvironmentHelper::getVariable('DISABLE_EXTENSIONS', false)) {
-            return null;
-        }
-
         /*
          * In dev env app templates are directly loaded over the filesystem
          * @see TwigLoaderConfigCompilerPass::addAppTemplatePaths()

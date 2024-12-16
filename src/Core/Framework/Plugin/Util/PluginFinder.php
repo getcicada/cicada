@@ -18,7 +18,7 @@ use Symfony\Component\Finder\Finder;
 class PluginFinder
 {
     final public const COMPOSER_TYPE = 'cicada-platform-plugin';
-    private const SHOPWARE_PLUGIN_CLASS_EXTRA_IDENTIFIER = 'cicada-plugin-class';
+    private const CICADA_PLUGIN_CLASS_EXTRA_IDENTIFIER = 'cicada-plugin-class';
 
     /**
      * @internal
@@ -95,14 +95,14 @@ class PluginFinder
 
     private function isPluginComposerValid(CompletePackageInterface $package): bool
     {
-        return isset($package->getExtra()[self::SHOPWARE_PLUGIN_CLASS_EXTRA_IDENTIFIER])
-            && $package->getExtra()[self::SHOPWARE_PLUGIN_CLASS_EXTRA_IDENTIFIER] !== ''
+        return isset($package->getExtra()[self::CICADA_PLUGIN_CLASS_EXTRA_IDENTIFIER])
+            && $package->getExtra()[self::CICADA_PLUGIN_CLASS_EXTRA_IDENTIFIER] !== ''
             && !empty($package->getExtra()['label']);
     }
 
     private function getPluginNameFromPackage(CompletePackageInterface $pluginPackage): string
     {
-        return $pluginPackage->getExtra()[self::SHOPWARE_PLUGIN_CLASS_EXTRA_IDENTIFIER];
+        return $pluginPackage->getExtra()[self::CICADA_PLUGIN_CLASS_EXTRA_IDENTIFIER];
     }
 
     /**
@@ -178,7 +178,7 @@ class PluginFinder
                 \sprintf(
                     'Plugin composer.json has invalid "type" (must be "%s"), or invalid "extra/%s" value, or missing extra.label property',
                     self::COMPOSER_TYPE,
-                    self::SHOPWARE_PLUGIN_CLASS_EXTRA_IDENTIFIER
+                    self::CICADA_PLUGIN_CLASS_EXTRA_IDENTIFIER
                 ),
             ]
         ));

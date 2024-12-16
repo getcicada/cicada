@@ -62,7 +62,6 @@ class AdministrationController extends AbstractController
             'features' => Feature::getAll(),
             'systemLanguageId' => Defaults::LANGUAGE_SYSTEM,
             'defaultLanguageIds' => [Defaults::LANGUAGE_SYSTEM],
-            'disableExtensions' => EnvironmentHelper::getVariable('DISABLE_EXTENSIONS', false),
             'liveVersionId' => Defaults::LIVE_VERSION,
             'firstRunWizard' => $this->firstRunWizardService->frwShouldRun(),
             'apiVersion' => $this->getLatestApiVersion(),

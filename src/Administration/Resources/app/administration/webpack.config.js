@@ -46,9 +46,9 @@ console.log(chalk.yellow('# Compiling with Webpack configuration'));
 
 const isDev = process.env.mode === 'development';
 const isProd = process.env.mode !== 'development';
-const buildOnlyExtensions = process.env.SHOPWARE_ADMIN_BUILD_ONLY_EXTENSIONS === '1';
+const buildOnlyExtensions = process.env.CICADA_ADMIN_BUILD_ONLY_EXTENSIONS === '1';
 const openBrowserForWatch = process.env.DISABLE_DEVSERVER_OPEN !== '1';
-const useSourceMap = isDev && process.env.SHOPWARE_ADMIN_SKIP_SOURCEMAP_GENERATION !== '1';
+const useSourceMap = isDev && process.env.CICADA_ADMIN_SKIP_SOURCEMAP_GENERATION !== '1';
 const disableAdminImportsFromPlugins = process.env.DISABLE_ADMIN_IMPORTS_FROM_PLUGINS === '1' || process.env.DISABLE_ADMIN_IMPORTS_FROM_PLUGINS === 'true';
 
 if (isDev) {

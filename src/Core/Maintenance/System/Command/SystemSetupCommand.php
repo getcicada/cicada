@@ -54,8 +54,8 @@ class SystemSetupCommand extends Command
             ->addOption('app-url', null, InputOption::VALUE_OPTIONAL, 'Application URL', $this->getDefault('APP_URL', 'http://localhost'))
             ->addOption('blue-green', null, InputOption::VALUE_OPTIONAL, 'Blue green deployment', $this->getDefault('BLUE_GREEN_DEPLOYMENT', '1'))
             ->addOption('dump-env', null, InputOption::VALUE_NONE, 'Dump the generated .env file in a optimized .env.local.php file, to skip parsing of the .env file on each request')
-            ->addOption('http-cache-enabled', null, InputOption::VALUE_OPTIONAL, 'Http-Cache enabled', $this->getDefault('SHOPWARE_HTTP_CACHE_ENABLED', '1'))
-            ->addOption('http-cache-ttl', null, InputOption::VALUE_OPTIONAL, 'Http-Cache TTL', $this->getDefault('SHOPWARE_HTTP_DEFAULT_TTL', '7200'))
+            ->addOption('http-cache-enabled', null, InputOption::VALUE_OPTIONAL, 'Http-Cache enabled', $this->getDefault('CICADA_HTTP_CACHE_ENABLED', '1'))
+            ->addOption('http-cache-ttl', null, InputOption::VALUE_OPTIONAL, 'Http-Cache TTL', $this->getDefault('CICADA_HTTP_DEFAULT_TTL', '7200'))
             ->addOption('mailer-url', null, InputOption::VALUE_OPTIONAL, 'Mailer URL', $this->getDefault('MAILER_DSN', 'native://default'));
     }
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -64,9 +64,9 @@ class SystemSetupCommand extends Command
             'APP_ENV' => $input->getOption('app-env'),
             'APP_URL' => trim((string) $input->getOption('app-url')),
             'DATABASE_URL' => $input->getOption('database-url'),
-            'SHOPWARE_HTTP_CACHE_ENABLED' => $input->getOption('http-cache-enabled'),
-            'SHOPWARE_HTTP_DEFAULT_TTL' => $input->getOption('http-cache-ttl'),
-            'SHOPWARE_CDN_STRATEGY_DEFAULT' => $input->getOption('cdn-strategy'),
+            'CICADA_HTTP_CACHE_ENABLED' => $input->getOption('http-cache-enabled'),
+            'CICADA_HTTP_DEFAULT_TTL' => $input->getOption('http-cache-ttl'),
+            'CICADA_CDN_STRATEGY_DEFAULT' => $input->getOption('cdn-strategy'),
             'BLUE_GREEN_DEPLOYMENT' => $input->getOption('blue-green'),
             'MAILER_DSN' => $input->getOption('mailer-url'),
             'COMPOSER_HOME' => $input->getOption('composer-home'),
@@ -93,7 +93,7 @@ class SystemSetupCommand extends Command
 
         $io = new SymfonyStyle($input, $output);
         if (file_exists($this->projectDir . '/symfony.lock')) {
-            $io->warning('It looks like you have installed Shopware with Symfony Flex. You should use a .env.local file instead of creating a complete new one');
+            $io->warning('It looks like you have installed Cicada with Symfony Flex. You should use a .env.local file instead of creating a complete new one');
         }
 
         $io->title('Cicada setup process');
@@ -155,7 +155,7 @@ class SystemSetupCommand extends Command
         $dbPass = $io->askHidden('Database password') ?: '';
         $dbHost = $io->ask('Database host', 'localhost', $emptyValidation);
         $dbPort = $io->ask('Database port', '3306', $emptyValidation);
-        $dbName = $io->ask('Database name', 'shopware', $emptyValidation);
+        $dbName = $io->ask('Database name', 'cicada', $emptyValidation);
         $dbSslCa = $io->ask('Database SSL CA Path', '');
         $dbSslCert = $io->ask('Database SSL Cert Path', '');
         $dbSslKey = $io->ask('Database SSL Key Path', '');

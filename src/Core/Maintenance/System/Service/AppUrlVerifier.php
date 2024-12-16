@@ -62,11 +62,4 @@ class AppUrlVerifier
 
         return false;
     }
-
-    public function hasAppsThatNeedAppUrl(): bool
-    {
-        $foundApp = $this->connection->fetchOne('SELECT 1 FROM app WHERE app_secret IS NOT NULL');
-
-        return $foundApp === '1';
-    }
 }

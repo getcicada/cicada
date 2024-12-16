@@ -18,7 +18,7 @@ use Cicada\Core\System\User\Aggregate\UserConfig\UserConfigEntity;
 #[Package('member')]
 class FrwRequestOptionsProvider extends AbstractStoreRequestOptionsProvider
 {
-    private const SHOPWARE_TOKEN_HEADER = 'X-Cicada-Token';
+    private const CICADA_TOKEN_HEADER = 'X-Cicada-Token';
 
     public function __construct(
         private readonly AbstractStoreRequestOptionsProvider $optionsProvider,
@@ -28,7 +28,7 @@ class FrwRequestOptionsProvider extends AbstractStoreRequestOptionsProvider
 
     public function getAuthenticationHeader(Context $context): array
     {
-        return array_filter([self::SHOPWARE_TOKEN_HEADER => $this->getFrwUserToken($context)]);
+        return array_filter([self::CICADA_TOKEN_HEADER => $this->getFrwUserToken($context)]);
     }
 
     public function getDefaultQueryParameters(Context $context): array

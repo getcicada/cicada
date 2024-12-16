@@ -35,10 +35,10 @@
         </parameter>
 
         <parameter key="cicada_http_cache_enabled_default">1</parameter>
-        <parameter key="cicada.http.cache.enabled">%env(default:cicada_http_cache_enabled_default:SHOPWARE_HTTP_CACHE_ENABLED)%</parameter>
+        <parameter key="cicada.http.cache.enabled">%env(default:cicada_http_cache_enabled_default:CICADA_HTTP_CACHE_ENABLED)%</parameter>
 
         <parameter key="cicada_http_cache_default_ttl_default">7200</parameter>
-        <parameter key="cicada.http.cache.default_ttl">%env(default:cicada_http_cache_default_ttl_default:SHOPWARE_HTTP_DEFAULT_TTL)%</parameter>
+        <parameter key="cicada.http.cache.default_ttl">%env(default:cicada_http_cache_default_ttl_default:CICADA_HTTP_DEFAULT_TTL)%</parameter>
     </parameters>
 
     <monolog:config>

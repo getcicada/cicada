@@ -27,7 +27,7 @@ class Factory
 
         // This is a workaround to make sure that the cicada platform package has the correct version
         if (($json['name'] ?? '') === 'cicada/platform' && !isset($json['version']) && !EnvironmentHelper::hasVariable('COMPOSER_ROOT_VERSION')) {
-            $_SERVER['COMPOSER_ROOT_VERSION'] = Kernel::SHOPWARE_FALLBACK_VERSION;
+            $_SERVER['COMPOSER_ROOT_VERSION'] = Kernel::CICADA_FALLBACK_VERSION;
         }
 
         $composer = (new ComposerFactory())->createComposer(

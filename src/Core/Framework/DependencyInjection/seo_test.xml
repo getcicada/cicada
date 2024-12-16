@@ -7,8 +7,8 @@
 
     <services>
 
-        <service id="Shopware\Core\Content\Test\Seo\Twig\LastLetterBigTwigFilter">
-            <tag name="shopware.seo_url.twig.extension"/>
+        <service id="Cicada\Core\Content\Test\Seo\Twig\LastLetterBigTwigFilter">
+            <tag name="cicada.seo_url.twig.extension"/>
         </service>
 
     </services>

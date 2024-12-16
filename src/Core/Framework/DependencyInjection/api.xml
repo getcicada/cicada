@@ -165,7 +165,6 @@
             <argument type="service" id="assets.packages" />
             <argument type="service" id="Cicada\Core\Framework\Event\BusinessEventCollector" />
             <argument type="service" id="cicada.increment.gateway.registry"/>
-            <argument type="service" id="Doctrine\DBAL\Connection"/>
             <argument type="service" id="Cicada\Core\Maintenance\System\Service\AppUrlVerifier"/>
             <argument type="service" id="router"/>
             <argument type="service" id="Cicada\Core\System\SystemConfig\SystemConfigService"/>

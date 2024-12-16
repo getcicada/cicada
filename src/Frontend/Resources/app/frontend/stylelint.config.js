@@ -1,6 +1,6 @@
 module.exports = {
     extends: 'stylelint-config-sass-guidelines',
-    plugins: ['./build/stylelint/shopware-object-fit-polyfill.js'],
+    plugins: ['./build/stylelint/cicada-object-fit-polyfill.js'],
     customSyntax: 'postcss-html',
     rules: {
         indentation: 4,

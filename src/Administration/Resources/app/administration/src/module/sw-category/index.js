@@ -29,7 +29,6 @@ Cicada.Component.extend(
 Cicada.Component.register('sw-category-detail', () => import('./page/sw-category-detail'));
 Cicada.Component.register('sw-category-detail-base', () => import('./view/sw-category-detail-base'));
 Cicada.Component.register('sw-category-detail-cms', () => import('./view/sw-category-detail-cms'));
-Cicada.Component.register('sw-category-detail-custom-entity', () => import('./view/sw-category-detail-custom-entity'));
 Cicada.Component.register('sw-landing-page-detail-base', () => import('./view/sw-landing-page-detail-base'));
 Cicada.Component.register('sw-landing-page-detail-cms', () => import('./view/sw-landing-page-detail-cms'));
 Cicada.Component.register('sw-category-detail-products', () => import('./view/sw-category-detail-products'));

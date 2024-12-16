@@ -15,7 +15,7 @@ abstract class MigrationStep
 {
     use AddColumnTrait;
 
-    final public const INSTALL_ENVIRONMENT_VARIABLE = 'SHOPWARE_INSTALL';
+    final public const INSTALL_ENVIRONMENT_VARIABLE = 'CICADA_INSTALL';
 
     /**
      * get creation timestamp
