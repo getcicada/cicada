@@ -26,7 +26,7 @@ class ThemeLifecycleHandler
         private readonly ThemeLifecycleService $themeLifecycleService,
         private readonly ThemeService $themeService,
         private readonly EntityRepository $themeRepository,
-        private readonly FrontendPluginRegistryInterface $frontendPluginRegistry,
+        private readonly FrontendPluginRegistry $frontendPluginRegistry,
         private readonly Connection $connection
     ) {
     }

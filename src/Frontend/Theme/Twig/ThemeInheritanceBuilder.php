@@ -4,7 +4,6 @@ namespace Cicada\Frontend\Theme\Twig;
 
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Frontend\Theme\FrontendPluginRegistry;
-use Cicada\Frontend\Theme\FrontendPluginRegistryInterface;
 
 #[Package('frontend')]
 class ThemeInheritanceBuilder implements ThemeInheritanceBuilderInterface

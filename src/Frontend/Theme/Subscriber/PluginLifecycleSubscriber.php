@@ -18,7 +18,7 @@ use Cicada\Frontend\Theme\Exception\InvalidThemeBundleException;
 use Cicada\Frontend\Theme\Exception\ThemeCompileException;
 use Cicada\Frontend\Theme\FrontendPluginConfiguration\AbstractFrontendPluginConfigurationFactory;
 use Cicada\Frontend\Theme\FrontendPluginConfiguration\FrontendPluginConfiguration;
-use Cicada\Frontend\Theme\FrontendPluginRegistryInterface;
+use Cicada\Frontend\Theme\FrontendPluginRegistry;
 use Cicada\Frontend\Theme\ThemeLifecycleHandler;
 use Cicada\Frontend\Theme\ThemeLifecycleService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -33,7 +33,7 @@ class PluginLifecycleSubscriber implements EventSubscriberInterface
      * @internal
      */
     public function __construct(
-        private readonly FrontendPluginRegistryInterface $frontendPluginRegistry,
+        private readonly FrontendPluginRegistry $frontendPluginRegistry,
         private readonly string $projectDirectory,
         private readonly AbstractFrontendPluginConfigurationFactory $pluginConfigurationFactory,
         private readonly ThemeLifecycleHandler $themeLifecycleHandler,

@@ -105,15 +105,6 @@
             <argument type="service" id="Doctrine\DBAL\Connection"/>
         </service>
 
-
-        <service id="Cicada\Frontend\Theme\ThemeAppLifecycleHandler">
-            <argument type="service" id="Cicada\Frontend\Theme\FrontendPluginRegistry"/>
-            <argument type="service" id="Cicada\Frontend\Theme\FrontendPluginConfiguration\FrontendPluginConfigurationFactory"/>
-            <argument type="service" id="Cicada\Frontend\Theme\ThemeLifecycleHandler"/>
-
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
         <service id="Cicada\Frontend\Theme\ConfigLoader\DatabaseAvailableThemeProvider">
             <argument type="service" id="Doctrine\DBAL\Connection"/>
         </service>

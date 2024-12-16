@@ -10,7 +10,7 @@ use Cicada\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\System\Channel\ChannelCollection;
 use Cicada\Core\System\Channel\ChannelEntity;
-use Cicada\Frontend\Theme\FrontendPluginRegistryInterface;
+use Cicada\Frontend\Theme\FrontendPluginRegistry;
 use Cicada\Frontend\Theme\ThemeEntity;
 use Cicada\Frontend\Theme\ThemeService;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -38,7 +38,7 @@ class ThemeChangeCommand extends Command
      */
     public function __construct(
         private readonly ThemeService $themeService,
-        private readonly FrontendPluginRegistryInterface $pluginRegistry,
+        private readonly FrontendPluginRegistry $pluginRegistry,
         private readonly EntityRepository $channelRepository,
         private readonly EntityRepository $themeRepository
     ) {

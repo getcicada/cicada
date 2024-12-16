@@ -2,11 +2,11 @@
 
 namespace Cicada\Frontend\Theme\Subscriber;
 
+use Cicada\Frontend\Theme\FrontendPluginRegistry;
 use Doctrine\DBAL\Exception as DBALException;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Core\System\SystemConfig\Service\ConfigurationService;
 use Cicada\Frontend\Theme\Event\ThemeCompilerEnrichScssVariablesEvent;
-use Cicada\Frontend\Theme\FrontendPluginRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -20,7 +20,7 @@ class ThemeCompilerEnrichScssVarSubscriber implements EventSubscriberInterface
      */
     public function __construct(
         private readonly ConfigurationService $configurationService,
-        private readonly FrontendPluginRegistryInterface $frontendPluginRegistry
+        private readonly FrontendPluginRegistry $frontendPluginRegistry
     ) {
     }
 

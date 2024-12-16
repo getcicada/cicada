@@ -11,7 +11,7 @@ use Cicada\Core\Framework\Uuid\Uuid;
 use Cicada\Core\System\Channel\ChannelEntity;
 use Cicada\Frontend\Theme\ConfigLoader\AbstractConfigLoader;
 use Cicada\Frontend\Theme\Exception\ThemeException;
-use Cicada\Frontend\Theme\FrontendPluginRegistryInterface;
+use Cicada\Frontend\Theme\FrontendPluginRegistry;
 use Cicada\Frontend\Theme\ThemeCompilerInterface;
 use Cicada\Frontend\Theme\ThemeService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -26,9 +26,9 @@ final class CompileThemeHandler
     public function __construct(
         private readonly ThemeCompilerInterface $themeCompiler,
         private readonly AbstractConfigLoader $configLoader,
-        private readonly FrontendPluginRegistryInterface $extensionRegistry,
+        private readonly FrontendPluginRegistry $extensionRegistry,
         private readonly NotificationService $notificationService,
-        private readonly EntityRepository $saleschannelRepository
+        private readonly EntityRepository $channelRepository
     ) {
     }
 
@@ -48,7 +48,7 @@ final class CompileThemeHandler
             return;
         }
         /** @var ChannelEntity|null $channel */
-        $channel = $this->saleschannelRepository->search(
+        $channel = $this->channelRepository->search(
             new Criteria([$message->getChannelId()]),
             $message->getContext()
         )->first();

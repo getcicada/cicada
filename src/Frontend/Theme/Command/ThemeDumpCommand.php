@@ -9,7 +9,7 @@ use Cicada\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Cicada\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Cicada\Core\Framework\Log\Package;
 use Cicada\Frontend\Theme\ConfigLoader\StaticFileConfigDumper;
-use Cicada\Frontend\Theme\FrontendPluginRegistryInterface;
+use Cicada\Frontend\Theme\FrontendPluginRegistry;
 use Cicada\Frontend\Theme\ThemeCollection;
 use Cicada\Frontend\Theme\ThemeEntity;
 use Cicada\Frontend\Theme\ThemeFileResolver;
@@ -39,7 +39,7 @@ class ThemeDumpCommand extends Command
      * @param EntityRepository<ThemeCollection> $themeRepository
      */
     public function __construct(
-        private readonly FrontendPluginRegistryInterface $pluginRegistry,
+        private readonly FrontendPluginRegistry $pluginRegistry,
         private readonly ThemeFileResolver $themeFileResolver,
         private readonly EntityRepository $themeRepository,
         private readonly string $projectDir,
